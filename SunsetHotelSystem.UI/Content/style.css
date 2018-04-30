@@ -397,6 +397,7 @@ a.w3_agile_vimeo:hover{
 }
 .w3-about-grids {
     margin-top: 5em;
+    text-align: justify;
 }
 .w3-about-left h5 {
     color: #ff5722;

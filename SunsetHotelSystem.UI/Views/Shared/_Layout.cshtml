@@ -22,7 +22,7 @@
             <div class="header">
                 <div class="container">
                     <div class="w3_agile_logo">
-                        <img src="~/images/logo.png" width="50%" height="50%" class="rounded img-fluid" alt="Sunset Hotel logo">
+                        <img src="images/logo.png" width="50%" height="50%" class="rounded img-fluid" alt="Sunset Hotel logo">
                     </div>
                     <div class="header-nav">
                         <nav class="navbar navbar-default">
@@ -61,7 +61,7 @@
     <!------------------------------------------  PUBLICIDAD  ------------------------------------------->
     <div class="container">
         <section class="main row">
-            <aside class="col-xs-12 col-sm-4 col-md-3">
+            @*<aside class="col-xs-12 col-sm-4 col-md-3">
                 <br>
                 <div id="demo" class="carousel slide" data-ride="carousel">
                     <ul class="carousel-indicators">
@@ -114,7 +114,7 @@
                     </a>
                 </div>
                 <br>
-            </aside>
+            </aside>*@
             <!------------------------------------------  PUBLICIDAD  ------------------------------------------->
             @RenderBody()
         </section>
@@ -128,11 +128,10 @@
         </div>
     </div>
     <!--------------------------------------------- FOOTER --------------------------------------------->
-
+    
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
-    <script type="text/javascript" src="~/Script/move-top.js"></script>
-    <script type="text/javascript" src="~/Script/easing.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -141,13 +140,11 @@
             });
         });
     </script>
-    <script src="~/Script/bootstrap.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $().UItoTop({ easingType: 'easeOutQuart' });
         });
     </script>
-    <script src='~/Script/jquery.typer.js'></script>
     <script>
         var win = $(window),
 		foo = $('#typer');
@@ -159,7 +156,6 @@
             });
         }).resize();
     </script>
-    <script src="~/Script/easy-responsive-tabs.js"></script>
     <script>
         $(document).ready(function () {
             $('#horizontalTab').easyResponsiveTabs({

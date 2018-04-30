@@ -6,15 +6,15 @@ namespace SunsetHotelSystem.UI {
 
         public static void RegisterBundles(BundleCollection bundles) {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/jquery-2.1.4.min.js",
                         "~/Scripts/main.js",
-                        "~/Scripts/jquery-2.1.4.min.js"));
+                        "~/Scripts/move-top.js",
+                        "~/Script/easing.js",
+                        "~/Script/jquery.typer.js",
+                        "~/Script/easy-reponsive-tabs.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/move-top.js",
-                      "~/Scripts/easing.js",
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/jquery.typer.js",
-                      "~/Scripts/easy-responsive-tabs.js"));
+                      "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/font-awesome.css",
