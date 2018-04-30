@@ -1,0 +1,4 @@
+C:\Users\Kevin Vargas\Documents\Visual Studio 2015\Projects\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\bin\Debug\SunsetHotelSystem.Dominio.UTL.dll
+C:\Users\Kevin Vargas\Documents\Visual Studio 2015\Projects\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\bin\Debug\SunsetHotelSystem.Dominio.UTL.pdb
+C:\Users\Kevin Vargas\Documents\Visual Studio 2015\Projects\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.dll
+C:\Users\Kevin Vargas\Documents\Visual Studio 2015\Projects\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.pdb
