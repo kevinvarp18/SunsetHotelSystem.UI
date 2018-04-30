@@ -125,6 +125,6 @@ C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\Sunset
 C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.UI\bin\System.Web.WebPages.Razor.xml
 C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.UI\bin\Antlr3.Runtime.pdb
 C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.UI\bin\Newtonsoft.Json.xml
-C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.UI\obj\Debug\SunsetHotelSystem.UI.csprojResolveAssemblyReference.cache
 C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.UI\obj\Debug\SunsetHotelSystem.UI.dll
 C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.UI\obj\Debug\SunsetHotelSystem.UI.pdb
+C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.UI\obj\Debug\SunsetHotelSystem.UI.csprojResolveAssemblyReference.cache
