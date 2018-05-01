@@ -6,9 +6,9 @@ namespace SunsetHotelSystem.UI {
 
         public static void RegisterBundles(BundleCollection bundles) {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery.flexisel.js",
                         "~/Scripts/jquery-2.1.4.min.js",
-                        "~/Scripts/main.js"));
+                        "~/Scripts/main.js",
+                        "~/Scripts/lightbox-plus-jquery.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/javascript").Include(
                         "~/Scripts/move-top.js",
@@ -17,7 +17,7 @@ namespace SunsetHotelSystem.UI {
                         "~/Scripts/easy-responsive-tabs.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/popper.js",
                       "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

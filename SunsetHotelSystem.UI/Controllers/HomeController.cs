@@ -9,5 +9,9 @@ namespace SunsetHotelSystem.UI.Controllers {
         public ActionResult Index() {
             return View();
         }
+
+        public ActionResult SobreNosotros() {
+            return View();
+        }
     }//Fin de la clase HomeController.
 }//Fin del namespace.

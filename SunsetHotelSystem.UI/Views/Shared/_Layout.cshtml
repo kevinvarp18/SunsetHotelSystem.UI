@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Mug house Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <link rel="shortcut icon" type="image/x-icon" href="~/images/ico.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="../images/ico.png" />
     <link href="//fonts.googleapis.com/css?family=Prompt:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,thai,vietnamese" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
     @Styles.Render("~/Content/css")
@@ -16,13 +16,14 @@
     @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
+
     <!--------------------------------------------- HEADER --------------------------------------------->
     <div class="banner">
         <div class="header-bottom">
             <div class="header">
                 <div class="container">
                     <div class="w3_agile_logo">
-                        <img src="images/logo.png" width="50%" height="50%" class="rounded img-fluid" alt="Sunset Hotel logo">
+                        <img src="../images/logo.png" width="50%" height="50%" class="rounded img-fluid" alt="Sunset Hotel logo">
                     </div>
                     <div class="header-nav">
                         <nav class="navbar navbar-default">
@@ -37,8 +38,8 @@
                             <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                                 <nav class="link-effect-12">
                                     <ul class="nav navbar-nav w3_agile_nav">
-                                        <li class="active"><a href="index.html"><span>Inicio</span></a></li>
-                                        <li><a href="gallery.html"><span>Sobre Nosotros</span></a></li>
+                                        <li><a href="@Url.Action("Index", "Home")" class="active"><span>Inicio</span></a></li>
+                                        <li><a href="@Url.Action("SobreNosotros", "Home")"><span>Sobre Nosotros</span></a></li>
                                         <li><a href="about.html"><span>Facilidades</span></a></li>
                                         <li><a href="contact.html"><span>¿C&oacute;mo llegar?</span></a></li>
                                         <li><a href="contact.html"><span>Tarifas</span></a></li>
@@ -59,12 +60,11 @@
     </div>
     <!--------------------------------------------- HEADER --------------------------------------------->
     <!------------------------------------------  PUBLICIDAD  ------------------------------------------->
-    <div class="container">
+    <div class="col-xs-12 col-sm-12 col-md-12 container" style="background: #FFFFFF;">
         <section class="main row">
             <aside class="col-xs-12 col-sm-4 col-md-3">
                 <br>
                 <div id="demo" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
                     <ul class="carousel-indicators">
                         <li data-target="#demo" data-slide-to="0" class="active"></li>
                         <li data-target="#demo" data-slide-to="1"></li>
@@ -78,39 +78,37 @@
                         <li data-target="#demo" data-slide-to="9"></li>
                         <li data-target="#demo" data-slide-to="10"></li>
                     </ul>
-
-                    <!-- The slideshow -->
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="images/p1.png" alt="Los Angeles">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/p2.png" alt="Chicago">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/p3.png" alt="New York">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/p4.png" alt="New York">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/p5.png" alt="New York">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/p6.png" alt="New York">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/p8.png" alt="New York">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/p9.png" alt="New York">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/p10.png" alt="New York">
-                        </div>
+                        <center>
+                            <div class="carousel-item active">
+                                <img src="../images/p1.png" alt="Los Angeles">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../images/p2.png" alt="Chicago">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../images/p3.png" alt="New York">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../images/p4.png" alt="New York">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../images/p5.png" alt="New York">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../images/p6.png" alt="New York">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../images/p8.png" alt="New York">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../images/p9.png" alt="New York">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../images/p10.png" alt="New York">
+                            </div>
+                        </center>
                     </div>
-
-                    <!-- Left and right controls -->
                     <a class="carousel-control-prev" href="#demo" data-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
                     </a>
@@ -124,16 +122,13 @@
             @RenderBody()
         </section>
     </div>
+
     <!--------------------------------------------- FOOTER --------------------------------------------->
     <div class="w3-agile-footer">
-        <div class="container">
-            <div class="agileits-w3layouts-copyright">
-                <p>© 2018 Sunset Hotel. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a> </p>
-            </div>
-        </div>
+        <p>© 2018 Sunset Hotel. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a> </p>
     </div>
     <!--------------------------------------------- FOOTER --------------------------------------------->
-    
+
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/javascript")
     @RenderSection("scripts", required: false)
@@ -154,7 +149,7 @@
     <script>
         var win = $(window),
 		foo = $('#typer');
-        foo.typer(['Sunset Hotel', 'Sunset Hotel', 'Sunset Hotel']);
+        foo.typer(['Sunset Hotel']);
         win.resize(function () {
             var fontSize = Math.max(Math.min(win.width() / (1 * 10), parseFloat(Number.POSITIVE_INFINITY)), parseFloat(Number.NEGATIVE_INFINITY));
             foo.css({
@@ -181,6 +176,18 @@
                 type: 'vertical',
                 width: 'auto',
                 fit: true
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover({
+                html: true,
+                placement: 'top',
+                trigger: 'hover',
+                content: function () {
+                    return '<img src="' + $(this).data('image') + '"/>';
+                }
             });
         });
     </script>
