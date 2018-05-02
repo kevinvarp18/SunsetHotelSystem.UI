@@ -167,6 +167,7 @@
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\PruebaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReservaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,7 +243,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Config\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -260,6 +260,8 @@
     <Content Include="Views\Home\Facilidades.cshtml" />
     <Content Include="Views\Home\Contactenos.cshtml" />
     <Content Include="Views\Home\Tarifas.cshtml" />
+    <Content Include="Views\Reserva\HabitacionDisponible.cshtml" />
+    <Content Include="Views\Reserva\Reserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SunsetHotelSystem.Dominio.Entidades\SunsetHotelSystem.Dominio.Entidades.csproj">

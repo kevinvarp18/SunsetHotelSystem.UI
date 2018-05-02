@@ -38,6 +38,10 @@ aside {
     border: solid 2px #000000;
 }
 
+section {
+    background: #F2F2F2;
+}
+
 #map {
     width: 60%;
     height: 500px;
@@ -477,6 +481,17 @@ a.w3_agile_vimeo:hover {
     margin: 1em 0 0 0;
 }
 
+.w3-about-right ul, .w3-about-left ul {
+    margin-left: 1.2em;
+}
+
+.w3-about-right li, .w3-about-left li {
+    color: #999999;
+    font-size: .9em;
+    line-height: 1.8em;
+    margin: 1em 0 0 0;
+}
+
     .w3-about-right p span, .w3-about-left p span {
         display: block;
         margin: 1em 0 0 0;
@@ -863,23 +878,33 @@ li.agileinfo_share {
 }
 
 .agileinfo-subscribe {
-    margin-top: 5em;
+    margin-top: 3em;
 }
 
 .wthree-subscribe h3 {
     color: #212121;
 }
 
-.news-letter input[type="text"], .news-letter input[type="email"] {
-    outline: none;
-    padding: 1em;
+.news-letter span {
+    font-size: 1em;
+    font-family: 'Prompt', sans-serif;
+    line-height: 1.8em;
+}
+
+.news-letter input[type="text"], .news-letter input[type="email"], .news-letter input[type="date"], .news-letter select {
+    padding: 0.5em;
     color: #848484;
-    font-size: .9em;
+    font-size: 1em;
     border: 1px solid #cdcdcd;
-    width: 42%;
-    float: left;
+    width: 38%;
     background: #ffffff;
+    margin-top: 3%;
+    margin-left: 2%;
     margin-right: 2%;
+}
+
+.news-letter input[type="date"] {
+    padding: 0.3em;
 }
 
 .news-letter input[type="submit"] {
@@ -888,10 +913,9 @@ li.agileinfo_share {
     border: none;
     padding: 1em;
     border: 1px solid #212121;
-    font-size: .9em;
-    outline: none;
     text-transform: uppercase;
-    float: left;
+    font-size: .9em;
+    margin-top: 6%;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -o-transition: 0.5s all;

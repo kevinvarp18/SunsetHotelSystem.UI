@@ -25,5 +25,9 @@ namespace SunsetHotelSystem.UI.Controllers {
         public ActionResult Contactenos() {
             return View();
         }
+
+        public ActionResult Tarifas() {
+            return View();
+        }
     }//Fin de la clase HomeController.
 }//Fin del namespace.

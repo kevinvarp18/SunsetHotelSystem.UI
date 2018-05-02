@@ -6,3 +6,4 @@ C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\Sunset
 C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\bin\Debug\SunsetHotelSystem.Dominio.UTL.pdb
 C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.dll
 C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.pdb
+C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.csprojResolveAssemblyReference.cache
