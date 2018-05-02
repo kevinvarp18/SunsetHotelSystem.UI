@@ -13,5 +13,13 @@ namespace SunsetHotelSystem.UI.Controllers {
         public ActionResult SobreNosotros() {
             return View();
         }
+
+        public ActionResult ComoLlegar() { 
+            return View();
+        }
+
+        public ActionResult facilidades() {
+            return View();
+        }
     }//Fin de la clase HomeController.
 }//Fin del namespace.

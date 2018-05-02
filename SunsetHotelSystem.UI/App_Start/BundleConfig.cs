@@ -6,7 +6,7 @@ namespace SunsetHotelSystem.UI {
 
         public static void RegisterBundles(BundleCollection bundles) {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-2.1.4.min.js",
+                        "~/Scripts/jquery-3.3.1.min.js",
                         "~/Scripts/main.js",
                         "~/Scripts/lightbox-plus-jquery.min.js"));
 
