@@ -18,7 +18,11 @@ namespace SunsetHotelSystem.UI.Controllers {
             return View();
         }
 
-        public ActionResult facilidades() {
+        public ActionResult Facilidades() {
+            return View();
+        }
+
+        public ActionResult Contactenos() {
             return View();
         }
     }//Fin de la clase HomeController.
