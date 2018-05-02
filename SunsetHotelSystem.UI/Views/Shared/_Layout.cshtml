@@ -10,15 +10,18 @@
     <link href="//fonts.googleapis.com/css?family=Prompt:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,thai,vietnamese" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/javascript")
     <script type="application/x-javascript">
          addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
         function hideURLbar(){ window.scrollTo(0,1); } </script>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/javascript")
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1JuYmoq83Om5mLz0qyg_k1viClteC2NU&callback=initMap"></script>
+    
 </head>
 <body>
 
     <!--------------------------------------------- HEADER --------------------------------------------->
+    
     <div class="banner">
         <div class="header-bottom">
             <div class="header">
@@ -59,8 +62,11 @@
             </div>
         </div>
     </div>
+
     <!--------------------------------------------- HEADER --------------------------------------------->
-    <!------------------------------------------  PUBLICIDAD  ------------------------------------------->
+    
+    <!------------------------------------------  PUBLICIDAD  ------------------------------------------>
+    
     <div class="col-xs-12 col-sm-12 col-md-12 container" style="background: #FFFFFF;">
         <section class="main row">
             <aside class="col-xs-12 col-sm-4 col-md-3">
@@ -119,15 +125,19 @@
                 </div>
                 <br>
             </aside>
-            <!------------------------------------------  PUBLICIDAD  ------------------------------------------->
+
+    <!------------------------------------------  PUBLICIDAD  ------------------------------------------>
+
             @RenderBody()
         </section>
     </div>
 
     <!--------------------------------------------- FOOTER --------------------------------------------->
+
     <div class="w3-agile-footer">
         <p>© 2018 Sunset Hotel. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a> </p>
     </div>
+
     <!--------------------------------------------- FOOTER --------------------------------------------->
 
     @Scripts.Render("~/bundles/bootstrap")
@@ -190,5 +200,6 @@
             });
         });
     </script>
+    <script>initMap();</script>
 </body>
 </html>

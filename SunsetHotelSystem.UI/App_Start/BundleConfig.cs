@@ -14,7 +14,8 @@ namespace SunsetHotelSystem.UI {
                         "~/Scripts/move-top.js",
                         "~/Scripts/easing.js",
                         "~/Scripts/jquery.typer.js",
-                        "~/Scripts/easy-responsive-tabs.js"));
+                        "~/Scripts/easy-responsive-tabs.js",
+                        "~/Scripts/viewsScript/ComoLlegar.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/popper.js",
