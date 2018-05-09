@@ -165,7 +165,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
-    <Compile Include="Controllers\PruebaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReservaController.cs" />
     <Compile Include="Global.asax.cs">
@@ -262,6 +261,7 @@
     <Content Include="Views\Home\Tarifas.cshtml" />
     <Content Include="Views\Reserva\HabitacionDisponible.cshtml" />
     <Content Include="Views\Reserva\Reserva.cshtml" />
+    <Content Include="Views\Reserva\ResultadoReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SunsetHotelSystem.Dominio.Entidades\SunsetHotelSystem.Dominio.Entidades.csproj">

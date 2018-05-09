@@ -43,12 +43,25 @@
                                 <nav class="link-effect-12">
                                     <ul class="nav navbar-nav w3_agile_nav">
                                         <li><a href="@Url.Action("Index", "Home")" class="active"><span>Inicio</span></a></li>
-                                        <li><a href="@Url.Action("SobreNosotros", "Home")"><span>Sobre Nosotros</span></a></li>
-                                        <li><a href="@Url.Action("Facilidades", "Home")"><span>Facilidades</span></a></li>
-                                        <li><a href="@Url.Action("ComoLlegar", "Home")"><span>¿C&oacute;mo llegar?</span></a></li>
-                                        <li><a href="@Url.Action("Tarifas", "Home")"><span>Tarifas</span></a></li>
-                                        <li><a href="@Url.Action("HabitacionDisponible", "Reserva")"><span>Reserva en L&iacute;nea</span></a></li>
-                                        <li><a href="@Url.Action("Contactenos", "Home")"><span>Contactenos</span></a></li>
+                                        @{
+                                            if (Session["Usuario"].Equals("0")) {
+                                                <li><a href="@Url.Action("SobreNosotros", "Home")"><span>Sobre Nosotros</span></a></li>
+                                                <li><a href="@Url.Action("Facilidades", "Home")"><span>Facilidades</span></a></li>
+                                                <li><a href="@Url.Action("ComoLlegar", "Home")"><span>¿C&oacute;mo llegar?</span></a></li>
+                                                <li><a href="@Url.Action("Tarifas", "Home")"><span>Tarifas</span></a></li>
+                                                <li><a href="@Url.Action("HabitacionDisponible", "Reserva")"><span>Reserva en L&iacute;nea</span></a></li>
+                                                <li><a href="@Url.Action("Contactenos", "Home")"><span>Contactenos</span></a></li>
+                                            }
+                                            else {
+                                                <li><a href="@Url.Action("", "")"><span>Modificar p&aacute;ginas</span></a></li>
+                                                <li><a href="@Url.Action("", "")"><span>Lista de reservaciones</span></a></li>
+                                                <li><a href="@Url.Action("", "")"><span>Administrar habitaciones</span></a></li>
+                                                <li><a href="@Url.Action("", "")"><span>Estado del hotel hoy</span></a></li>
+                                                <li><a href="@Url.Action("", "")"><span>Disponibilidad de habitaciones</span></a></li>
+                                                <li><a href="@Url.Action("", "")"><span>Publicidad</span></a></li>
+                                            }
+                                        }
+                                        
                                     </ul>
                                 </nav>
                             </div>
@@ -200,6 +213,5 @@
             });
         });
     </script>
-    <script>initMap();</script>
 </body>
 </html>

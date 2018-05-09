@@ -42,6 +42,14 @@ section {
     background: #F2F2F2;
 }
 
+span {
+    font-size: 1em;
+    font-family: 'Prompt', sans-serif;
+    line-height: 1.8em;
+    margin: 0% 0% 0% 1.4%;
+    width: 23%;
+}
+
 #map {
     width: 60%;
     height: 500px;
@@ -885,22 +893,27 @@ li.agileinfo_share {
     color: #212121;
 }
 
+form {
+    margin: 7% 0 0 25%;
+}
+
 .news-letter span {
     font-size: 1em;
     font-family: 'Prompt', sans-serif;
     line-height: 1.8em;
+    float: left;
+    margin: 1% 0 0 0;
+    width: 23%;
 }
 
-.news-letter input[type="text"], .news-letter input[type="email"], .news-letter input[type="date"], .news-letter select {
+.news-letter input[type="text"], .news-letter input[type="email"], .news-letter input[type="date"], select {
     padding: 0.5em;
     color: #848484;
     font-size: 1em;
     border: 1px solid #cdcdcd;
-    width: 38%;
+    width: 40%;
     background: #ffffff;
-    margin-top: 3%;
-    margin-left: 2%;
-    margin-right: 2%;
+    margin: 0% 0 2% 2%;
 }
 
 .news-letter input[type="date"] {
@@ -913,6 +926,7 @@ li.agileinfo_share {
     border: none;
     padding: 1em;
     border: 1px solid #212121;
+    margin: 0 0 0 27%;
     text-transform: uppercase;
     font-size: .9em;
     margin-top: 6%;
