@@ -57,6 +57,15 @@ span {
     margin-left: 20%;
 }
 
+h5 {
+    color: #ff5722;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
 /*-- banner --*/
 .banner {
     background: url(../images/banner.jpg) no-repeat 0px 0px;
@@ -903,10 +912,10 @@ form {
     line-height: 1.8em;
     float: left;
     margin: 1% 0 0 0;
-    width: 23%;
+    width: 45%;
 }
 
-.news-letter input[type="text"], .news-letter input[type="email"], .news-letter input[type="date"], select {
+.news-letter input[type="text"], .news-letter input[type="email"], .news-letter input[type="date"], select, .news-letter textarea {
     padding: 0.5em;
     color: #848484;
     font-size: 1em;
@@ -914,6 +923,14 @@ form {
     width: 40%;
     background: #ffffff;
     margin: 0% 0 2% 2%;
+}
+
+.news-letter textarea {
+    margin: 0 0 5% 0;
+    padding: 0 0 12% 0;
+    width: 65%;
+    height: 20%;
+    resize: none;
 }
 
 .news-letter input[type="date"] {
@@ -926,10 +943,9 @@ form {
     border: none;
     padding: 1em;
     border: 1px solid #212121;
-    margin: 0 0 0 27%;
+    margin-top: 6%;
     text-transform: uppercase;
     font-size: .9em;
-    margin-top: 6%;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -o-transition: 0.5s all;
@@ -942,15 +958,6 @@ form {
         color: #212121;
         background: none;
     }
-
-.agileinfo-subscribe h5 {
-    color: #212121;
-    font-size: 1em;
-    margin: 2em 0;
-    font-family: 'Rokkitt', serif;
-    text-align: center;
-    text-transform: uppercase;
-}
 
 .agileits-social-grids {
     text-align: center;

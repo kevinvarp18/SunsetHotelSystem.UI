@@ -1,0 +1,31 @@
+﻿@model SunsetHotelSystem.Dominio.Entidades.Entidades.TSH_Pag_Home
+
+<article class="col-xs-12 col-sm-8 col-md-9">
+    <div class="news-letter">
+        <div class="row">
+            <div class="w3ls-heading">
+                <h3>Modificar P&aacute;ginas</h3>
+            </div>
+            <div class="agileinfo-subscribe">
+                <h5>Home</h5>
+                <form action="" method="post">
+                    <textarea>@Model.TSH_Pagina.TC_Descripcion_TSH_Tipo_Habitacion</textarea>
+                    <div class="col-md-5 about-img" style="margin-left: -2%;">
+                        <span>Imagen Actual</span><br />
+                        <img src="../images/hotel.jpg" alt="Sunset Hotel" />
+                    </div>
+                    <div class="col-md-6">
+                        <br /><br /><br />
+                        <span>Subir imagen nueva</span><br />
+                        <input type="file" name="imagen" id="imagen">
+                        <br /><br /><br /><br /><br />
+                    </div>
+                    <center>
+                        <input type="submit" value="Aceptar">&nbsp;&nbsp;<input type="submit" value="Cancelar">
+                    </center>
+                    <div class="clearfix"> </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</article>
