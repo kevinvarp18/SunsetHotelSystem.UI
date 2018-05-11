@@ -17,7 +17,6 @@ namespace SunsetHotelSystem.Dominio.Entidades.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TSH_Habitacion()
         {
-            this.TSH_Caracteristica_habitacion = new HashSet<TSH_Caracteristica_habitacion>();
             this.TSH_Reserva = new HashSet<TSH_Reserva>();
         }
     
@@ -30,8 +29,6 @@ namespace SunsetHotelSystem.Dominio.Entidades.Entidades
         public byte[] TI_Imagen_TSH_Habitacion { get; set; }
         public System.Guid TN_Id_Imagen_TSH_Habitacion { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TSH_Caracteristica_habitacion> TSH_Caracteristica_habitacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TSH_Reserva> TSH_Reserva { get; set; }
         public virtual TSH_Tipo_Habitacion TSH_Tipo_Habitacion { get; set; }

@@ -10,6 +10,7 @@ namespace SunsetHotelSystem.Dominio.UTL {
         public EMessageType enuTipoMensaje;
         public String strMensajeRespuesta = "¡Transacción realizada exitosamente!";
         public String strOrigen = String.Empty;
+        public int resultado;
         public T valorRetorno;
     }//Fin de la clase Response.
 

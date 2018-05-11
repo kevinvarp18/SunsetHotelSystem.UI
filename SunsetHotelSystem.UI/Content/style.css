@@ -937,7 +937,7 @@ form {
     padding: 0.3em;
 }
 
-.news-letter input[type="submit"] {
+.news-letter input[type="submit"], .news-letter button {
     color: #FFFFFF;
     background: #212121;
     border: none;

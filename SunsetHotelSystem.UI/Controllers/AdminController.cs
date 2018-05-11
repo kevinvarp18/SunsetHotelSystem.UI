@@ -17,19 +17,19 @@ namespace SunsetHotelSystem.UI.Controllers {
         public ActionResult Home() {
             Session["Usuario"] = "1";
             return View();
-        }//Fin del método Administrador.
+        }//Fin del método Home.
 
         public ActionResult ModificarPaginas() {
             return View();
         }//Fin del método ModificarPaginas.
 
-        public async Task<ActionResult> PaginaHome()  {
-            TSH_Pag_Home paginaHome = new TSH_Pag_Home();
-            Respuesta<TSH_Pag_Home> respuesta = new Respuesta<TSH_Pag_Home>();
+        public async Task<ActionResult> PaginaHome() {
+            TSH_Pagina paginaHome = new TSH_Pagina();
+            Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
             try {
-                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Pag_Home");
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Pagina/", 5));
                 if (responseWAPI.IsSuccessStatusCode) {
-                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pag_Home>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
                     paginaHome = respuesta.valorRetorno;
                 }//Fin del if.
             } catch (Exception ex) {
@@ -37,6 +37,78 @@ namespace SunsetHotelSystem.UI.Controllers {
             }//Fin del try-catch.
 
             return View(paginaHome);
-        }//Fin de la funcion HabitacionDisponible.
+        }//Fin de la funcion PaginaHome.
+
+        [HttpPost]
+        public async Task<ActionResult> actualizarPaginaHome(int id, string descripcion, string imagen) {
+            Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
+            TSH_Pagina pagina = new TSH_Pagina();
+            try {
+                pagina.TN_Identificador_TSH_Pagina = id;
+                pagina.TC_Descripcion_TSH_Pagina = descripcion;
+                String jsonContent = JsonConvert.SerializeObject(pagina);
+                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
+                ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
+                byteArrayContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                HttpResponseMessage responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Pagina"), byteArrayContent);
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    pagina = respuesta.valorRetorno;
+                }//Fin del if.
+
+                if (respuesta.resultado == 1)
+                    ViewBag.Message = "Los cambios en la pagina Inicio se realizaron exitosamente.";
+                else
+                    ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
+
+                return View("Home");
+            } catch {
+                ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
+                return View("Home");
+            }//Try-catch.
+        }//Fin del método guardarCambios.
+
+        public async Task<ActionResult> PaginaSobreNosotros() {
+            TSH_Pagina paginaSobreNosotros = new TSH_Pagina();
+            Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
+            try {
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Pagina/", 6));
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    paginaSobreNosotros = respuesta.valorRetorno;
+                }//Fin del if.
+            } catch (Exception ex) {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+
+            return View(paginaSobreNosotros);
+        }//Fin de la funcion PaginaSobreNosotros.
+
+        [HttpPost]
+        public async Task<ActionResult> ActualizarSobreNosotros(int id, string descripcion) {
+            Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
+            TSH_Pagina pagina = new TSH_Pagina();
+            try {
+                pagina.TN_Identificador_TSH_Pagina = id;
+                pagina.TC_Descripcion_TSH_Pagina = descripcion;
+                String jsonContent = JsonConvert.SerializeObject(pagina);
+                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
+                ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
+                byteArrayContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                HttpResponseMessage responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Pagina"), byteArrayContent);
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    pagina = respuesta.valorRetorno;
+                }//Fin del if.
+                if (respuesta.resultado == 1)
+                    ViewBag.Message = "Los cambios en la pagina Sobre Nosotros se realizaron exitosamente.";
+                else
+                    ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
+                return View("Home");
+            } catch {
+                ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
+                return View("Home");
+            }//Try-catch.
+        }//Fin del método ActualizarSobreNosotros.
     }//Fin de la clase AdminController.
 }//Fin del namespace.

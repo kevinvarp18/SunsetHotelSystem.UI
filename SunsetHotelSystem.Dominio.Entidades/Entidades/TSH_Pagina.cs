@@ -15,7 +15,7 @@ namespace SunsetHotelSystem.Dominio.Entidades.Entidades
     public partial class TSH_Pagina
     {
         public int TN_Identificador_TSH_Pagina { get; set; }
-        public string TC_Descripcion_TSH_Tipo_Habitacion { get; set; }
+        public string TC_Descripcion_TSH_Pagina { get; set; }
     
         public virtual TSH_Pag_Facilidades TSH_Pag_Facilidades { get; set; }
         public virtual TSH_Pag_Home TSH_Pag_Home { get; set; }

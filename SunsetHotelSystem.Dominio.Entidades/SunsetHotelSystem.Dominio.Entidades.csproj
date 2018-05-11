@@ -51,9 +51,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SunsetHotelModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entidades\TSH_Caracteristica_habitacion.cs">
-      <DependentUpon>SunsetHotelModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entidades\TSH_Cliente.cs">
       <DependentUpon>SunsetHotelModel.tt</DependentUpon>
     </Compile>

@@ -14,16 +14,14 @@ namespace SunsetHotelSystem.UI.Controllers {
     public class HomeController : ConfigController {
 
         public async Task<ActionResult> Index() {
-            if ((Session["Usuario"] == null)) {
-                Session["Usuario"] = "0";
-            }
+            Session["Usuario"] = "0";
 
-            TSH_Pag_Home paginaHome = new TSH_Pag_Home();
-            Respuesta<TSH_Pag_Home> respuesta = new Respuesta<TSH_Pag_Home>();
+            TSH_Pagina paginaHome = new TSH_Pagina();
+            Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
             try {
-                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Pag_Home");
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Pagina/", 5));
                 if (responseWAPI.IsSuccessStatusCode) {
-                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pag_Home>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
                     paginaHome = respuesta.valorRetorno;
                 }//Fin del if.
             } catch (Exception ex) {
@@ -33,9 +31,21 @@ namespace SunsetHotelSystem.UI.Controllers {
             return View(paginaHome);
         }//Fin del método Index.
 
-        public ActionResult SobreNosotros() {
-            return View();
-        }
+        public async Task<ActionResult> SobreNosotros() {
+            TSH_Pagina paginaSobreNosotros = new TSH_Pagina();
+            Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
+            try {
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Pagina/", 6));
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    paginaSobreNosotros = respuesta.valorRetorno;
+                }//Fin del if.
+            } catch (Exception ex) {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+
+            return View(paginaSobreNosotros);
+        }//Fin del método SobreNosotros.
 
         public ActionResult ComoLlegar() { 
             return View();
