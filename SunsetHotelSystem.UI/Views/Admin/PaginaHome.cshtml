@@ -1,4 +1,12 @@
 ﻿@model SunsetHotelSystem.Dominio.Entidades.Entidades.TSH_Pagina
+    *@{
+
+        var base64ImagenHotel = Convert.ToBase64String(Model.TSH_Pag_Home.TI_Imagen_TSH_Pag_Home);
+        string imgSrcImagenHotel = String.Format("data:image/gif;base64,{0}", base64ImagenHotel);
+    }
+
+
+
 
 <article class="col-xs-12 col-sm-8 col-md-9">
     <div class="news-letter">
@@ -13,12 +21,13 @@
                     <textarea id="descripcion" name="descripcion">@Model.TC_Descripcion_TSH_Pagina</textarea>
                     <div class="col-md-5 about-img" style="margin-left: -2%;">
                         <span>Imagen Actual</span><br />
-                        <img src="../images/hotel.jpg" alt="Sunset Hotel" />
+                        <img src="@imgSrcImagenHotel" alt="Sunset Hotel" />
                     </div>
                     <div class="col-md-6">
                         <br /><br /><br />
                         <span>Subir imagen nueva</span><br />
                         <input type="file" name="imagen" id="imagen">
+                  
                         <br /><br /><br /><br /><br />
                     </div>
                     <center>

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
-
+using System.IO;
 
 namespace SunsetHotelSystem.UI.Controllers {
     public class AdminController : ConfigController {
@@ -39,13 +39,26 @@ namespace SunsetHotelSystem.UI.Controllers {
             return View(paginaHome);
         }//Fin de la funcion PaginaHome.
 
+
+        public static byte[] StrToByteArray(string str)
+        {
+            System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+            return encoding.GetBytes(str);
+        }
+
+
         [HttpPost]
         public async Task<ActionResult> actualizarPaginaHome(int id, string descripcion, string imagen) {
             Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
             TSH_Pagina pagina = new TSH_Pagina();
             try {
+
+                byte[] image = StrToByteArray(imagen);
+               
                 pagina.TN_Identificador_TSH_Pagina = id;
                 pagina.TC_Descripcion_TSH_Pagina = descripcion;
+                pagina.TSH_Pag_Home.TI_Imagen_TSH_Pag_Home = image;
+
                 String jsonContent = JsonConvert.SerializeObject(pagina);
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
                 ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
@@ -67,6 +80,8 @@ namespace SunsetHotelSystem.UI.Controllers {
                 return View("Home");
             }//Try-catch.
         }//Fin del método guardarCambios.
+
+     
 
         public async Task<ActionResult> PaginaSobreNosotros() {
             TSH_Pagina paginaSobreNosotros = new TSH_Pagina();
