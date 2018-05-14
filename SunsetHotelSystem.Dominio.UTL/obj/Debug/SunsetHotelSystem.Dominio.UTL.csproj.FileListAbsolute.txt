@@ -10,3 +10,7 @@ C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UT
 C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\bin\Debug\SunsetHotelSystem.Dominio.UTL.pdb
 C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.dll
 C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.pdb
+C:\Users\santi\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\bin\Debug\SunsetHotelSystem.Dominio.UTL.dll
+C:\Users\santi\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\bin\Debug\SunsetHotelSystem.Dominio.UTL.pdb
+C:\Users\santi\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.dll
+C:\Users\santi\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.pdb

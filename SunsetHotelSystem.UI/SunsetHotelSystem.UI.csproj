@@ -266,6 +266,7 @@
     <Content Include="Views\Admin\ModificarPaginas.cshtml" />
     <Content Include="Views\Admin\Home.cshtml" />
     <Content Include="Views\Admin\PaginaSobreNosotros.cshtml" />
+    <Content Include="Views\Admin\ComoLlegar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SunsetHotelSystem.Dominio.Entidades\SunsetHotelSystem.Dominio.Entidades.csproj">

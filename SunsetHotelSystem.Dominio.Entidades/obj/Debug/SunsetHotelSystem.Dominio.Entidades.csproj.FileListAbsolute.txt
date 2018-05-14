@@ -10,3 +10,7 @@ C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.En
 C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\bin\Debug\SunsetHotelSystem.Dominio.Entidades.pdb
 C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.dll
 C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.pdb
+C:\Users\santi\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\bin\Debug\SunsetHotelSystem.Dominio.Entidades.dll
+C:\Users\santi\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\bin\Debug\SunsetHotelSystem.Dominio.Entidades.pdb
+C:\Users\santi\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.dll
+C:\Users\santi\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.pdb

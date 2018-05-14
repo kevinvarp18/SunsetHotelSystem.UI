@@ -1,0 +1,42 @@
+﻿@model SunsetHotelSystem.Dominio.Entidades.Entidades.TSH_Pagina
+
+<article class="col-xs-12 col-sm-8 col-md-9">
+    <div class="news-letter">
+        <div class="row">
+            <div class="w3ls-heading">
+                <h3>Modificar P&aacute;ginas</h3>
+            </div>
+            <div class="agileinfo-subscribe">
+                <h5>¿Cómo llegar?</h5>
+                <form action="ActualizarComoLlegar" method="post">
+                    <input type="number" name="id" id="id" value="@Model.TN_Identificador_TSH_Pagina" style="display: none;" />
+                    <textarea id="descripcion" name="descripcion">@Model.TC_Descripcion_TSH_Pagina</textarea>
+                    <center>
+                        <input type="submit" value="Aceptar">&nbsp;&nbsp;
+                        <button type="button" data-toggle="modal" data-target="#myModal">Cancelar</button>
+                    </center>
+                    <div class="clearfix"> </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</article>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Advertencia</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">¿Desea salir sin guardar cambios?</div>
+            <form action="Home" method="post">
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Sí</button>
+                    <button type="submit" class="btn btn-danger" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
