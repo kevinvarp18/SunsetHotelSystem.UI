@@ -132,7 +132,7 @@ namespace SunsetHotelSystem.UI.Controllers {
             Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
             try
             {
-                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Pagina/", 6));
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Pagina/", 8));
                 if (responseWAPI.IsSuccessStatusCode)
                 {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
