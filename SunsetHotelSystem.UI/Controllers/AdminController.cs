@@ -32,33 +32,27 @@ namespace SunsetHotelSystem.UI.Controllers {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
                     paginaHome = respuesta.valorRetorno;
                 }//Fin del if.
-            } catch (Exception ex) {
+            }catch (Exception ex){
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
 
             return View(paginaHome);
         }//Fin de la funcion PaginaHome.
 
-
-        public static byte[] StrToByteArray(string str)
-        {
+        public static byte[] StrToByteArray(string str) {
             System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
             return encoding.GetBytes(str);
         }
-
 
         [HttpPost]
         public async Task<ActionResult> actualizarPaginaHome(int id, string descripcion, string imagen) {
             Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
             TSH_Pagina pagina = new TSH_Pagina();
             try {
-
                 byte[] image = StrToByteArray(imagen);
-               
                 pagina.TN_Identificador_TSH_Pagina = id;
                 pagina.TC_Descripcion_TSH_Pagina = descripcion;
                 pagina.TSH_Pag_Home.TI_Imagen_TSH_Pag_Home = image;
-
                 String jsonContent = JsonConvert.SerializeObject(pagina);
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
                 ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
@@ -80,8 +74,6 @@ namespace SunsetHotelSystem.UI.Controllers {
                 return View("Home");
             }//Try-catch.
         }//Fin del método guardarCambios.
-
-     
 
         public async Task<ActionResult> PaginaSobreNosotros() {
             TSH_Pagina paginaSobreNosotros = new TSH_Pagina();
@@ -115,6 +107,7 @@ namespace SunsetHotelSystem.UI.Controllers {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
                     pagina = respuesta.valorRetorno;
                 }//Fin del if.
+
                 if (respuesta.resultado == 1)
                     ViewBag.Message = "Los cambios en la pagina Sobre Nosotros se realizaron exitosamente.";
                 else
@@ -125,22 +118,16 @@ namespace SunsetHotelSystem.UI.Controllers {
                 return View("Home");
             }//Try-catch.
         }//Fin del método ActualizarSobreNosotros.
-
-        public async Task<ActionResult> ComoLlegar()
-        {
+        public async Task<ActionResult> ComoLlegar() {
             TSH_Pagina comoLlegar = new TSH_Pagina();
             Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
-            try
-            {
+            try {
                 HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Pagina/", 8));
-                if (responseWAPI.IsSuccessStatusCode)
-                {
+                if (responseWAPI.IsSuccessStatusCode) {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
                     comoLlegar = respuesta.valorRetorno;
                 }//Fin del if.
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
 
@@ -148,12 +135,10 @@ namespace SunsetHotelSystem.UI.Controllers {
         }//ComoLlegar
 
         [HttpPost]
-        public async Task<ActionResult> ActualizarComoLlegar(int id, string descripcion)
-        {
+        public async Task<ActionResult> ActualizarComoLlegar(int id, string descripcion) {
             Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
             TSH_Pagina pagina = new TSH_Pagina();
-            try
-            {
+            try {
                 pagina.TN_Identificador_TSH_Pagina = id;
                 pagina.TC_Descripcion_TSH_Pagina = descripcion;
                 String jsonContent = JsonConvert.SerializeObject(pagina);
@@ -161,8 +146,7 @@ namespace SunsetHotelSystem.UI.Controllers {
                 ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
                 byteArrayContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
                 HttpResponseMessage responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Pagina"), byteArrayContent);
-                if (responseWAPI.IsSuccessStatusCode)
-                {
+                if (responseWAPI.IsSuccessStatusCode) {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
                     pagina = respuesta.valorRetorno;
                 }//Fin del if.
@@ -171,9 +155,7 @@ namespace SunsetHotelSystem.UI.Controllers {
                 else
                     ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
                 return View("Home");
-            }
-            catch
-            {
+            } catch {
                 ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
                 return View("Home");
             }//Try-catch.

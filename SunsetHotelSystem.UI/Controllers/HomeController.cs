@@ -15,52 +15,73 @@ namespace SunsetHotelSystem.UI.Controllers {
 
         public async Task<ActionResult> Index() {
             Session["Usuario"] = "0";
-
-            TSH_Pagina paginaHome = new TSH_Pagina();
+            TSH_Pagina pagina = new TSH_Pagina();
             Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
             try {
                 HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Pagina/", 5));
                 if (responseWAPI.IsSuccessStatusCode) {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
-                    paginaHome = respuesta.valorRetorno;
+                    pagina = respuesta.valorRetorno;
                 }//Fin del if.
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
-
-            return View(paginaHome);
+            return View(pagina);
         }//Fin del método Index.
 
         public async Task<ActionResult> SobreNosotros() {
-            TSH_Pagina paginaSobreNosotros = new TSH_Pagina();
+            TSH_Pagina pagina = new TSH_Pagina();
             Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
             try {
                 HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Pagina/", 6));
-                if (responseWAPI.IsSuccessStatusCode) {
+                if (responseWAPI.IsSuccessStatusCode)
+                {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
-                    paginaSobreNosotros = respuesta.valorRetorno;
+                    pagina = respuesta.valorRetorno;
                 }//Fin del if.
             } catch (Exception ex) {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
-
-            return View(paginaSobreNosotros);
+            return View(pagina);
         }//Fin del método SobreNosotros.
 
-        public ActionResult ComoLlegar() { 
-            return View();
-        }
+        public async Task<ActionResult> ComoLlegar() {
+            TSH_Pagina pagina = new TSH_Pagina();
+            Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
+            try {
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Pagina/", 8));
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    pagina = respuesta.valorRetorno;
+                }//Fin del if.
+            } catch (Exception ex) {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+            return View(pagina);
+        }//Fin del método ComoLlegar.
 
-        public ActionResult Facilidades() {
-            return View();
-        }
+        public async Task<ActionResult> Facilidades() {
+            TSH_Pagina pagina = new TSH_Pagina();
+            Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
+            try {
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Pagina/", 7));
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    pagina = respuesta.valorRetorno;
+                }//Fin del if.
+            } catch (Exception ex) {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+            return View(pagina);
+        }//Fin del método Facilidades.
 
         public ActionResult Contactenos() {
             return View();
-        }
+        }//Fin del método Contactenos.
 
         public ActionResult Tarifas() {
             return View();
-        }
+        }//Fin del método Tarifas.
     }//Fin de la clase HomeController.
 }//Fin del namespace.

@@ -1,4 +1,6 @@
-﻿<article class="col-xs-12 col-sm-8 col-md-9">
+﻿@model SunsetHotelSystem.Dominio.Entidades.Entidades.TSH_Pagina
+
+<article class="col-xs-12 col-sm-8 col-md-9">
     <div class="about">
         <div class="row">
             <div class="w3ls-heading">
@@ -7,59 +9,32 @@
             <div class="w3-about-grids">
                 <div class="w3-about-grids">
                     <div class="col-md-12 w3-about-left">
-                        <p>En Sunset Hotel podrá encontras bastantes facilidades para que su estadía sea la mejor, incluyendo distintas localidades de gran actractivo.</p>
+                        <p>@Model.TC_Descripcion_TSH_Pagina</p>
                     </div>
                 </div>
             </div>
         </div>
         <br /><br />
 
-        <div class="row">
-            <div class="col-4 col-sm-6 col-md-6 w3-about-left">
-                <div class="about-img-grids">
-                    <div class="col-md-10 about-img">
-                        <img class="rounded img-fluid" src="../images/foto4.jpg" alt=" " />
+        @{
+            foreach (var item in Model.TSH_Pag_Facilidades)
+            {
+                <div class="row">
+                    <div class="col-4 col-sm-6 col-md-6 w3-about-left">
+                        <div class="about-img-grids">
+                            <div class="col-md-10 about-img">
+                                <img class="rounded img-fluid" src="../images/foto4.jpg" alt=" " />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8 col-sm-6 col-md-6 w3-about-right">
+                        <h5>@item.TC_TituloFacilidad_TSH_Pag_Facilidades</h5>
+                        <br />
+                        <p>@item.TC_Descripcion_TSH_Pag_Facilidades</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-8 col-sm-6 col-md-6 w3-about-right">
-                <h5>Piscina</h5>
-                <br />
-                <p>En SunSet encontra una gran piscina la cual cuenta con diferentes niveles de profundidad para que tanto niños como adultos puedan relajarse y disfrutar del gran ambiente que posee SunSent.</p>
-            </div>
-        </div>
-        <br /><br />
-
-        <div class="row">
-            <div class="col-4 col-sm-6 col-md-6 w3-about-left">
-                <div class="about-img-grids">
-                    <div class="col-md-10 about-img">
-                        <img class="rounded img-fluid" src="../images/foto5.jpg" alt=" " />
-                    </div>
-                </div>
-            </div>
-            <div class="col-8 col-sm-6 col-md-6 w3-about-right">
-                <h5>Playa</h5>
-                <br />
-                <p>En SunSet cuenta con una de las playas más hermosas del pais en donde podra disfrutar de una vista hermosa y relajante.</p>
-            </div>
-        </div>
-        <br /><br />
-
-
-        <div class="row">
-            <div class="col-4 col-sm-6 col-md-6 w3-about-left">
-                <div class="about-img-grids">
-                    <div class="col-md-10 about-img">
-                        <img class="rounded img-fluid" src="../images/foto7.jpg" alt=" " />
-                    </div>
-                </div>
-            </div>
-            <div class="col-8 col-sm-6 col-md-6 w3-about-right">
-                <h5>Centro de relajaci&oacute;n</h5>
-                <br />
-                <p>En SunSet encontrara varios centros de relajacion en donde disfrutar de una experiencia una en familia.</p>
-            </div>
-        </div>
+                <br /><br />
+            }//Fin del foreach.
+        }
     </div>
 </article>
