@@ -104,7 +104,9 @@ namespace SunsetHotelSystem.UI.Controllers {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Reserva>>(responseWAPI.Content.ReadAsStringAsync().Result);
                     reserva = respuesta.valorRetorno;
                 }//Fin del if.
-                return RedirectToAction("ResultadoReserva", "Reserva", new { nombreCliente = nombreReserva + " " + apellidoReserva, correoElectronico = correoReserva, numeroReserva = "abc", resultadoReserva = "1" });
+                Guid g = Guid.NewGuid();
+                Console.Write(g);
+                return RedirectToAction("ResultadoReserva", "Reserva", new { nombreCliente = nombreReserva + " " + apellidoReserva, correoElectronico = correoReserva, numeroReserva = g.ToString(), resultadoReserva = "1" });
             } catch {
                 return RedirectToAction("Index", "Home");
             }//Fin del try-catch.
