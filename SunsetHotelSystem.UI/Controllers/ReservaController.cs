@@ -34,8 +34,8 @@ namespace SunsetHotelSystem.UI.Controllers {
         [HttpPost]
         public async Task<ActionResult> HabitacionDisponible(DateTime fechaLlegada, DateTime fechaSalida, int tipoHabitacion) {
             DateTime fechaActual = DateTime.Now;
-            if (fechaLlegada > fechaSalida || fechaLlegada == fechaSalida || fechaLlegada < fechaActual || fechaSalida < fechaActual) {
-                return RedirectToAction("HabitacionDisponible", "Reserva");
+            if (fechaLlegada > fechaSalida || fechaLlegada < fechaActual || fechaSalida < fechaActual) {
+                return RedirectToAction("ResultadoReserva", "Reserva", new { nombreCliente = "", correoElectronico = "", numeroReserva = "", resultadoReserva = "2" });
             } else {
                 List<SP_ConsultarDisponibilidad_Result> habitacionesDisponibles = new List<SP_ConsultarDisponibilidad_Result>();
                 Respuesta<List<SP_ConsultarDisponibilidad_Result>> respuesta = new Respuesta<List<SP_ConsultarDisponibilidad_Result>>();
@@ -124,7 +124,7 @@ namespace SunsetHotelSystem.UI.Controllers {
             email.To.Add(new MailAddress(correoReserva));
             email.From = new MailAddress("sunsethotelinfo@gmail.com");
             email.Subject = "Reservación Comprobante( " + DateTime.Now.ToString("dd / MMM / yyy hh:mm:ss") + " ) ";
-            email.Body = "Reciba un cordial saludo " + nombreReserva + " " + apellidoReserva + " por parte de Sunset Hotel. Le adjuntamos el  número de habitación asiganada: " + numeroHabitacion + ". Además, tiene que presentar el siguiente código de comprobante para verificar su reservación " + cod;
+            email.Body = "<h1>Reciba un cordial saludo </h1><br><h2>" + nombreReserva + " " + apellidoReserva + "</h2><br> <p>De parte de Sunset Hotel, le adjuntamos el  número de habitación asiganada: " + numeroHabitacion + ".</p><br> <p>Además, tiene que presentar el siguiente código de comprobante para verificar su reservación <p/><br><h3>" + cod+ "</h3>";
             email.IsBodyHtml = true;
             email.Priority = MailPriority.Normal;
             SmtpClient smtp = new SmtpClient();
