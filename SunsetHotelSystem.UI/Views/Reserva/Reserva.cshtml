@@ -50,3 +50,25 @@
     </div>
 </article>
 
+<script>
+
+    $(document).ready(function () {
+        $("#tarjetaCredito").on("input", function () {
+
+            var lenghtText = document.getElementById("tarjetaCredito").value.length;
+
+            if (lenghtText >= 19) {
+
+                var url = "@Url.Action("consulta", "Reserva")";
+                var tarjeta = document.getElementById("tarjetaCredito").value;
+                var data = { tarjeta: tarjeta };
+
+                $.post(url, data).done>(function (data)){
+                    //codifo de vuelta
+                });
+
+            }//if
+        });
+    });
+
+</script>

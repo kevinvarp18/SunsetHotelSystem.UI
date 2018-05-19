@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Net.Mail;
+using System.Net;
 
 namespace SunsetHotelSystem.UI.Controllers {
     public class ReservaController : ConfigController {
@@ -147,5 +148,12 @@ namespace SunsetHotelSystem.UI.Controllers {
                 email.Dispose();
             }
         }//fin correo
+
+
+        [HttpPost]
+        public JsonResult consulta( string tarjeta)
+        {
+            return Json("");
+        }
     }//Fin de la clase ReservaController.
 }//Fin del namespace.
