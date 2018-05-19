@@ -37,8 +37,6 @@ namespace SunsetHotelSystem.UI.Controllers {
             if (fechaLlegada > fechaSalida || fechaLlegada == fechaSalida || fechaLlegada < fechaActual || fechaSalida < fechaActual) {
                 return RedirectToAction("HabitacionDisponible", "Reserva");
             } else {
-                fechaLlegada = Convert.ToDateTime(fechaLlegada.ToString("yyyy/MM/dd"));
-                fechaSalida = Convert.ToDateTime(fechaSalida.ToString("yyyy/MM/dd"));
                 List<SP_ConsultarDisponibilidad_Result> habitacionesDisponibles = new List<SP_ConsultarDisponibilidad_Result>();
                 Respuesta<List<SP_ConsultarDisponibilidad_Result>> respuesta = new Respuesta<List<SP_ConsultarDisponibilidad_Result>>();
                 try {
@@ -80,9 +78,7 @@ namespace SunsetHotelSystem.UI.Controllers {
 
         [HttpPost]
         public async Task<ActionResult> Reserva(string nombreReserva, string apellidoReserva, string correoReserva, string tarjetaReserva, int numeroHabitacion, DateTime fechaLlegada, DateTime fechaSalida) {
-            fechaLlegada = Convert.ToDateTime(fechaLlegada.ToString("yyyy/MM/dd"));
             fechaLlegada = fechaLlegada.Date + (new TimeSpan(15, 0, 0));
-            fechaSalida = Convert.ToDateTime(fechaSalida.ToString("yyyy/MM/dd"));
             fechaSalida = fechaSalida.Date + (new TimeSpan(11, 0, 0));
             Respuesta<TSH_Reserva> respuesta = new Respuesta<TSH_Reserva>();
             TSH_Reserva reserva = new TSH_Reserva();
@@ -107,7 +103,7 @@ namespace SunsetHotelSystem.UI.Controllers {
                     reserva = respuesta.valorRetorno;
                 }//Fin del if.
                 Guid g = Guid.NewGuid();
-                correo(nombreReserva, correoReserva, apellidoReserva, numeroHabitacion,g);
+                correo(nombreReserva, correoReserva, apellidoReserva, numeroHabitacion,g.ToString());
                 return RedirectToAction("ResultadoReserva", "Reserva", new { nombreCliente = nombreReserva + " " + apellidoReserva, correoElectronico = correoReserva, numeroReserva = g.ToString(), resultadoReserva = "1" });
             } catch {
                 return RedirectToAction("Index", "Home");
