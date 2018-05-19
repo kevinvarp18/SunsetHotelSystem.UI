@@ -1,4 +1,4 @@
-﻿@model SunsetHotelSystem.Dominio.Entidades.Entidades.TSH_Pagina
+﻿@model List<SunsetHotelSystem.Dominio.Entidades.Entidades.TSH_Pag_Facilidades>
 
 <article class="col-xs-12 col-sm-8 col-md-9">
     <div class="news-letter">
@@ -10,10 +10,9 @@
                 <h5>Facilidades</h5>
                 <form action="actualizarFacilidades" method="post">
                     @{
-                        foreach (var item in Model.TSH_Pag_Facilidades)
-                        {
+                        foreach (var item in Model) {
                             <h5>@item.TC_TituloFacilidad_TSH_Pag_Facilidades</h5>
-                            <input type="number" name="id" id="id" value="@Model.TN_Identificador_TSH_Pagina" style="display: none;" />
+                            @*<input type="number" name="id" id="id" value="@item.TN_Identificador_TSH_Pag_Facilidades" style="display: none;" />*@
                             <textarea id="descripcion" name="descripcion">@item.TC_Descripcion_TSH_Pag_Facilidades</textarea>
                             <div class="col-md-5 about-img" style="margin-left: -2%;">
                                 <span>Imagen Actual</span><br />

@@ -39,20 +39,25 @@ namespace SunsetHotelSystem.UI.Controllers {
             return View(paginaHome);
         }//Fin de la funcion PaginaHome.
 
-        public static byte[] StrToByteArray(string str) {
-            System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
-            return encoding.GetBytes(str);
-        }
-
         [HttpPost]
-        public async Task<ActionResult> actualizarPaginaHome(int id, string descripcion, string imagen) {
+        public async Task<ActionResult> actualizarPaginaHome(int id, string descripcion, HttpPostedFileBase imagen) {
             Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
             TSH_Pagina pagina = new TSH_Pagina();
+            pagina.TSH_Pag_Home = new TSH_Pag_Home();
             try {
-                byte[] image = StrToByteArray(imagen);
-                pagina.TN_Identificador_TSH_Pagina = id;
-                pagina.TC_Descripcion_TSH_Pagina = descripcion;
-                pagina.TSH_Pag_Home.TI_Imagen_TSH_Pag_Home = image;
+                if (imagen.ContentLength > 0) {
+                    byte[] imageData = null;
+                    using (var binaryReader = new BinaryReader(imagen.InputStream)) {
+                        imageData = binaryReader.ReadBytes(imagen.ContentLength);
+                    }
+                    Guid g = Guid.NewGuid();
+                    pagina.TSH_Pag_Home.TN_Id_Imagen_TSH_Pag_Home = g;
+                    pagina.TN_Identificador_TSH_Pagina = id;
+                    pagina.TSH_Pag_Home.TN_Identificador_TSH_Pag_Home = id;
+                    pagina.TC_Descripcion_TSH_Pagina = descripcion;
+                    pagina.TSH_Pag_Home.TI_Imagen_TSH_Pag_Home = imageData;
+                }//Fin del if.
+                
                 String jsonContent = JsonConvert.SerializeObject(pagina);
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
                 ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
@@ -160,5 +165,20 @@ namespace SunsetHotelSystem.UI.Controllers {
                 return View("Home");
             }//Try-catch.
         }//ActualizarComoLlegar
+
+        public async Task<ActionResult> PaginaFacilidades() {
+            List<TSH_Pag_Facilidades> listaFacilidades = new List<TSH_Pag_Facilidades>();
+            Respuesta<List<TSH_Pag_Facilidades>> respuesta = new Respuesta<List<TSH_Pag_Facilidades>>();
+            try {
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Pag_Facilidades");
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Pag_Facilidades>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaFacilidades = respuesta.valorRetorno;
+                }//Fin del if.
+            } catch (Exception ex) {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+            return View(listaFacilidades);
+        }//Fin de la funcion PaginaSobreNosotros.
     }//Fin de la clase AdminController.
 }//Fin del namespace.

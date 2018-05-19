@@ -16,7 +16,7 @@
             </div>
             <div class="agileinfo-subscribe">
                 <h5>Home</h5>
-                <form action="actualizarPaginaHome" method="post">
+                <form action="actualizarPaginaHome" method="post" enctype="multipart/form-data">
                     <input type="number" name="id" id="id" value="@Model.TN_Identificador_TSH_Pagina" style="display: none;"/>
                     <textarea id="descripcion" name="descripcion">@Model.TC_Descripcion_TSH_Pagina</textarea>
                     <div class="col-md-5 about-img" style="margin-left: -2%;">
