@@ -62,18 +62,19 @@ namespace SunsetHotelSystem.UI.Controllers {
         }//Fin del método ComoLlegar.
 
         public async Task<ActionResult> Facilidades() {
-            TSH_Pagina pagina = new TSH_Pagina();
-            Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
+            List<TSH_Pag_Facilidades> listaFacilidades = new List<TSH_Pag_Facilidades>();
+            Respuesta<List<TSH_Pag_Facilidades>> respuesta = new Respuesta<List<TSH_Pag_Facilidades>>();
             try {
-                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Pagina/", 7));
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Pag_Facilidades");
                 if (responseWAPI.IsSuccessStatusCode) {
-                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
-                    pagina = respuesta.valorRetorno;
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Pag_Facilidades>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaFacilidades = respuesta.valorRetorno;
                 }//Fin del if.
             } catch (Exception ex) {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
-            return View(pagina);
+
+            return View(listaFacilidades);
         }//Fin del método Facilidades.
 
         public ActionResult Contactenos() {

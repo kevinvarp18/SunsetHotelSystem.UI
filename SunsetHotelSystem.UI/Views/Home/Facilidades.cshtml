@@ -1,4 +1,4 @@
-﻿@model SunsetHotelSystem.Dominio.Entidades.Entidades.TSH_Pagina
+﻿@model List<SunsetHotelSystem.Dominio.Entidades.Entidades.TSH_Pag_Facilidades>
 
 <article class="col-xs-12 col-sm-8 col-md-9">
     <div class="about">
@@ -9,7 +9,7 @@
             <div class="w3-about-grids">
                 <div class="w3-about-grids">
                     <div class="col-md-12 w3-about-left">
-                        <p>@Model.TC_Descripcion_TSH_Pagina</p>
+                        <p></p>
                     </div>
                 </div>
             </div>
@@ -17,8 +17,7 @@
         <br /><br />
 
         @{
-            foreach (var item in Model.TSH_Pag_Facilidades)
-            {
+            foreach (var item in Model) {
                 <div class="row">
                     <div class="col-4 col-sm-6 col-md-6 w3-about-left">
                         <div class="about-img-grids">

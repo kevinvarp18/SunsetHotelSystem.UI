@@ -14,10 +14,17 @@ namespace SunsetHotelSystem.Dominio.Entidades.Entidades
     
     public partial class TSH_Pagina
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TSH_Pagina()
+        {
+            this.TSH_Pag_Facilidades = new HashSet<TSH_Pag_Facilidades>();
+        }
+    
         public int TN_Identificador_TSH_Pagina { get; set; }
         public string TC_Descripcion_TSH_Pagina { get; set; }
     
-        public virtual TSH_Pag_Facilidades TSH_Pag_Facilidades { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TSH_Pag_Facilidades> TSH_Pag_Facilidades { get; set; }
         public virtual TSH_Pag_Home TSH_Pag_Home { get; set; }
         public virtual TSH_SobreN_Galeria TSH_SobreN_Galeria { get; set; }
     }
