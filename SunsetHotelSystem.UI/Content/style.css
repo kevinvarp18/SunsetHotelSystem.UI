@@ -914,7 +914,7 @@ li.agileinfo_share {
 }
 
 form {
-    margin: 7% 0 0 25%;
+    margin-top: 7%;
 }
 
 .news-letter span {
@@ -937,10 +937,9 @@ form {
 }
 
 .news-letter textarea {
-    margin: 0 0 5% 0;
+    margin: 0 0 5% 19%;
     padding: 0 0 12% 0;
     width: 65%;
-    height: 20%;
     resize: none;
 }
 

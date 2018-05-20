@@ -18,11 +18,13 @@
 
         @{
             foreach (var item in Model) {
+                var base64ImagenHotel = Convert.ToBase64String(@item.TI_Imagen_TSH_Pag_Facilidades);
+                string imgSrcImagenFacilidad = String.Format("data:image/gif;base64,{0}", base64ImagenHotel);
                 <div class="row">
                     <div class="col-4 col-sm-6 col-md-6 w3-about-left">
                         <div class="about-img-grids">
                             <div class="col-md-10 about-img">
-                                <img class="rounded img-fluid" src="../images/foto4.jpg" alt=" " />
+                                <img class="rounded img-fluid" src="@imgSrcImagenFacilidad" alt=" " />
                             </div>
                         </div>
                     </div>

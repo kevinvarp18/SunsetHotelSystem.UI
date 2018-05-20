@@ -1,12 +1,9 @@
 ﻿@model SunsetHotelSystem.Dominio.Entidades.Entidades.TSH_Pagina
-    *@{
 
-        var base64ImagenHotel = Convert.ToBase64String(Model.TSH_Pag_Home.TI_Imagen_TSH_Pag_Home);
-        string imgSrcImagenHotel = String.Format("data:image/gif;base64,{0}", base64ImagenHotel);
-    }
-
-
-
+@{
+    var base64ImagenHotel = Convert.ToBase64String(Model.TSH_Pag_Home.TI_Imagen_TSH_Pag_Home);
+    string imgSrcImagenHotel = String.Format("data:image/gif;base64,{0}", base64ImagenHotel);
+}
 
 <article class="col-xs-12 col-sm-8 col-md-9">
     <div class="news-letter">
