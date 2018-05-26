@@ -117,9 +117,26 @@ namespace SunsetHotelSystem.UI.Controllers {
         }//Fin de la función ResultadoReserva.
 
         [HttpPost]
-        public JsonResult consulta( string tarjeta)
-        {
-            return Json("");
-        }
+        public async Task<ActionResult> Consulta(string tarjeta) {
+            List<TSH_Reserva> listaReservas = new List<TSH_Reserva>();
+            Respuesta<List<TSH_Reserva>> respuesta = new Respuesta<List<TSH_Reserva>>();
+            try {
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Reserva/");
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Reserva>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaReservas = respuesta.valorRetorno;
+                }//Fin del if.
+            } catch (Exception ex) {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+            string resultado = " / / ";
+
+            foreach (TSH_Reserva reserva in listaReservas) {
+                if (reserva.TSH_Cliente.TC_Tarjeta_TSH_Cliente.Equals(tarjeta)) {
+                    resultado = reserva.TSH_Cliente.TC_Nombre_TSH_Cliente + "/" + reserva.TSH_Cliente.TC_Apellidos_TSH_Cliente + "/" + reserva.TSH_Cliente.TC_Correo_TSH_Cliente;
+                }
+            }
+            return Json(resultado);
+        }//CargarDatosCliente
     }//Fin de la clase ReservaController.
 }//Fin del namespace.

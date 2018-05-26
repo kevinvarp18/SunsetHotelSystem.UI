@@ -30,47 +30,55 @@
                 <h3>Datos Personales</h3>
             </div>
             <div class="agileinfo-subscribe">
-                <div class="formCenter">
-                    <form action="Reserva" method="post">
-                        <input type="number" id="numeroHabitacion" name="numeroHabitacion" value="@Model.TN_Numero_Habitacion_TSH_Habitacion" style="display: none;">
-                        <input type="text" id="fechaLlegada" name="fechaLlegada" value="@ViewData["fechaLlegada"]" style="display: none;">
-                        <input type="text" id="fechaSalida" name="fechaSalida" value="@ViewData["fechaSalida"]" style="display: none;">
-                        <span>Nombre:</span>
-                        <input type="text" name="nombreReserva" id="nombreReserva"><br>
-                        <span>Apellidos:</span>
-                        <input type="text" name="apellidoReserva" id="apellidoReserva"><br>
-                        <span>Correo electrónico:</span>
-                        <input type="email" name="correoReserva" id="correoReserva"><br>
-                        <span>Tarjeta de cr&eacute;dito:</span>
-                        <input type="text" name="tarjetaReserva" id="tarjetaReserva"><br>
-                        <input type="submit" value="Aceptar">
-                        <div class="clearfix"> </div>
-                    </form>
-                </div>
+                <form action="Reserva" method="post">
+                    <input type="number" id="numeroHabitacion" name="numeroHabitacion" value="@Model.TN_Numero_Habitacion_TSH_Habitacion" style="display: none;">
+                    <input type="text" id="fechaLlegada" name="fechaLlegada" value="@ViewData["fechaLlegada"]" style="display: none;">
+                    <input type="text" id="fechaSalida" name="fechaSalida" value="@ViewData["fechaSalida"]" style="display: none;">
+                    <span>Nombre:</span>
+                    <input type="text" name="nombreReserva" id="nombreReserva"><br>
+                    <span>Apellidos:</span>
+                    <input type="text" name="apellidoReserva" id="apellidoReserva"><br>
+                    <span>Correo electrónico:</span>
+                    <input type="email" name="correoReserva" id="correoReserva"><br>
+                    <span>Tarjeta de cr&eacute;dito:</span>
+                    <input type="text" name="tarjetaReserva" id="tarjetaReserva"><br>
+                    <script>
+                        $("#tarjetaReserva").mask("9999-9999-9999-9999");
+                    </script>
+                    <input type="submit" value="Aceptar">
+                    <div class="clearfix"> </div>
+                </form>
             </div>
         </div>
     </div>
 </article>
 
 <script>
+$(document).ready(function () {
+    $("#tarjetaReserva").on("input", function () {
 
-    $(document).ready(function () {
-        $("#tarjetaCredito").on("input", function () {
+        var tarjeta = this.value;
+            if (this.value.length == 19) {
 
-            var lenghtText = document.getElementById("tarjetaCredito").value.length;
-
-            if (lenghtText >= 19) {
-
-                var url = "@Url.Action("consulta", "Reserva")";
-                var tarjeta = document.getElementById("tarjetaCredito").value;
-                var data = { tarjeta: tarjeta };
-
-                $.post(url, data).done>(function (data)){
-                    //codifo de vuelta
-                });
-
-            }//if
-        });
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Consulta", "Reserva")",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({ tarjeta: tarjeta }),
+                    success: function (data) { //recibe los datos que vienen dentro de la consulta
+                        if (data != null) {
+                            var datos = data.split("/");
+                            document.getElementById('nombreReserva').value = datos[0];
+                            document.getElementById('apellidoReserva').value = datos[1];
+                            document.getElementById('correoReserva').value = datos[2];
+                        }
+                    },//success
+                    error: function (data) {
+                        alert("ERROR");
+                    },//error
+                });//ajax
+            }//if (this.value.length == 11)
+        });//cedula.on
     });
-
 </script>
