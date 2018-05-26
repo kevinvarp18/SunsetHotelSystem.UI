@@ -8,7 +8,7 @@
             </div>
             <div class="agileinfo-subscribe">
                 <h5>Facilidades</h5>
-                <form action="PaginaFacilidades" method="post" enctype="multipart/form-data">
+                <form action="ActualizarFacilidades" method="post" enctype="multipart/form-data" name="formularioFacilidades">
                     <input type="number" name="facilidadesTotal" id="facilidadesTotal" value="@Model.Count" style="display: none;" />
                     <textarea id="descripcionPagina" name="descripcionPagina">@Model.First().TSH_Pagina.TC_Descripcion_TSH_Pagina</textarea>
                     @{
@@ -21,20 +21,21 @@
                                 <input type="number" name="id@(contador)" id="id@(contador)" value="@item.TN_IdentificadorNumFac_TSH_Pag_Facilidades" style="display: none;" />
                                 <input type="text" name="tituloFacilidad@(contador)" id="tituloFacilidad@(contador)" value="@item.TC_TituloFacilidad_TSH_Pag_Facilidades" style="display: none;" />
                                 <textarea id="descripcion@(contador)" name="descripcion@(contador)">@item.TC_Descripcion_TSH_Pag_Facilidades</textarea>
-                                <div class="col-md-5 about-img" style="margin-left: -2%;">
-                                    <span>Imagen Actual</span><br />
-                                    <img src="@imgSrcImagenFacilidad" alt="Sunset Hotel" />
-                                </div>
-                                <div class="col-md-6">
-                                    <br /><br /><br />
-                                    <span>Subir imagen nueva</span><br />
-                                    <input type="file" name="imagen@(contador)" id="imagen@(contador)" value="@imgSrcImagenFacilidad">
-                                    <br /><br /><br /><br /><br />
+                                <div class="formCenter">
+                                    <div class="col-md-5 about-img" style="margin-left: -2%;">
+                                        <span>Imagen Actual</span><br />
+                                        <img src="@imgSrcImagenFacilidad" alt="Sunset Hotel" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <br /><br /><br />
+                                        <span>Subir imagen nueva</span><br />
+                                        <input type="file" name="imagen@(contador)" id="imagen@(contador)" value="@imgSrcImagenFacilidad">
+                                        <br /><br /><br /><br /><br />
+                                    </div>
                                 </div>
                             </div>
-                            <br /><br />
+                                <br /><br />
                             contador = contador + 1;
-
                         }//Fin del foreach.
                     }
                     <center>
@@ -43,6 +44,7 @@
                     </center>
                     <div class="clearfix"> </div>
                 </form>
+                <input type="submit" value="Agregar facilidad" onclick="nuevaFacilidad();">
             </div>
         </div>
     </div>

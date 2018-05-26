@@ -15,21 +15,27 @@
     <script type="application/x-javascript">
          addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
         function hideURLbar(){ window.scrollTo(0,1); } </script>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-    
+
 </head>
 <body>
 
     <!--------------------------------------------- HEADER --------------------------------------------->
-    
+
     <div class="banner">
         <div class="header-bottom">
             <div class="header">
                 <div class="container">
                     <div class="w3_agile_logo">
-                        <a href="@Url.Action("Index", "Home")"><img src="../images/logo.png" width="50%" height="50%" class="rounded img-fluid" alt="Logo"></a>
+                        @{
+                            if (Session["Usuario"].Equals("0")) {
+                                <a href="@Url.Action("Home", "Admin")"><img src="../images/logo.png" width="50%" height="50%" class="rounded img-fluid" alt="Logo"></a>
+                            } else {
+                                <a href="@Url.Action("Index", "Home")"><img src="../images/logo.png" width="50%" height="50%" class="rounded img-fluid" alt="Logo"></a>
+                            }
+                        }
                     </div>
                     <div class="header-nav">
                         <nav class="navbar navbar-default">
@@ -45,7 +51,8 @@
                                 <nav class="link-effect-12">
                                     <ul class="nav navbar-nav w3_agile_nav">
                                         @{
-                                            if (Session["Usuario"].Equals("0")) {
+                                            if (Session["Usuario"].Equals("0"))
+                                            {
                                                 <li><a href="@Url.Action("Index", "Home")" class="active"><span>Inicio</span></a></li>
                                                 <li><a href="@Url.Action("SobreNosotros", "Home")"><span>Sobre Nosotros</span></a></li>
                                                 <li><a href="@Url.Action("Facilidades", "Home")"><span>Facilidades</span></a></li>
@@ -53,7 +60,9 @@
                                                 <li><a href="@Url.Action("Tarifas", "Home")"><span>Tarifas</span></a></li>
                                                 <li><a href="@Url.Action("HabitacionDisponible", "Reserva")"><span>Reserva en L&iacute;nea</span></a></li>
                                                 <li><a href="@Url.Action("Contactenos", "Home")"><span>Contactenos</span></a></li>
-                                            } else {
+                                            }
+                                            else
+                                            {
                                                 <li><a href="@Url.Action("Home", "Admin")" class="active"><span>Inicio</span></a></li>
                                                 <li><a href="@Url.Action("ModificarPaginas", "Admin")"><span>Modificar p&aacute;ginas</span></a></li>
                                                 <li><a href="@Url.Action("", "")"><span>Lista de reservaciones</span></a></li>
@@ -78,9 +87,8 @@
     </div>
 
     <!--------------------------------------------- HEADER --------------------------------------------->
-    
     <!------------------------------------------  PUBLICIDAD  ------------------------------------------>
-    
+
     <div class="col-xs-12 col-sm-12 col-md-12 container" style="background: #FFFFFF;">
         <section class="main row">
             <aside class="col-xs-12 col-sm-4 col-md-3">
@@ -140,7 +148,7 @@
                 <br>
             </aside>
 
-    <!------------------------------------------  PUBLICIDAD  ------------------------------------------>
+            <!------------------------------------------  PUBLICIDAD  ------------------------------------------>
 
             @RenderBody()
         </section>

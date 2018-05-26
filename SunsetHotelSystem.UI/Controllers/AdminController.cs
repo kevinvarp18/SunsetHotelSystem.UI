@@ -65,7 +65,6 @@ namespace SunsetHotelSystem.UI.Controllers {
                 HttpResponseMessage responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Pagina"), byteArrayContent);
                 if (responseWAPI.IsSuccessStatusCode) {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
-                    pagina = respuesta.valorRetorno;
                 }//Fin del if.
 
                 if (respuesta.resultado == 1)
@@ -110,7 +109,6 @@ namespace SunsetHotelSystem.UI.Controllers {
                 HttpResponseMessage responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Pagina"), byteArrayContent);
                 if (responseWAPI.IsSuccessStatusCode) {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
-                    pagina = respuesta.valorRetorno;
                 }//Fin del if.
 
                 if (respuesta.resultado == 1)
@@ -124,7 +122,7 @@ namespace SunsetHotelSystem.UI.Controllers {
             }//Try-catch.
         }//Fin del método ActualizarSobreNosotros.
 
-        public async Task<ActionResult> ComoLlegar() {
+        public async Task<ActionResult> PaginaComoLlegar() {
             TSH_Pagina pagina = new TSH_Pagina();
             Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
             try {
@@ -154,7 +152,6 @@ namespace SunsetHotelSystem.UI.Controllers {
                 HttpResponseMessage responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Pagina"), byteArrayContent);
                 if (responseWAPI.IsSuccessStatusCode) {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
-                    pagina = respuesta.valorRetorno;
                 }//Fin del if.
                 if (respuesta.resultado == 1)
                     ViewBag.Message = "Los cambios en la página ¿Cómo llegar? se realizaron exitosamente.";
@@ -183,10 +180,32 @@ namespace SunsetHotelSystem.UI.Controllers {
         }//Fin de la funcion PaginaFacilidades.
 
         [HttpPost]
-        public async Task<ActionResult> PaginaFacilidades(FormCollection collection) {
+        public async Task<ActionResult> ActualizarFacilidades(FormCollection collection) {
+            int bandera = 1;
+            TSH_Pagina pagina = new TSH_Pagina();
+            pagina.TN_Identificador_TSH_Pagina = 7;
+            pagina.TC_Descripcion_TSH_Pagina = collection.GetValue("descripcionPagina").AttemptedValue.ToString();
+            Respuesta<TSH_Pagina> respuestaPagina = new Respuesta<TSH_Pagina>();
+
+            try {
+                String jsonContent = JsonConvert.SerializeObject(pagina);
+                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
+                ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
+                byteArrayContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                HttpResponseMessage responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Pagina"), byteArrayContent);
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuestaPagina = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                }//Fin del if.
+            } catch (Exception ex) {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+
+            if (respuestaPagina.resultado == 0)
+                bandera = 0;
+
             List<TSH_Pag_Facilidades> listaFacilidades = new List<TSH_Pag_Facilidades>();
             List<Respuesta<TSH_Pag_Facilidades>> respuestas = new List<Respuesta<TSH_Pag_Facilidades>>();
-            int totalFacilidades = int.Parse(collection.GetValue("facilidadesTotal").AttemptedValue.ToString());
+            int totalFacilidades = int.Parse(collection.GetValue("facilidadesTotal").AttemptedValue.ToString());            
 
             for (int i = 1; i <= totalFacilidades; i++) {
                 HttpPostedFileBase imagen = Request.Files["imagen" + i];
@@ -221,8 +240,6 @@ namespace SunsetHotelSystem.UI.Controllers {
             } catch (Exception ex) {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
-
-            int bandera = 1;
 
             foreach(Respuesta<TSH_Pag_Facilidades> respuesta in respuestas){
                 if (respuesta.resultado == 0)

@@ -21,16 +21,18 @@
                 <h3>Reserva En L&iacute;nea</h3>
             </div>
             <div class="agileinfo-subscribe">
-                <form action="HabitacionDisponible" method="post">
-                    <span>Fecha de llegada:</span>
-                    <input type="date" name="fechaLlegada" id="fechaLlegada"><br>
-                    <span>Fecha de salida:</span>
-                    <input type="date" name="fechaSalida" id="fechaSalida"><br>
-                    <span>Tipo de habitaci&oacute;n:</span>
-                    @Html.DropDownList("tipoHabitacion", listado, htmlAttributes: new {@style= "news-letter" })<br />
-                    <input type="submit" value="Aceptar"><br><br>
-                    <div class="clearfix"> </div>
-                </form>
+                <div class="formCenter">
+                    <form action="HabitacionDisponible" method="post">
+                        <span>Fecha de llegada:</span>
+                        <input type="date" name="fechaLlegada" id="fechaLlegada"><br>
+                        <span>Fecha de salida:</span>
+                        <input type="date" name="fechaSalida" id="fechaSalida"><br>
+                        <span>Tipo de habitaci&oacute;n:</span>
+                        @Html.DropDownList("tipoHabitacion", listado, htmlAttributes: new { @style = "news-letter" })<br />
+                        <input type="submit" value="Aceptar"><br><br>
+                        <div class="clearfix"> </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

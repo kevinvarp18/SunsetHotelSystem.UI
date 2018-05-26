@@ -23,8 +23,8 @@ namespace SunsetHotelSystem.Dominio.Entidades.Entidades
         public int TN_Identificador_TSH_Cliente { get; set; }
         public string TC_Nombre_TSH_Cliente { get; set; }
         public string TC_Apellidos_TSH_Cliente { get; set; }
-        public string TC_correo_TSH_Cliente { get; set; }
         public string TC_Tarjeta_TSH_Cliente { get; set; }
+        public string TC_Correo_TSH_Cliente { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TSH_Reserva> TSH_Reserva { get; set; }

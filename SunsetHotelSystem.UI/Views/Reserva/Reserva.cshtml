@@ -30,21 +30,23 @@
                 <h3>Datos Personales</h3>
             </div>
             <div class="agileinfo-subscribe">
-                <form action="Reserva" method="post">
-                    <input type="number" id="numeroHabitacion" name="numeroHabitacion" value="@Model.TN_Numero_Habitacion_TSH_Habitacion" style="display: none;">
-                    <input type="text" id="fechaLlegada" name="fechaLlegada" value="@ViewData["fechaLlegada"]" style="display: none;">
-                    <input type="text" id="fechaSalida" name="fechaSalida" value="@ViewData["fechaSalida"]" style="display: none;">
-                    <span>Nombre:</span>
-                    <input type="text" name="nombreReserva" id="nombreReserva"><br>
-                    <span>Apellidos:</span>
-                    <input type="text" name="apellidoReserva" id="apellidoReserva"><br>
-                    <span>Correo electrónico:</span>
-                    <input type="email" name="correoReserva" id="correoReserva"><br>
-                    <span>Tarjeta de cr&eacute;dito:</span>
-                    <input type="text" name="tarjetaReserva" id="tarjetaReserva"><br>
-                    <input type="submit" value="Aceptar">
-                    <div class="clearfix"> </div>
-                </form>
+                <div class="formCenter">
+                    <form action="Reserva" method="post">
+                        <input type="number" id="numeroHabitacion" name="numeroHabitacion" value="@Model.TN_Numero_Habitacion_TSH_Habitacion" style="display: none;">
+                        <input type="text" id="fechaLlegada" name="fechaLlegada" value="@ViewData["fechaLlegada"]" style="display: none;">
+                        <input type="text" id="fechaSalida" name="fechaSalida" value="@ViewData["fechaSalida"]" style="display: none;">
+                        <span>Nombre:</span>
+                        <input type="text" name="nombreReserva" id="nombreReserva"><br>
+                        <span>Apellidos:</span>
+                        <input type="text" name="apellidoReserva" id="apellidoReserva"><br>
+                        <span>Correo electrónico:</span>
+                        <input type="email" name="correoReserva" id="correoReserva"><br>
+                        <span>Tarjeta de cr&eacute;dito:</span>
+                        <input type="text" name="tarjetaReserva" id="tarjetaReserva"><br>
+                        <input type="submit" value="Aceptar">
+                        <div class="clearfix"> </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

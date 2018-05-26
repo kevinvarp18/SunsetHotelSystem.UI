@@ -9,7 +9,6 @@
                     <div class="col-md-12 w3-about-left">
                         @{
                             if (ViewData["Resultado"].Equals("1")) {
-
                                 <p>¡Enhorabuena! Su reserva se ha realizado con éxito. A continuación, se le muestra la información de su reserva.</p>
                                 <table class="table table-bordered">
                                     <thead>
@@ -23,7 +22,7 @@
                                         <tr class="table-danger">
                                             <td>@ViewData["Cliente"]</td>
                                             <td>@ViewData["Correo"]</td>
-                                            <td>@ViewData["Reserva"]</td>
+                                            <td>@ViewData["NumeroReserva"]</td>
                                         </tr>
                                     </tbody>
                                 </table>

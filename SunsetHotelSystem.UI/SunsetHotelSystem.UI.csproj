@@ -227,6 +227,7 @@
     <Content Include="Scripts\move-top.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\viewsScript\ComoLlegar.js" />
+    <Content Include="Scripts\viewsScript\PaginaFacilidades.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -266,7 +267,7 @@
     <Content Include="Views\Admin\ModificarPaginas.cshtml" />
     <Content Include="Views\Admin\Home.cshtml" />
     <Content Include="Views\Admin\PaginaSobreNosotros.cshtml" />
-    <Content Include="Views\Admin\ComoLlegar.cshtml" />
+    <Content Include="Views\Admin\PaginaComoLlegar.cshtml" />
     <Content Include="Views\Admin\PaginaFacilidades.cshtml" />
   </ItemGroup>
   <ItemGroup>

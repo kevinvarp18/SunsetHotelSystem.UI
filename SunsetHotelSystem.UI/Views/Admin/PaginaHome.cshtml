@@ -16,16 +16,18 @@
                 <form action="actualizarPaginaHome" method="post" enctype="multipart/form-data">
                     <input type="number" name="id" id="id" value="@Model.TN_Identificador_TSH_Pagina" style="display: none;"/>
                     <textarea id="descripcion" name="descripcion">@Model.TC_Descripcion_TSH_Pagina</textarea>
-                    <div class="col-md-5 about-img" style="margin-left: -2%;">
-                        <span>Imagen Actual</span><br />
-                        <img src="@imgSrcImagenHotel" alt="Sunset Hotel" />
-                    </div>
-                    <div class="col-md-6">
-                        <br /><br /><br />
-                        <span>Subir imagen nueva</span><br />
-                        <input type="file" name="imagen" id="imagen">
-                  
-                        <br /><br /><br /><br /><br />
+                    <div class="formCenter">
+                        <div class="col-md-5 about-img" style="margin-left: -2%;">
+                            <span>Imagen Actual</span><br />
+                            <img src="@imgSrcImagenHotel" alt="Sunset Hotel" />
+                        </div>
+                        <div class="col-md-6">
+                            <br /><br /><br />
+                            <span>Subir imagen nueva</span><br />
+                            <input type="file" name="imagen" id="imagen" value="@imgSrcImagenHotel">
+
+                            <br /><br /><br /><br /><br />
+                        </div>
                     </div>
                     <center>
                         <input type="submit" value="Aceptar">&nbsp;&nbsp;
