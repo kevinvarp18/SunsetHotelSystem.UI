@@ -17,14 +17,20 @@ namespace SunsetHotelSystem.Dominio.Entidades.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TSH_Tipo_Habitacion()
         {
+            this.TSH_Caracteristica_habitacion = new HashSet<TSH_Caracteristica_habitacion>();
             this.TSH_Habitacion = new HashSet<TSH_Habitacion>();
         }
     
         public int TN_Identificador_TSH_Tipo_Habitacion { get; set; }
         public double TN_Tarifa_TSH_Tipo_Habitacion { get; set; }
-        public string TC_Descripcion_TSH_Tipo_Habitacion { get; set; }
+        public string TC_Titulo_TSH_Tipo_Habitacion { get; set; }
         public int TN_Cantidad_Personas_TSH_Tipo_Habitacion { get; set; }
+        public string TC_Descripcion_TSH_Tipo_Habitacion { get; set; }
+        public Nullable<System.Guid> TN_Id_Imagen_TSH_Tipo_Habitacion { get; set; }
+        public byte[] TI_Imagen_TSH_Tipo_Habitacion { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TSH_Caracteristica_habitacion> TSH_Caracteristica_habitacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TSH_Habitacion> TSH_Habitacion { get; set; }
     }

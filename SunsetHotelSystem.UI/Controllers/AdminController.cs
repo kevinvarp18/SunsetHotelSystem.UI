@@ -205,25 +205,24 @@ namespace SunsetHotelSystem.UI.Controllers {
 
             List<TSH_Pag_Facilidades> listaFacilidades = new List<TSH_Pag_Facilidades>();
             List<Respuesta<TSH_Pag_Facilidades>> respuestas = new List<Respuesta<TSH_Pag_Facilidades>>();
-            int totalFacilidades = int.Parse(collection.GetValue("facilidadesTotal").AttemptedValue.ToString());            
-
+            int totalFacilidades = int.Parse(collection.GetValue("facilidadesTotal").AttemptedValue.ToString());
+            
             for (int i = 1; i <= totalFacilidades; i++) {
                 HttpPostedFileBase imagen = Request.Files["imagen" + i];
-                if (imagen.ContentLength > 0) {
-                    byte[] imageData = null;
-                    using (var binaryReader = new BinaryReader(imagen.InputStream)) {
-                        imageData = binaryReader.ReadBytes(imagen.ContentLength);
-                    }//Conversion de la imagen a un arreglo de bytes.
-                    Guid g = Guid.NewGuid();
-                    TSH_Pag_Facilidades facilidad = new TSH_Pag_Facilidades();
-                    facilidad.TN_Identificador_TSH_Pag_Facilidades = 7;
-                    facilidad.TN_IdentificadorNumFac_TSH_Pag_Facilidades = int.Parse(collection.GetValue("id" + i).AttemptedValue.ToString());
-                    facilidad.TC_TituloFacilidad_TSH_Pag_Facilidades = collection.GetValue("tituloFacilidad" + i).AttemptedValue.ToString();
-                    facilidad.TC_Descripcion_TSH_Pag_Facilidades = collection.GetValue("descripcion" + i).AttemptedValue.ToString();
-                    facilidad.TN_Id_Imagen_TSH_Pag_Facilidades = g;
-                    facilidad.TI_Imagen_TSH_Pag_Facilidades = imageData;
-                    listaFacilidades.Add(facilidad);
-                }//Fin del if.
+                byte[] imageData = null;
+                using (var binaryReader = new BinaryReader(imagen.InputStream)) {
+                    imageData = binaryReader.ReadBytes(imagen.ContentLength);
+                }//Conversion de la imagen a un arreglo de bytes.
+                Guid g = Guid.NewGuid();
+                TSH_Pag_Facilidades facilidad = new TSH_Pag_Facilidades();
+                facilidad.TN_Identificador_TSH_Pag_Facilidades = 7;
+                facilidad.TN_Borrado_TSH_Pag_Facilidades = int.Parse(collection.GetValue("borrado" + i).AttemptedValue.ToString());
+                facilidad.TN_IdentificadorNumFac_TSH_Pag_Facilidades = int.Parse(collection.GetValue("id" + i).AttemptedValue.ToString());
+                facilidad.TC_TituloFacilidad_TSH_Pag_Facilidades = collection.GetValue("tituloFacilidad" + i).AttemptedValue.ToString();
+                facilidad.TC_Descripcion_TSH_Pag_Facilidades = collection.GetValue("descripcion" + i).AttemptedValue.ToString();
+                facilidad.TN_Id_Imagen_TSH_Pag_Facilidades = g;
+                facilidad.TI_Imagen_TSH_Pag_Facilidades = imageData;
+                listaFacilidades.Add(facilidad);
             }//Fin del for.
             
             try {

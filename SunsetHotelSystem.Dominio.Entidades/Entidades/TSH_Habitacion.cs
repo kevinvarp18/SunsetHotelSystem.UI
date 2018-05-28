@@ -25,8 +25,6 @@ namespace SunsetHotelSystem.Dominio.Entidades.Entidades
         public int TN_Id_TipoH_TSH_Habitacion { get; set; }
         public int TN_Estado_TSH_habitacion { get; set; }
         public int TN_Borrado_TSH_Habitacion { get; set; }
-        public byte[] TI_Imagen_TSH_Habitacion { get; set; }
-        public System.Guid TN_Id_Imagen_TSH_Habitacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TSH_Reserva> TSH_Reserva { get; set; }
