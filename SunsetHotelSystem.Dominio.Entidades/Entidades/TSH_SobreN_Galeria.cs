@@ -17,6 +17,7 @@ namespace SunsetHotelSystem.Dominio.Entidades.Entidades
         public int TN_Identificador_TSH_SobreN_Galeria { get; set; }
         public System.Guid TN_Id_Imagen_TSH_SobreN_Galeria { get; set; }
         public byte[] TI_Imagen_TSH_SobreN_Galeria { get; set; }
+        public int TN_IdentificadorNumImagen_TSH_SobreN_Galeria { get; set; }
     
         public virtual TSH_Pagina TSH_Pagina { get; set; }
     }

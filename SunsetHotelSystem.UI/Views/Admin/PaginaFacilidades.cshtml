@@ -8,7 +8,7 @@
             </div>
             <div class="agileinfo-subscribe">
                 <h5>Facilidades</h5>
-                <form action="ActualizarFacilidades" method="post" enctype="multipart/form-data" name="formularioFacilidades">
+                <form action="ActualizarFacilidades" method="post" enctype="multipart/form-data" id="formularioFacilidades">
                     <input type="number" name="facilidadesTotal" id="facilidadesTotal" value="@Model.Count" style="display: none;" />
                     <textarea id="descripcionPagina" name="descripcionPagina">@Model.First().TSH_Pagina.TC_Descripcion_TSH_Pagina</textarea>
                     @{
@@ -16,9 +16,10 @@
                         foreach (var item in Model) {
                             var base64ImagenHotel = Convert.ToBase64String(@item.TI_Imagen_TSH_Pag_Facilidades);
                             string imgSrcImagenFacilidad = String.Format("data:image/gif;base64,{0}", base64ImagenHotel);
-                            <div class="row">
+                            <div id ="row@(contador)" class="row">
                                 <h5>@item.TC_TituloFacilidad_TSH_Pag_Facilidades</h5><br />
                                 <input type="number" name="id@(contador)" id="id@(contador)" value="@item.TN_IdentificadorNumFac_TSH_Pag_Facilidades" style="display: none;" />
+                                <input type="number" name="borrado@(contador)" id="borrado@(contador)" value="@item.TN_Borrado_TSH_Pag_Facilidades" style="display: none;" />
                                 <input type="text" name="tituloFacilidad@(contador)" id="tituloFacilidad@(contador)" value="@item.TC_TituloFacilidad_TSH_Pag_Facilidades" style="display: none;" />
                                 <textarea id="descripcion@(contador)" name="descripcion@(contador)">@item.TC_Descripcion_TSH_Pag_Facilidades</textarea>
                                 <div class="formCenter">
@@ -32,14 +33,15 @@
                                         <input type="file" name="imagen@(contador)" id="imagen@(contador)" value="@imgSrcImagenFacilidad">
                                         <br /><br /><br /><br /><br />
                                     </div>
+                                    <input type="submit" value="Eliminar facilidad" onclick="eliminarFacilidad(@contador);">
                                 </div>
                             </div>
                                 <br /><br />
                             contador = contador + 1;
                         }//Fin del foreach.
                     }
-                    <center>
-                        <input type="submit" value="Aceptar">&nbsp;&nbsp;
+                    <center id="center">
+                        <input type="submit" value="Aceptar">
                         <button type="button" data-toggle="modal" data-target="#myModal">Cancelar</button>
                     </center>
                     <div class="clearfix"> </div>

@@ -25,7 +25,6 @@ namespace SunsetHotelSystem.Dominio.Entidades.Entidades
         public int TN_Id_TipoH_TSH_Habitacion { get; set; }
         public int TN_Estado_TSH_habitacion { get; set; }
         public int TN_Borrado_TSH_Habitacion { get; set; }
-        public string TC_Descripcion_TSH_Habitacion { get; set; }
         public byte[] TI_Imagen_TSH_Habitacion { get; set; }
         public System.Guid TN_Id_Imagen_TSH_Habitacion { get; set; }
     

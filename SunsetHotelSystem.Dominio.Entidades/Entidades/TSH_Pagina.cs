@@ -18,6 +18,7 @@ namespace SunsetHotelSystem.Dominio.Entidades.Entidades
         public TSH_Pagina()
         {
             this.TSH_Pag_Facilidades = new HashSet<TSH_Pag_Facilidades>();
+            this.TSH_SobreN_Galeria = new HashSet<TSH_SobreN_Galeria>();
         }
     
         public int TN_Identificador_TSH_Pagina { get; set; }
@@ -26,6 +27,7 @@ namespace SunsetHotelSystem.Dominio.Entidades.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TSH_Pag_Facilidades> TSH_Pag_Facilidades { get; set; }
         public virtual TSH_Pag_Home TSH_Pag_Home { get; set; }
-        public virtual TSH_SobreN_Galeria TSH_SobreN_Galeria { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TSH_SobreN_Galeria> TSH_SobreN_Galeria { get; set; }
     }
 }

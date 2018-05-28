@@ -17,10 +17,10 @@ namespace SunsetHotelSystem.Dominio.Entidades.Entidades
         public int TN_Identificador_TSH_Reserva { get; set; }
         public System.Guid TN_Numero_Reserva_TSH_Reserva { get; set; }
         public int TN_Num_Habitacion_TSH_Reserva { get; set; }
-        public int TN_Id_Cliente_TSH_Reserva { get; set; }
+        public string TC_Id_Cliente_TSH_Reserva { get; set; }
         public System.DateTime TD_Fecha_Ingreso_TSH_Reserva { get; set; }
         public System.DateTime TD_Fecha_Salida_TSH_Reserva { get; set; }
-        public int TN_Borrado_TSH_Habitacion { get; set; }
+        public int TN_Borrado_TSH_Reserva { get; set; }
     
         public virtual TSH_Cliente TSH_Cliente { get; set; }
         public virtual TSH_Habitacion TSH_Habitacion { get; set; }
