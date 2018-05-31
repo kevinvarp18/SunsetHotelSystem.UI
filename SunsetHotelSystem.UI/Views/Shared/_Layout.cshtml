@@ -31,7 +31,7 @@
                     <div class="w3_agile_logo">
                         @{
                             if (Session["Usuario"].Equals("0")) {
-                                <a href="@Url.Action("Home", "Admin")"><img src="../images/logo.png" width="50%" height="50%" class="rounded img-fluid" alt="Logo"></a>
+                                <a href="@Url.Action("Home", "Administrador")"><img src="../images/logo.png" width="50%" height="50%" class="rounded img-fluid" alt="Logo"></a>
                             } else {
                                 <a href="@Url.Action("Index", "Home")"><img src="../images/logo.png" width="50%" height="50%" class="rounded img-fluid" alt="Logo"></a>
                             }
@@ -51,22 +51,19 @@
                                 <nav class="link-effect-12">
                                     <ul class="nav navbar-nav w3_agile_nav">
                                         @{
-                                            if (Session["Usuario"].Equals("0"))
-                                            {
+                                            if (Session["Usuario"].Equals("0")) {
                                                 <li><a href="@Url.Action("Index", "Home")" class="active"><span>Inicio</span></a></li>
-                                                <li><a href="@Url.Action("SobreNosotros", "Home")"><span>Sobre Nosotros</span></a></li>
-                                                <li><a href="@Url.Action("Facilidades", "Home")"><span>Facilidades</span></a></li>
-                                                <li><a href="@Url.Action("ComoLlegar", "Home")"><span>¿C&oacute;mo llegar?</span></a></li>
-                                                <li><a href="@Url.Action("Tarifas", "Home")"><span>Tarifas</span></a></li>
+                                                <li><a href="@Url.Action("SobreNosotros", "Cliente")"><span>Sobre Nosotros</span></a></li>
+                                                <li><a href="@Url.Action("Facilidades", "Cliente")"><span>Facilidades</span></a></li>
+                                                <li><a href="@Url.Action("ComoLlegar", "Cliente")"><span>¿C&oacute;mo llegar?</span></a></li>
+                                                <li><a href="@Url.Action("Tarifas", "Cliente")"><span>Tarifas</span></a></li>
                                                 <li><a href="@Url.Action("HabitacionDisponible", "Reserva")"><span>Reserva en L&iacute;nea</span></a></li>
-                                                <li><a href="@Url.Action("Contactenos", "Home")"><span>Contactenos</span></a></li>
-                                            }
-                                            else
-                                            {
-                                                <li><a href="@Url.Action("Home", "Admin")" class="active"><span>Inicio</span></a></li>
-                                                <li><a href="@Url.Action("ModificarPaginas", "Admin")"><span>Modificar p&aacute;ginas</span></a></li>
+                                                <li><a href="@Url.Action("Contactenos", "Cliente")"><span>Contactenos</span></a></li>
+                                            } else {
+                                                <li><a href="@Url.Action("Home", "Administrador")" class="active"><span>Inicio</span></a></li>
+                                                <li><a href="@Url.Action("ModificarPaginas", "ModificarPaginas")"><span>Modificar p&aacute;ginas</span></a></li>
                                                 <li><a href="@Url.Action("", "")"><span>Lista de reservaciones</span></a></li>
-                                                <li><a href="@Url.Action("", "")"><span>Administrar habitaciones</span></a></li>
+                                                <li><a href="@Url.Action("ListaHabitaciones", "Habitaciones")"><span>Administrar habitaciones</span></a></li>
                                                 <li><a href="@Url.Action("", "")"><span>Estado del hotel hoy</span></a></li>
                                                 <li><a href="@Url.Action("", "")"><span>Disponibilidad de habitaciones</span></a></li>
                                                 <li><a href="@Url.Action("", "")"><span>Publicidad</span></a></li>

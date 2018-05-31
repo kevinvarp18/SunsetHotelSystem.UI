@@ -1,0 +1,48 @@
+﻿@model SunsetHotelSystem.UI.Models.Habitacion
+
+<article class="col-xs-12 col-sm-8 col-md-9">
+    <div class="about">
+        <div class="row">
+            <div class="w3ls-heading">
+                <h2>Administrar Habitaciones</h2>
+            </div>
+            <div class="w3-about-grids">
+                <div class="w3-about-grids">
+                    <div class="col-md-12 w3-about-left">
+                        @{
+                            foreach (var tipoHabitacion in Model.TipoHabitaciones) {
+                                    <h5>@tipoHabitacion.TC_Titulo_TSH_Tipo_Habitacion</h5><a href="@Url.Action("ModificarHabitacion", "Habitaciones", new {idTipoHabitacion = tipoHabitacion.TN_Identificador_TSH_Tipo_Habitacion})">Cambiar descripcion</a>
+                                    <br /><br />
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr class="table-info">
+                                                <th>Número de Habitacion</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                @foreach (var habitacion in Model.Habitaciones) {
+                                                    <tr class="table-danger">
+                                                        @if (habitacion.TN_Id_TipoH_TSH_Habitacion == tipoHabitacion.TN_Identificador_TSH_Tipo_Habitacion) {
+                                                            <td>@habitacion.TN_Numero_Habitacion_TSH_Habitacion</td>
+                                                            if (habitacion.TN_Borrado_TSH_Habitacion == 1) {
+                                                                <td>Activa</td>
+                                                            } else {
+                                                                <td>Inactiva</td>
+                                                            }//Fin del if que verifica si la habitación está activa o no.
+                                                        }
+                                                    </tr>
+                                                }
+                                        </tbody>
+                                    </table>
+                                    <br /><br />
+                            }//Fin del foreach.
+                        }
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+</article>

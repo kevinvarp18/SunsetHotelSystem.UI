@@ -12,19 +12,9 @@ using System.Web.Mvc;
 using System.IO;
 
 namespace SunsetHotelSystem.UI.Controllers {
-    public class AdminController : ConfigController {
-
-        public ActionResult Home() {
-            Session["Usuario"] = "1";
-            return View();
-        }//Fin del método Home.
+    public class ModificarPaginasController : ConfigController {
 
         public ActionResult ModificarPaginas() {
-            return View();
-        }//Fin del método ModificarPaginas.
-
-        public ActionResult PaginaHabitacion()
-        {
             return View();
         }//Fin del método ModificarPaginas.
 
@@ -45,24 +35,31 @@ namespace SunsetHotelSystem.UI.Controllers {
         }//Fin de la funcion PaginaHome.
 
         [HttpPost]
-        public async Task<ActionResult> actualizarPaginaHome(int id, string descripcion, HttpPostedFileBase imagen) {
+        public async Task<ActionResult> actualizarPaginaHome(FormCollection collection, HttpPostedFileBase File) {
             Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
             TSH_Pagina pagina = new TSH_Pagina();
             pagina.TSH_Pag_Home = new TSH_Pag_Home();
+            HttpPostedFileBase file = Request.Files["archivoImagen"];
+
             try {
-                if (imagen.ContentLength > 0) {
+                if (file.ContentLength > 0) {
                     byte[] imageData = null;
-                    using (var binaryReader = new BinaryReader(imagen.InputStream)) {
-                        imageData = binaryReader.ReadBytes(imagen.ContentLength);
+                    using (var binaryReader = new BinaryReader(file.InputStream)) {
+                        imageData = binaryReader.ReadBytes(file.ContentLength);
                     }
-                    Guid g = Guid.NewGuid();
-                    pagina.TSH_Pag_Home.TN_Id_Imagen_TSH_Pag_Home = g;
-                    pagina.TN_Identificador_TSH_Pagina = id;
-                    pagina.TSH_Pag_Home.TN_Identificador_TSH_Pag_Home = id;
-                    pagina.TC_Descripcion_TSH_Pagina = descripcion;
                     pagina.TSH_Pag_Home.TI_Imagen_TSH_Pag_Home = imageData;
                 }//Fin del if.
+            } catch (Exception ex){
+                throw new Exception(ex.ToString());
+            }//Fin del try-catch.
+
+            Guid g = Guid.NewGuid();
+            pagina.TSH_Pag_Home.TN_Id_Imagen_TSH_Pag_Home = g;
+            pagina.TN_Identificador_TSH_Pagina = int.Parse(collection["id"].ToString());
+            pagina.TSH_Pag_Home.TN_Identificador_TSH_Pag_Home = int.Parse(collection["id"].ToString());
+            pagina.TC_Descripcion_TSH_Pagina = collection["descripcion"].ToString();
                 
+            try {
                 String jsonContent = JsonConvert.SerializeObject(pagina);
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
                 ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
@@ -77,10 +74,10 @@ namespace SunsetHotelSystem.UI.Controllers {
                 else
                     ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
 
-                return View("Home");
+                return View("../Administrador/Home");
             } catch {
                 ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
-                return View("Home");
+                return View("../Administrador/Home");
             }//Try-catch.
         }//Fin del método guardarCambios.
 
@@ -120,10 +117,10 @@ namespace SunsetHotelSystem.UI.Controllers {
                     ViewBag.Message = "Los cambios en la pagina Sobre Nosotros se realizaron exitosamente.";
                 else
                     ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
-                return View("Home");
+                return View("../Administrador/Home");
             } catch {
                 ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
-                return View("Home");
+                return View("../Administrador/Home");
             }//Try-catch.
         }//Fin del método ActualizarSobreNosotros.
 
@@ -162,10 +159,10 @@ namespace SunsetHotelSystem.UI.Controllers {
                     ViewBag.Message = "Los cambios en la página ¿Cómo llegar? se realizaron exitosamente.";
                 else
                     ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
-                return View("Home");
+                return View("../Administrador/Home");
             } catch {
                 ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
-                return View("Home");
+                return View("../Administrador/Home");
             }//Try-catch.
         }//ActualizarComoLlegar
 
@@ -255,66 +252,7 @@ namespace SunsetHotelSystem.UI.Controllers {
             else
                 ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
 
-            return View("Home");
-
+            return View("../Administrador/Home");
         }//Fin de la funcion PaginaFacilidades.
-
-        [HttpPost]
-        public async Task<ActionResult> ConsultaHabitaciones()
-        {
-            List<TSH_Tipo_Habitacion> listaReservas = new List<TSH_Tipo_Habitacion>();
-            Respuesta<List<TSH_Tipo_Habitacion>> respuesta = new Respuesta<List<TSH_Tipo_Habitacion>>();
-            try
-            {
-                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Tipo_Habitacion");
-                if (responseWAPI.IsSuccessStatusCode)
-                {
-                    respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Tipo_Habitacion>>>(responseWAPI.Content.ReadAsStringAsync().Result);
-                    listaReservas = respuesta.valorRetorno;
-                }//Fin del if.
-            }
-            catch (Exception ex)
-            {
-                System.Console.Write(ex.ToString());
-            }//Fin del try-catch.
-            string resultado = " / / ";
-            return Json(listaReservas);
-        }//CargarDatosCliente
-
-        [HttpPost]
-        public async Task<ActionResult> actualizarPaginahabitacion(int id, string descripcion, float tarifa)
-        {
-            Respuesta<TSH_Tipo_Habitacion> respuesta = new Respuesta<TSH_Tipo_Habitacion>();
-            TSH_Tipo_Habitacion pagina = new TSH_Tipo_Habitacion();
-            try
-            {
-                pagina.TC_Descripcion_TSH_Tipo_Habitacion = descripcion;
-                pagina.TN_Tarifa_TSH_Tipo_Habitacion = tarifa;
-                pagina.TN_Identificador_TSH_Tipo_Habitacion = id;
-
-                String jsonContent = JsonConvert.SerializeObject(pagina);
-                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
-                ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
-                byteArrayContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                HttpResponseMessage responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Tipo_Habitacion"), byteArrayContent);
-                if (responseWAPI.IsSuccessStatusCode)
-                {
-                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Tipo_Habitacion>>(responseWAPI.Content.ReadAsStringAsync().Result);
-                }//Fin del if.
-
-                if (respuesta.resultado == 1)
-                    ViewBag.Message = "Los cambios en la pagina Inicio se realizaron exitosamente.";
-                else
-                    ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
-
-                return View("Home");
-            }
-            catch
-            {
-                ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
-                return View("Home");
-            }//Try-catch.
-        }//Fin del método guardarCambios.
-
-    }//Fin de la clase AdminController.
+    }//Fin de la clase ModificarPaginasController.
 }//Fin del namespace.

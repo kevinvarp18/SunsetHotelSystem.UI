@@ -1,0 +1,43 @@
+﻿@model SunsetHotelSystem.UI.Models.Tarifa
+
+<article class="col-xs-12 col-sm-8 col-md-9">
+    <div class="about">
+        <div class="row">
+            <div class="w3ls-heading">
+                <h2>Tarifas</h2>
+            </div>
+        </div>
+        <br /><br /><br />
+        @{
+            foreach (var tipoHabitacion in Model.TipoHabitaciones) {
+                var base64ImagenHotel = Convert.ToBase64String(@tipoHabitacion.TI_Imagen_TSH_Tipo_Habitacion);
+                string imgSrcImagenHabitacion = String.Format("data:image/gif;base64,{0}", base64ImagenHotel);
+                <div class="row">
+                    <div class="col-4 col-sm-6 col-md-6 w3-about-left">
+                        <div class="about-img-grids">
+                            <div class="col-md-10 about-img">
+                                <img class="rounded img-fluid" src="@imgSrcImagenHabitacion"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8 col-sm-6 col-md-6 w3-about-right">
+                        <h5>@tipoHabitacion.TC_Titulo_TSH_Tipo_Habitacion</h5>
+                        <br />
+                        <p>@tipoHabitacion.TC_Descripcion_TSH_Tipo_Habitacion</p>
+                        <ul>
+                            <li>Capacidad máxima: @tipoHabitacion.TN_Cantidad_Personas_TSH_Tipo_Habitacion personas</li>
+                            <li>Precio por noche: $@tipoHabitacion.TN_Tarifa_TSH_Tipo_Habitacion</li>
+
+                            @foreach(var caracteristicaHabitacion in Model.CaracteristicasHabitaciones){
+                                if (caracteristicaHabitacion.TN_Id_Tipo_Habitacion_TSH_Caracteristica_Habitacion == tipoHabitacion.TN_Identificador_TSH_Tipo_Habitacion) {
+                                    <li>@caracteristicaHabitacion.TC_Descripcion_TSH_Caracteristica_habitacion</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <br /><br /><br />
+                }//Fin del foreach.
+            }
+    </div>
+</article>

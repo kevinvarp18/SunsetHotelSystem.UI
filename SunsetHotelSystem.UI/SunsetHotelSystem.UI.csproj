@@ -164,13 +164,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdministradorController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
+    <Compile Include="Controllers\HabitacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModificarPaginasController.cs" />
     <Compile Include="Controllers\ReservaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Habitacion.cs" />
+    <Compile Include="Models\Tarifa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -243,7 +248,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -263,13 +267,19 @@
     <Content Include="Views\Reserva\HabitacionDisponible.cshtml" />
     <Content Include="Views\Reserva\Reserva.cshtml" />
     <Content Include="Views\Reserva\ResultadoReserva.cshtml" />
-    <Content Include="Views\Admin\PaginaHome.cshtml" />
-    <Content Include="Views\Admin\ModificarPaginas.cshtml" />
-    <Content Include="Views\Admin\Home.cshtml" />
-    <Content Include="Views\Admin\PaginaSobreNosotros.cshtml" />
-    <Content Include="Views\Admin\PaginaComoLlegar.cshtml" />
-    <Content Include="Views\Admin\PaginaFacilidades.cshtml" />
-    <Content Include="Views\Admin\PaginaHabitacion.cshtml" />
+    <Content Include="Views\Administrador\Home.cshtml" />
+    <Content Include="Views\Cliente\ComoLlegar.cshtml" />
+    <Content Include="Views\Cliente\Contactenos.cshtml" />
+    <Content Include="Views\Cliente\Facilidades.cshtml" />
+    <Content Include="Views\Cliente\SobreNosotros.cshtml" />
+    <Content Include="Views\Cliente\Tarifas.cshtml" />
+    <Content Include="Views\Habitaciones\ListaHabitaciones.cshtml" />
+    <Content Include="Views\Habitaciones\ModificarHabitacion.cshtml" />
+    <Content Include="Views\ModificarPaginas\ModificarPaginas.cshtml" />
+    <Content Include="Views\ModificarPaginas\PaginaComoLlegar.cshtml" />
+    <Content Include="Views\ModificarPaginas\PaginaFacilidades.cshtml" />
+    <Content Include="Views\ModificarPaginas\PaginaHome.cshtml" />
+    <Content Include="Views\ModificarPaginas\PaginaSobreNosotros.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SunsetHotelSystem.Dominio.Entidades\SunsetHotelSystem.Dominio.Entidades.csproj">

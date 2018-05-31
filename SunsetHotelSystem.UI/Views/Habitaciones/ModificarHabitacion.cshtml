@@ -1,8 +1,8 @@
-﻿@model SunsetHotelSystem.Dominio.Entidades.Entidades.TSH_Pagina
+﻿@model SunsetHotelSystem.Dominio.Entidades.Entidades.TSH_Tipo_Habitacion
 
 @{
-    var base64ImagenHotel = Convert.ToBase64String(Model.TSH_Pag_Home.TI_Imagen_TSH_Pag_Home);
-    string imgSrcImagenHotel = String.Format("data:image/gif;base64,{0}", base64ImagenHotel);
+    var base64ImagenHabitacion = Convert.ToBase64String(Model.TI_Imagen_TSH_Tipo_Habitacion);
+    string imgSrcImagenHabitacion = String.Format("data:image/gif;base64,{0}", base64ImagenHabitacion);
 }
 
 <article class="col-xs-12 col-sm-8 col-md-9">
@@ -12,19 +12,19 @@
                 <h3>Modificar P&aacute;ginas</h3>
             </div>
             <div class="agileinfo-subscribe">
-                <h5>Home</h5>
-                <form action="actualizarPaginaHome" method="post" enctype="multipart/form-data">
-                    <input type="number" name="id" id="id" value="@Model.TN_Identificador_TSH_Pagina" style="display: none;"/>
-                    <textarea id="descripcion" name="descripcion">@Model.TC_Descripcion_TSH_Pagina</textarea>
+                <h5>@Model.TC_Titulo_TSH_Tipo_Habitacion</h5>
+                <form action="actualizarHabitacion" method="post" enctype="multipart/form-data">
+                    <input type="number" name="id" id="id" value="@Model.TN_Identificador_TSH_Tipo_Habitacion" style="display: none;" />
+                    <textarea id="descripcion" name="descripcion">@Model.TC_Descripcion_TSH_Tipo_Habitacion</textarea>
                     <div class="formCenter">
                         <div class="col-md-5 about-img" style="margin-left: -2%;">
                             <span>Imagen Actual</span><br />
-                            <img src="@imgSrcImagenHotel" alt="Sunset Hotel" />
+                            <img src="@imgSrcImagenHabitacion" alt="Sunset Hotel" />
                         </div>
                         <div class="col-md-6">
                             <br /><br /><br />
                             <span>Subir imagen nueva</span><br />
-                            <input type="file" name="imagen" id="imagen" value="@imgSrcImagenHotel">
+                            <input type="file" name="imagen" id="imagen" value="@imgSrcImagenHabitacion">
 
                             <br /><br /><br /><br /><br />
                         </div>
