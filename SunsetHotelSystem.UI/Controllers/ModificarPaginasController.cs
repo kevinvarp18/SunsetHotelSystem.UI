@@ -27,7 +27,7 @@ namespace SunsetHotelSystem.UI.Controllers {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
                     paginaHome = respuesta.valorRetorno;
                 }//Fin del if.
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
 
@@ -35,30 +35,28 @@ namespace SunsetHotelSystem.UI.Controllers {
         }//Fin de la funcion PaginaHome.
 
         [HttpPost]
-        public async Task<ActionResult> actualizarPaginaHome(FormCollection collection, HttpPostedFileBase File) {
+        public async Task<ActionResult> actualizarPaginaHome(int id, string descripcion, HttpPostedFileBase imagen) {
             Respuesta<TSH_Pagina> respuesta = new Respuesta<TSH_Pagina>();
             TSH_Pagina pagina = new TSH_Pagina();
             pagina.TSH_Pag_Home = new TSH_Pag_Home();
-            HttpPostedFileBase file = Request.Files["archivoImagen"];
 
             try {
-                if (file.ContentLength > 0) {
+                if (imagen.ContentLength > 0) {
                     byte[] imageData = null;
-                    using (var binaryReader = new BinaryReader(file.InputStream)) {
-                        imageData = binaryReader.ReadBytes(file.ContentLength);
+                    using (var binaryReader = new BinaryReader(imagen.InputStream)) {
+                        imageData = binaryReader.ReadBytes(imagen.ContentLength);
                     }
                     pagina.TSH_Pag_Home.TI_Imagen_TSH_Pag_Home = imageData;
                 }//Fin del if.
-            } catch (Exception ex){
-                throw new Exception(ex.ToString());
+            } catch (Exception ex) {
             }//Fin del try-catch.
 
             Guid g = Guid.NewGuid();
             pagina.TSH_Pag_Home.TN_Id_Imagen_TSH_Pag_Home = g;
-            pagina.TN_Identificador_TSH_Pagina = int.Parse(collection["id"].ToString());
-            pagina.TSH_Pag_Home.TN_Identificador_TSH_Pag_Home = int.Parse(collection["id"].ToString());
-            pagina.TC_Descripcion_TSH_Pagina = collection["descripcion"].ToString();
-                
+            pagina.TN_Identificador_TSH_Pagina = id;
+            pagina.TSH_Pag_Home.TN_Identificador_TSH_Pag_Home = id;
+            pagina.TC_Descripcion_TSH_Pagina = descripcion;
+
             try {
                 String jsonContent = JsonConvert.SerializeObject(pagina);
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
@@ -138,7 +136,7 @@ namespace SunsetHotelSystem.UI.Controllers {
             }//Fin del try-catch.
 
             return View(pagina);
-        }//ComoLlegar
+        }//Fin del método PaginaComoLlegar.
 
         [HttpPost]
         public async Task<ActionResult> ActualizarComoLlegar(int id, string descripcion) {
@@ -155,6 +153,7 @@ namespace SunsetHotelSystem.UI.Controllers {
                 if (responseWAPI.IsSuccessStatusCode) {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
                 }//Fin del if.
+
                 if (respuesta.resultado == 1)
                     ViewBag.Message = "Los cambios en la página ¿Cómo llegar? se realizaron exitosamente.";
                 else
@@ -164,7 +163,7 @@ namespace SunsetHotelSystem.UI.Controllers {
                 ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
                 return View("../Administrador/Home");
             }//Try-catch.
-        }//ActualizarComoLlegar
+        }//Fin del método ActualizarComoLlegar.
 
         public async Task<ActionResult> PaginaFacilidades() {
             List<TSH_Pag_Facilidades> listaFacilidades = new List<TSH_Pag_Facilidades>();
@@ -184,21 +183,26 @@ namespace SunsetHotelSystem.UI.Controllers {
         [HttpPost]
         public async Task<ActionResult> ActualizarFacilidades(FormCollection collection) {
             int bandera = 1;
+            int contador = 1;
             TSH_Pagina pagina = new TSH_Pagina();
             pagina.TN_Identificador_TSH_Pagina = 7;
             pagina.TC_Descripcion_TSH_Pagina = collection.GetValue("descripcionPagina").AttemptedValue.ToString();
             Respuesta<TSH_Pagina> respuestaPagina = new Respuesta<TSH_Pagina>();
 
-            try {
+            try
+            {
                 String jsonContent = JsonConvert.SerializeObject(pagina);
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
                 ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
                 byteArrayContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
                 HttpResponseMessage responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Pagina"), byteArrayContent);
-                if (responseWAPI.IsSuccessStatusCode) {
+                if (responseWAPI.IsSuccessStatusCode)
+                {
                     respuestaPagina = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
                 }//Fin del if.
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
 
@@ -208,46 +212,74 @@ namespace SunsetHotelSystem.UI.Controllers {
             List<TSH_Pag_Facilidades> listaFacilidades = new List<TSH_Pag_Facilidades>();
             List<Respuesta<TSH_Pag_Facilidades>> respuestas = new List<Respuesta<TSH_Pag_Facilidades>>();
             int totalFacilidades = int.Parse(collection.GetValue("facilidadesTotal").AttemptedValue.ToString());
-            
-            for (int i = 1; i <= totalFacilidades; i++) {
+            int nuevasFacilidades = int.Parse(collection.GetValue("nuevasFacilidades").AttemptedValue.ToString());
+
+            for (int i = 1; i <= (totalFacilidades + nuevasFacilidades); i++)
+            {
                 HttpPostedFileBase imagen = Request.Files["imagen" + i];
-                byte[] imageData = null;
-                using (var binaryReader = new BinaryReader(imagen.InputStream)) {
-                    imageData = binaryReader.ReadBytes(imagen.ContentLength);
-                }//Conversion de la imagen a un arreglo de bytes.
-                Guid g = Guid.NewGuid();
                 TSH_Pag_Facilidades facilidad = new TSH_Pag_Facilidades();
+
+                try
+                {
+                    if (imagen.ContentLength > 0)
+                    {
+                        byte[] imageData = null;
+                        using (var binaryReader = new BinaryReader(imagen.InputStream))
+                        {
+                            imageData = binaryReader.ReadBytes(imagen.ContentLength);
+                        }
+                        facilidad.TI_Imagen_TSH_Pag_Facilidades = imageData;
+                    }//Fin del if.
+                }
+                catch (Exception ex)
+                {
+                }//Fin del try-catch.
+
+                Guid g = Guid.NewGuid();
                 facilidad.TN_Identificador_TSH_Pag_Facilidades = 7;
                 facilidad.TN_Borrado_TSH_Pag_Facilidades = int.Parse(collection.GetValue("borrado" + i).AttemptedValue.ToString());
                 facilidad.TN_IdentificadorNumFac_TSH_Pag_Facilidades = int.Parse(collection.GetValue("id" + i).AttemptedValue.ToString());
                 facilidad.TC_TituloFacilidad_TSH_Pag_Facilidades = collection.GetValue("tituloFacilidad" + i).AttemptedValue.ToString();
                 facilidad.TC_Descripcion_TSH_Pag_Facilidades = collection.GetValue("descripcion" + i).AttemptedValue.ToString();
                 facilidad.TN_Id_Imagen_TSH_Pag_Facilidades = g;
-                facilidad.TI_Imagen_TSH_Pag_Facilidades = imageData;
+
                 listaFacilidades.Add(facilidad);
             }//Fin del for.
-            
-            try {
-                foreach (TSH_Pag_Facilidades facilidad in listaFacilidades) {
+
+            try
+            {
+                foreach (TSH_Pag_Facilidades facilidad in listaFacilidades)
+                {
                     String jsonContent = JsonConvert.SerializeObject(facilidad);
                     byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
                     ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
                     byteArrayContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                    HttpResponseMessage responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Pag_Facilidades"), byteArrayContent);
-                    if (responseWAPI.IsSuccessStatusCode) {
+                    HttpResponseMessage responseWAPI;
+
+                    if (contador <= totalFacilidades)
+                        responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Pag_Facilidades"), byteArrayContent);
+                    else
+                        responseWAPI = await webAPI.PostAsync(String.Concat("api/TSH_Pag_Facilidades"), byteArrayContent);
+
+                    if (responseWAPI.IsSuccessStatusCode)
+                    {
                         respuestas.Add(JsonConvert.DeserializeObject<Respuesta<TSH_Pag_Facilidades>>(responseWAPI.Content.ReadAsStringAsync().Result));
                     }//Fin del if.
+                    contador++;
                 }//Fin del foreach.
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
 
-            foreach(Respuesta<TSH_Pag_Facilidades> respuesta in respuestas){
+            foreach (Respuesta<TSH_Pag_Facilidades> respuesta in respuestas)
+            {
                 if (respuesta.resultado == 0)
                     bandera = 0;
             }//Fin del foreach.
 
-            if(bandera == 1)
+            if (bandera == 1)
                 ViewBag.Message = "Los cambios en la pagina Facilidades se realizaron exitosamente.";
             else
                 ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";

@@ -72,6 +72,9 @@ span {
     margin-left: 25%;
 }
 
+.formCenter2 {
+    margin-left: 36%;
+}
 
 h5 {
     color: #ff5722;
@@ -525,10 +528,10 @@ a.w3_agile_vimeo:hover {
     margin: 1em 0 0 0;
 }
 
-    .w3-about-right p span, .w3-about-left p span {
-        display: block;
-        margin: 1em 0 0 0;
-    }
+.w3-about-right p span, .w3-about-left p span {
+    display: block;
+    margin: 1em 0 0 0;
+}
 
 .w3l-button {
     margin: 2em 0 2em 0;
@@ -972,11 +975,11 @@ form {
     margin-left: 1%;
 }
 
-    .news-letter input[type="submit"]:hover {
-        border: 1px solid #212121;
-        color: #212121;
-        background: none;
-    }
+.news-letter input[type="submit"]:hover {
+    border: 1px solid #212121;
+    color: #212121;
+    background: none;
+}
 
 .agileits-social-grids {
     text-align: center;

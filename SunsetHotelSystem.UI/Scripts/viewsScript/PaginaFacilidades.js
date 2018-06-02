@@ -1,9 +1,25 @@
 ﻿function nuevaFacilidad() {
     var formulario = document.getElementById("formularioFacilidades");
     var inputFacilidadesTotal = document.getElementById("facilidadesTotal");
-    var indexAtributtes = inputFacilidadesTotal.value;
-    indexAtributtes++;
-    inputFacilidadesTotal.value = indexAtributtes;
+
+    var inputNuevasFacilidades = document.getElementById("nuevasFacilidades");
+    inputNuevasFacilidades.value = parseInt(inputNuevasFacilidades.value) + 1;
+
+    var indexAtributtes = parseInt(inputFacilidadesTotal.value) + parseInt(inputNuevasFacilidades.value);
+
+    var inputID = document.createElement("input");
+    inputID.setAttribute('type', 'number');
+    inputID.id = 'id' + indexAtributtes;
+    inputID.name = 'id' + indexAtributtes;
+    inputID.style.display = "none";
+    inputID.value = indexAtributtes;
+
+    var inputBorrado = document.createElement("input");
+    inputBorrado.setAttribute('type', 'number');
+    inputBorrado.id = 'borrado' + indexAtributtes;
+    inputBorrado.name = 'borrado' + indexAtributtes;
+    inputBorrado.style.display = "none";
+    inputBorrado.value = 1;
 
     var inputNombre = document.createElement("input");
     inputNombre.setAttribute('type', 'text');
@@ -41,6 +57,8 @@
 
     var divRow = document.createElement("div");
     divRow.setAttribute('class', 'row');
+    divRow.appendChild(inputID);
+    divRow.appendChild(inputBorrado);
     divRow.appendChild(divNombreFacilidad);
     divRow.appendChild(inputDescripcion);
     divRow.appendChild(divImagen);
@@ -65,7 +83,24 @@
 
 function eliminarFacilidad(idFacilidad) {
     var divRow = document.getElementById("row" + idFacilidad);
-    divRow.style.display = "none";
+    divRow.style.filter = "alpha(opacity=50)";
+    divRow.style.opacity = "0.5";
     var inputBorrado = document.getElementById("borrado" + idFacilidad);
     inputBorrado.value = 0;
+    var boton = document.getElementById("eliminar" + idFacilidad);
+    boton.id = "recuperar" + idFacilidad;
+    boton.value = "Restaurar facilidad";
+    boton.setAttribute("onclick", "recuperarFacilidad(" + idFacilidad + ");");
 }//Fin del método eliminarFacilidad.
+
+function recuperarFacilidad(idFacilidad) {
+    var divRow = document.getElementById("row" + idFacilidad);
+    divRow.style.filter = "alpha(opacity=100)";
+    divRow.style.opacity = "1";
+    var inputBorrado = document.getElementById("borrado" + idFacilidad);
+    inputBorrado.value = 1;
+    var boton = document.getElementById("recuperar" + idFacilidad);
+    boton.id = "eliminar" + idFacilidad;
+    boton.value = "Eliminar facilidad";
+    boton.setAttribute("onclick", "eliminarFacilidad(" + idFacilidad + ");");
+}//Fin de la función recuperarfacilidad.

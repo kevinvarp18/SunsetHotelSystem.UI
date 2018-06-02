@@ -13,9 +13,8 @@
             </div>
             <div class="agileinfo-subscribe">
                 <h5>Home</h5>
-                @using (Html.BeginForm("actualizarPaginaHome", "ModificarPaginas", FormMethod.Post, new {enctype = "multipart/form-data" })) {
-                @*<form action="actualizarPaginaHome" method="post" enctype="multipart/form-data">*@
-                    <input type="number" name="id" id="id" value="@Model.TN_Identificador_TSH_Pagina" style="display: none;"/>
+                <form action="actualizarPaginaHome" method="post" enctype="multipart/form-data">
+                    <input type="number" name="id" id="id" value="@Model.TN_Identificador_TSH_Pagina" style="display: none;" />
                     <textarea id="descripcion" name="descripcion">@Model.TC_Descripcion_TSH_Pagina</textarea>
                     <div class="formCenter">
                         <div class="col-md-5 about-img" style="margin-left: -2%;">
@@ -25,8 +24,7 @@
                         <div class="col-md-6">
                             <br /><br /><br />
                             <span>Subir imagen nueva</span><br />
-                            <input type="file" name="archivoImagen" id="archivoImagen" value="@imgSrcImagenHotel">
-
+                            <input type="file" name="imagen" id="imagen">
                             <br /><br /><br /><br /><br />
                         </div>
                     </div>
@@ -35,8 +33,7 @@
                         <button type="button" data-toggle="modal" data-target="#myModal">Cancelar</button>
                     </center>
                     <div class="clearfix"> </div>
-                }
-                @*</form>*@
+                </form>
             </div>
         </div>
     </div>

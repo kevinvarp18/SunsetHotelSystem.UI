@@ -32,7 +32,7 @@ namespace SunsetHotelSystem.UI.Controllers {
                     respuestaHabitaciones = JsonConvert.DeserializeObject<Respuesta<List<TSH_Habitacion>>>(responseHabitacionWAPI.Content.ReadAsStringAsync().Result);
                     listaHabitaciones = respuestaHabitaciones.valorRetorno;
                 }//Fin del if.
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
 
@@ -41,7 +41,6 @@ namespace SunsetHotelSystem.UI.Controllers {
             return View(habitaciones);
         }//Fin del método ListaHabitaciones.
 
-        [HttpPost]
         public async Task<ActionResult> ModificarHabitacion(int idTipoHabitacion) {
             List<TSH_Tipo_Habitacion> listaTiposHabitacion = new List<TSH_Tipo_Habitacion>();
             Respuesta<List<TSH_Tipo_Habitacion>> respuestaTipoHabitacion = new Respuesta<List<TSH_Tipo_Habitacion>>();
@@ -67,23 +66,29 @@ namespace SunsetHotelSystem.UI.Controllers {
         }//Fin del método actualizarPaginaHabitacion.
 
         [HttpPost]
-        public async Task<ActionResult> actualizarHabitacion(int id, string descripcion, float tarifa, HttpPostedFileBase imagen) {
+        public async Task<ActionResult> actualizarHabitacion(int id, string descripcion, string tituloHabitacion, float tarifa, HttpPostedFileBase imagen) {
             Respuesta<TSH_Tipo_Habitacion> respuesta = new Respuesta<TSH_Tipo_Habitacion>();
             TSH_Tipo_Habitacion tipoHabitacion = new TSH_Tipo_Habitacion();
+
             try {
                 if (imagen.ContentLength > 0) {
                     byte[] imageData = null;
                     using (var binaryReader = new BinaryReader(imagen.InputStream)) {
                         imageData = binaryReader.ReadBytes(imagen.ContentLength);
                     }
-                    Guid g = Guid.NewGuid();
-                    tipoHabitacion.TN_Identificador_TSH_Tipo_Habitacion = id;
-                    tipoHabitacion.TN_Id_Imagen_TSH_Tipo_Habitacion = g;
-                    tipoHabitacion.TC_Descripcion_TSH_Tipo_Habitacion = descripcion;
-                    tipoHabitacion.TN_Tarifa_TSH_Tipo_Habitacion = tarifa;
                     tipoHabitacion.TI_Imagen_TSH_Tipo_Habitacion = imageData;
                 }//Fin del if.
+            } catch (Exception ex) {
+            }//Fin del try-catch.
 
+            Guid g = Guid.NewGuid();
+            tipoHabitacion.TN_Identificador_TSH_Tipo_Habitacion = id;
+            tipoHabitacion.TN_Id_Imagen_TSH_Tipo_Habitacion = g;
+            tipoHabitacion.TC_Titulo_TSH_Tipo_Habitacion = tituloHabitacion;
+            tipoHabitacion.TC_Descripcion_TSH_Tipo_Habitacion = descripcion;
+            tipoHabitacion.TN_Tarifa_TSH_Tipo_Habitacion = tarifa;
+
+            try {
                 String jsonContent = JsonConvert.SerializeObject(tipoHabitacion);
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
                 ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
@@ -98,10 +103,10 @@ namespace SunsetHotelSystem.UI.Controllers {
                 else
                     ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
 
-                return View("Home");
+                return View("../Administrador/Home");
             } catch {
                 ViewBag.Message = "¡Oops! Ocurrió un error a la hora de realizar los cambios.";
-                return View("Home");
+                return View("../Administrador/Home");
             }//Try-catch.
         }//Fin del método actualizarPaginaHabitacion.
     }//Fin de la clase HabitacionesController.

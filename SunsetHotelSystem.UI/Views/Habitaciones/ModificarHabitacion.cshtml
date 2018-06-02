@@ -12,9 +12,15 @@
                 <h3>Modificar P&aacute;ginas</h3>
             </div>
             <div class="agileinfo-subscribe">
-                <h5>@Model.TC_Titulo_TSH_Tipo_Habitacion</h5>
                 <form action="actualizarHabitacion" method="post" enctype="multipart/form-data">
                     <input type="number" name="id" id="id" value="@Model.TN_Identificador_TSH_Tipo_Habitacion" style="display: none;" />
+                    <div class="formCenter2">
+                        <input type="text" name="tituloHabitacion" id="tituloHabitacion" value="@Model.TC_Titulo_TSH_Tipo_Habitacion" />
+                    </div><br /><br />
+                    <div class="formCenter">
+                        <span>Tarifa:</span>
+                        <input type="number" name="tarifa" id="tarifa" value="@Model.TN_Tarifa_TSH_Tipo_Habitacion"><br>
+                    </div><br /><br>
                     <textarea id="descripcion" name="descripcion">@Model.TC_Descripcion_TSH_Tipo_Habitacion</textarea>
                     <div class="formCenter">
                         <div class="col-md-5 about-img" style="margin-left: -2%;">
