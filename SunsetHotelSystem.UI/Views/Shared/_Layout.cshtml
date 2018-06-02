@@ -34,8 +34,9 @@
                                 <a href="@Url.Action("Home", "Administrador")"><img src="../images/logo.png" width="50%" height="50%" class="rounded img-fluid" alt="Logo"></a>
                             } else {
                                 <a href="@Url.Action("Index", "Home")"><img src="../images/logo.png" width="50%" height="50%" class="rounded img-fluid" alt="Logo"></a>
-                            }
+                            }                        
                         }
+                        
                     </div>
                     <div class="header-nav">
                         <nav class="navbar navbar-default">
@@ -75,6 +76,31 @@
                         </nav>
                     </div>
                     <div class="clearfix"> </div>
+                    @{
+                        DateTime fechaHoy = DateTime.Now;
+                        //DateTime fechaHoy  = new DateTime(2018, 5, 25);
+                        //DateTime fechaHoy  = new DateTime(2018, 12, 25);
+                        //DateTime fechaHoy = new DateTime(2018, 9, 25);
+                        int mesFh = fechaHoy.Month;
+                        if (mesFh >= 2 && mesFh <= 6)
+                        {
+                            //promo1
+                            <div class="alert alert-success fade in">
+                                <a href="@Url.Action("HabitacionDisponible", "Reserva")" class="alert-link">Aproveche, las habitaciones estandar tienen un 10% de descuento y las suite tienen un 20%</a>
+                            </div>
+                        }
+                        else if (mesFh >= 9 && mesFh <= 11)
+                        {
+                            //promo2
+                            <div class="alert alert-success fade in">
+                                <a href="@Url.Action("HabitacionDisponible", "Reserva")" class="alert-link">Aproveche, a partir de 3 noches de estadia paga 2 y de 5 paga 3 venga y disfrute</a>
+                            </div>
+                        }
+                        else
+                        {
+                            //no hay promo
+                        }
+                    }
                 </div>
             </div>
             <div class="w3-banner">
