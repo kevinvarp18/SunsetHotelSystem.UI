@@ -258,11 +258,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Project_Readme.html" />
-    <Content Include="Views\Home\SobreNosotros.cshtml" />
-    <Content Include="Views\Home\ComoLlegar.cshtml" />
-    <Content Include="Views\Home\Facilidades.cshtml" />
-    <Content Include="Views\Home\Contactenos.cshtml" />
-    <Content Include="Views\Home\Tarifas.cshtml" />
     <Content Include="Views\Reserva\HabitacionDisponible.cshtml" />
     <Content Include="Views\Reserva\Reserva.cshtml" />
     <Content Include="Views\Reserva\ResultadoReserva.cshtml" />

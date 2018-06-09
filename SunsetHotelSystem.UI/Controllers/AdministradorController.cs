@@ -22,8 +22,22 @@ namespace SunsetHotelSystem.UI.Controllers {
                 return RedirectToAction("Home");
         }//Fin del método Login.
 
-        public Task<ActionResult> AutenticarUsuario(string usuario, string contrasena) {
+        public async Task<ActionResult> AutenticarUsuario(string usuario, string contrasena) {
+            TSH_Administrador administrador = new TSH_Administrador();
+            Respuesta<TSH_Administrador> respuesta = new Respuesta<TSH_Administrador>();
+            try {
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Administrador/", administrador));
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Administrador>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                }//Fin del if.
+            } catch (Exception ex) {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
 
+            if (respuesta.resultado == 1)
+                return RedirectToAction("Home");
+            else
+                return RedirectToAction("Login");
         }//Fin del método AutenticarUsuario.
     }//Fin de la clase AdminController.
 }//Fin del namespace.
