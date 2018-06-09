@@ -52,6 +52,10 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp, Version=5.4.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Content\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -183,6 +187,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\easy-responsive-tabs.css" />
     <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\itextsharp.dll" />
     <Content Include="Content\lightbox.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
@@ -275,6 +280,7 @@
     <Content Include="Views\ModificarPaginas\PaginaHome.cshtml" />
     <Content Include="Views\ModificarPaginas\PaginaSobreNosotros.cshtml" />
     <Content Include="Views\Administrador\Login.cshtml" />
+    <Content Include="Views\Habitaciones\disponibilidadDiaHoy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SunsetHotelSystem.Dominio.Entidades\SunsetHotelSystem.Dominio.Entidades.csproj">

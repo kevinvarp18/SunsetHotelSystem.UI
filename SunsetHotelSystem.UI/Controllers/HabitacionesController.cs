@@ -11,6 +11,8 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using SunsetHotelSystem.UI.Models;
 using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace SunsetHotelSystem.UI.Controllers {
     public class HabitacionesController : ConfigController {
@@ -109,5 +111,25 @@ namespace SunsetHotelSystem.UI.Controllers {
                 return View("../Administrador/Home");
             }//Try-catch.
         }//Fin del método actualizarPaginaHabitacion.
+
+        public ActionResult disponibilidadDiaHoy(){
+            return View();
+        }//Fin de la función ResultadoReserva.
+
+
+        public void generarPDF(){
+            Document doc = new Document(PageSize.LETTER);
+            // Indicamos donde vamos a guardar el documento
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(@"C:\prueba.pdf", FileMode.Create));
+
+            // Le colocamos el título y el autor
+            // **Nota: Esto no será visible en el documento
+            doc.AddTitle("Mi primer PDF");
+            doc.AddCreator("Roberto Torres");
+
+            // Abrimos el archivo
+            doc.Open();
+        }//End generarPDF
+
     }//Fin de la clase HabitacionesController.
 }//Fin de la namespace.

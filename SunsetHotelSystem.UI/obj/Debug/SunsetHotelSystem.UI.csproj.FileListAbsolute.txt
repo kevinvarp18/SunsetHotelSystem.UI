@@ -323,3 +323,4 @@ C:\Users\Dylan\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.UI\bin\Newton
 C:\Users\Dylan\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.UI\obj\Debug\SunsetHotelSystem.UI.csprojResolveAssemblyReference.cache
 C:\Users\Dylan\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.UI\obj\Debug\SunsetHotelSystem.UI.dll
 C:\Users\Dylan\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.UI\obj\Debug\SunsetHotelSystem.UI.pdb
+C:\Users\Dylan\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.UI\bin\itextsharp.dll
