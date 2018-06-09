@@ -1,4 +1,4 @@
-﻿using SunsetHotelSystem.Dominio.Entidades.Entidades;
+﻿using SunsetHotelSystem.Dominio.Entidades;
 using SunsetHotelSystem.Dominio.UTL;
 using Newtonsoft.Json;
 using System;
@@ -48,7 +48,7 @@ namespace SunsetHotelSystem.UI.Controllers {
                     }
                     pagina.TSH_Pag_Home.TI_Imagen_TSH_Pag_Home = imageData;
                 }//Fin del if.
-            } catch (Exception ex) {
+            } catch {
             }//Fin del try-catch.
 
             Guid g = Guid.NewGuid();
@@ -231,8 +231,7 @@ namespace SunsetHotelSystem.UI.Controllers {
                         facilidad.TI_Imagen_TSH_Pag_Facilidades = imageData;
                     }//Fin del if.
                 }
-                catch (Exception ex)
-                {
+                catch {
                 }//Fin del try-catch.
 
                 Guid g = Guid.NewGuid();

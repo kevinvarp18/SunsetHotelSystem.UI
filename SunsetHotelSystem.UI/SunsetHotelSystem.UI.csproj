@@ -242,7 +242,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
@@ -280,6 +279,7 @@
     <Content Include="Views\ModificarPaginas\PaginaFacilidades.cshtml" />
     <Content Include="Views\ModificarPaginas\PaginaHome.cshtml" />
     <Content Include="Views\ModificarPaginas\PaginaSobreNosotros.cshtml" />
+    <Content Include="Views\Administrador\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SunsetHotelSystem.Dominio.Entidades\SunsetHotelSystem.Dominio.Entidades.csproj">

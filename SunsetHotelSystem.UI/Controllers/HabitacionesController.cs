@@ -1,4 +1,4 @@
-﻿using SunsetHotelSystem.Dominio.Entidades.Entidades;
+﻿using SunsetHotelSystem.Dominio.Entidades;
 using SunsetHotelSystem.Dominio.UTL;
 using Newtonsoft.Json;
 using System;
@@ -78,7 +78,7 @@ namespace SunsetHotelSystem.UI.Controllers {
                     }
                     tipoHabitacion.TI_Imagen_TSH_Tipo_Habitacion = imageData;
                 }//Fin del if.
-            } catch (Exception ex) {
+            } catch {
             }//Fin del try-catch.
 
             Guid g = Guid.NewGuid();

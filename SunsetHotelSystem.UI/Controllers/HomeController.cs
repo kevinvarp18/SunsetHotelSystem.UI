@@ -1,4 +1,4 @@
-﻿using SunsetHotelSystem.Dominio.Entidades.Entidades;
+﻿using SunsetHotelSystem.Dominio.Entidades;
 using SunsetHotelSystem.Dominio.UTL;
 using Newtonsoft.Json;
 using System;

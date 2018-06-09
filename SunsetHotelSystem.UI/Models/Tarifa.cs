@@ -1,4 +1,4 @@
-﻿using SunsetHotelSystem.Dominio.Entidades.Entidades;
+﻿using SunsetHotelSystem.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,5 @@ namespace SunsetHotelSystem.UI.Models {
             CaracteristicasHabitaciones = caracteristicasHabitaciones;
             TipoHabitaciones = tipoHabitaciones;
         }//Fin del constructor sobrecargado.
-        
     }//Fin de la clase Tarifa.
 }//Fin del namespace.
