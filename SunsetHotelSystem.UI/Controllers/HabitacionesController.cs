@@ -94,7 +94,7 @@ namespace SunsetHotelSystem.UI.Controllers {
             }//Fin del foreach.
 
             Habitacion habitaciones = new Habitacion(listaTiposHabitacion, listaHabitaciones,listaHabitacionesReservadas);
-
+            generarPDF();
             return View(habitaciones);
         }//Fin del método ListaHabitaciones.
 
@@ -168,13 +168,14 @@ namespace SunsetHotelSystem.UI.Controllers {
         }//Fin del método actualizarPaginaHabitacion.
 
         public void generarPDF(){
+            DateTime fechaActual = DateTime.Now;
             FileIOPermission f = new FileIOPermission(FileIOPermissionAccess.AllAccess, "E:\\Documentos\\Universidad de Costa Rica");
             f.AllLocalFiles = FileIOPermissionAccess.Write;
             f.Demand();
             Document doc = new Document(PageSize.LETTER);
             // Indicamos donde vamos a guardar el documento
             PdfWriter writer = PdfWriter.GetInstance(doc,
-                                        new FileStream(@"E:\Documentos\Universidad de Costa Rica\nombreDoc.pdf", FileMode.Create));
+                                        new FileStream(@"E:\Documentos\Universidad de Costa Rica\EstadoHabitaciones"+ fechaActual.ToString()+".pdf", FileMode.Create));
 
             // Se le coloca el título y el autor
             // **Nota: Esto no será visible en el documento
@@ -184,10 +185,27 @@ namespace SunsetHotelSystem.UI.Controllers {
             // Abrimos el archivo
             doc.Open();
             // Se crea el tipo de Font que vamos utilizar
-            iTextSharp.text.Font _standardFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+            iTextSharp.text.Font _standardFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.COURIER, 8, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+            iTextSharp.text.Font _standardFont2 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.NORMAL, BaseColor.DARK_GRAY);
+            iTextSharp.text.Font _standardFont3 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.SYMBOL, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+            iTextSharp.text.Font _standardFont4 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+            iTextSharp.text.Font _standardFont5 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.ZAPFDINGBATS, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+
+            /*string imageURL = Server.MapPath("/images/") + "logo.png";
+
+            Image imagen = Image.GetInstance(imageURL);
+            Paragraph p = new Paragraph();
+            p.Add(new Chunk(imagen, 0, 0));
+            p.Add(new Phrase("Esto es un logo"));
+            doc.Add(p);
+
+             */
+
 
             // Se escribe el encabezamiento en el documento
-            doc.Add(new Paragraph("Estado de las habitaciones de Suntet Hotel"));
+            doc.Add(new Paragraph("SunSet Hotel", _standardFont2));
+            doc.Add(Chunk.NEWLINE);
+            doc.Add(new Paragraph("Estado de las habitaciones de Suntet Hotel", _standardFont2));
             doc.Add(Chunk.NEWLINE);
 
             // Se crean las tablas (en este caso 3)
@@ -195,15 +213,15 @@ namespace SunsetHotelSystem.UI.Controllers {
             tblPrueba.WidthPercentage = 100;
 
             // Se configura el título de las columnas de la tabla
-            PdfPCell clNombrePrimera = new PdfPCell(new Phrase("nombrePrimeraTabla", _standardFont));
+            PdfPCell clNombrePrimera = new PdfPCell(new Phrase("Número de Habitación", _standardFont));
             clNombrePrimera.BorderWidth = 0;
             clNombrePrimera.BorderWidthBottom = 0.75f;
 
-            PdfPCell clNombreSegunda = new PdfPCell(new Phrase("nombreSegundaTabla", _standardFont));
+            PdfPCell clNombreSegunda = new PdfPCell(new Phrase("Tipo de habitación", _standardFont));
             clNombreSegunda.BorderWidth = 0;
             clNombreSegunda.BorderWidthBottom = 0.75f;
 
-            PdfPCell clNombreTercera = new PdfPCell(new Phrase("nombreTerceraTabla", _standardFont));
+            PdfPCell clNombreTercera = new PdfPCell(new Phrase("Estado de la habitación", _standardFont));
             clNombreTercera.BorderWidth = 0;
             clNombreTercera.BorderWidthBottom = 0.75f;
 
@@ -213,13 +231,13 @@ namespace SunsetHotelSystem.UI.Controllers {
             tblPrueba.AddCell(clNombreTercera);
 
             // se llena la tabla con información
-            clNombrePrimera = new PdfPCell(new Phrase("Info_Tabla1", _standardFont));
+            clNombrePrimera = new PdfPCell(new Phrase("Info_Tabla1", _standardFont4));
             clNombrePrimera.BorderWidth = 0;
 
-            clNombreSegunda = new PdfPCell(new Phrase("Info_Tabla2", _standardFont));
+            clNombreSegunda = new PdfPCell(new Phrase("Info_Tabla2", _standardFont4));
             clNombreSegunda.BorderWidth = 0;
 
-            clNombreTercera = new PdfPCell(new Phrase("Info_Tabla3", _standardFont));
+            clNombreTercera = new PdfPCell(new Phrase("Info_Tabla3", _standardFont4));
             clNombreTercera.BorderWidth = 0;
 
             // Añadimos las celdas a la tabla
@@ -229,6 +247,10 @@ namespace SunsetHotelSystem.UI.Controllers {
 
             // Finalmente, se añade la tabla al documento PDF y se cierra el documento
             doc.Add(tblPrueba);
+            
+            doc.Add(new Paragraph("-Fin del reporte SunSet Hotel System. Emitido el " + fechaActual.ToString(), _standardFont));
+            doc.Add(Chunk.NEWLINE);
+   
 
             doc.Close();
             writer.Close();

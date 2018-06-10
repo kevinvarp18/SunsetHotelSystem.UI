@@ -19,3 +19,4 @@ C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI2\SunsetHotelSystem.Dominio.U
 C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI2\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.csprojResolveAssemblyReference.cache
 C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI2\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.dll
 C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI2\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.pdb
+C:\Users\santi\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.UTL\obj\Debug\SunsetHotelSystem.Dominio.UTL.csprojResolveAssemblyReference.cache
