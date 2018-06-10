@@ -13,6 +13,7 @@ using SunsetHotelSystem.UI.Models;
 using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using System.Security.Permissions;
 
 namespace SunsetHotelSystem.UI.Controllers {
     public class HabitacionesController : ConfigController {
@@ -167,17 +168,70 @@ namespace SunsetHotelSystem.UI.Controllers {
         }//Fin del método actualizarPaginaHabitacion.
 
         public void generarPDF(){
+            FileIOPermission f = new FileIOPermission(FileIOPermissionAccess.AllAccess, "E:\\Documentos\\Universidad de Costa Rica");
+            f.AllLocalFiles = FileIOPermissionAccess.Write;
+            f.Demand();
             Document doc = new Document(PageSize.LETTER);
             // Indicamos donde vamos a guardar el documento
-            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(@"C:\prueba.pdf", FileMode.Create));
+            PdfWriter writer = PdfWriter.GetInstance(doc,
+                                        new FileStream(@"E:\Documentos\Universidad de Costa Rica\nombreDoc.pdf", FileMode.Create));
 
-            // Le colocamos el título y el autor
+            // Se le coloca el título y el autor
             // **Nota: Esto no será visible en el documento
-            doc.AddTitle("Mi primer PDF");
-            doc.AddCreator("Roberto Torres");
+            doc.AddTitle("Estado de las habitaciones");
+            doc.AddCreator("Suntet Hotel");
 
             // Abrimos el archivo
             doc.Open();
+            // Se crea el tipo de Font que vamos utilizar
+            iTextSharp.text.Font _standardFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+
+            // Se escribe el encabezamiento en el documento
+            doc.Add(new Paragraph("Estado de las habitaciones de Suntet Hotel"));
+            doc.Add(Chunk.NEWLINE);
+
+            // Se crean las tablas (en este caso 3)
+            PdfPTable tblPrueba = new PdfPTable(3);
+            tblPrueba.WidthPercentage = 100;
+
+            // Se configura el título de las columnas de la tabla
+            PdfPCell clNombrePrimera = new PdfPCell(new Phrase("nombrePrimeraTabla", _standardFont));
+            clNombrePrimera.BorderWidth = 0;
+            clNombrePrimera.BorderWidthBottom = 0.75f;
+
+            PdfPCell clNombreSegunda = new PdfPCell(new Phrase("nombreSegundaTabla", _standardFont));
+            clNombreSegunda.BorderWidth = 0;
+            clNombreSegunda.BorderWidthBottom = 0.75f;
+
+            PdfPCell clNombreTercera = new PdfPCell(new Phrase("nombreTerceraTabla", _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            // se añade las celdas a la tabla
+            tblPrueba.AddCell(clNombrePrimera);
+            tblPrueba.AddCell(clNombreSegunda);
+            tblPrueba.AddCell(clNombreTercera);
+
+            // se llena la tabla con información
+            clNombrePrimera = new PdfPCell(new Phrase("Info_Tabla1", _standardFont));
+            clNombrePrimera.BorderWidth = 0;
+
+            clNombreSegunda = new PdfPCell(new Phrase("Info_Tabla2", _standardFont));
+            clNombreSegunda.BorderWidth = 0;
+
+            clNombreTercera = new PdfPCell(new Phrase("Info_Tabla3", _standardFont));
+            clNombreTercera.BorderWidth = 0;
+
+            // Añadimos las celdas a la tabla
+            tblPrueba.AddCell(clNombrePrimera);
+            tblPrueba.AddCell(clNombreSegunda);
+            tblPrueba.AddCell(clNombreTercera);
+
+            // Finalmente, se añade la tabla al documento PDF y se cierra el documento
+            doc.Add(tblPrueba);
+
+            doc.Close();
+            writer.Close();
         }//End generarPDF
 
     }//Fin de la clase HabitacionesController.
