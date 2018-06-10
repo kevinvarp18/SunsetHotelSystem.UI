@@ -1,4 +1,4 @@
-﻿
+﻿@model SunsetHotelSystem.UI.Models.Habitacion
 @{
     ViewBag.Title = "disponibiblidadDiaHoy";
 }
@@ -10,32 +10,57 @@
             <center>
                 <div class="col-4 .col-sm-6">
                     <div class="container table-responsive">
-                        <table class="table">
+                        <table class="table table-bordered">
                             <thead>
-                                <tr>
+                                <tr class="table-info">
                                     <th>Numero de Habitacion</th>
                                     <th>Tipo</th>
                                     <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Mary</td>
-                                    <td>Moe</td>
-                                    <td>mary@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>July</td>
-                                    <td>Dooley</td>
-                                    <td>july@example.com</td>
-                                </tr>
+                                @{
+                                    foreach (var habitacion in Model.Habitaciones)
+                                    {
+                                        <tr class="table-danger">
+
+                                            <td>@habitacion.TN_Numero_Habitacion_TSH_Habitacion</td>
+
+                                            @if (habitacion.TN_Id_TipoH_TSH_Habitacion == 2)
+                                            {
+                                                <td>Estandar</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Suite</td>
+                                            }
+                                            @if (Model.Reservadas.Count > 0)
+                                            {
+                                                foreach (var reservas in Model.Reservadas)
+                                                {
+                                                    if (reservas.TN_Numero_Habitacion_TSH_Habitacion != habitacion.TN_Numero_Habitacion_TSH_Habitacion)
+                                                    {
+                                                        <td>Disponible</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>Ocupada</td>
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <td>Disponible</td>
+                                            }
+
+
+
+                                        </tr>
+                                    }
+                                }
+
                             </tbody>
-                        </table>
+                        </table>                       
                     </div>
 
                 </div>

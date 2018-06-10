@@ -43,6 +43,60 @@ namespace SunsetHotelSystem.UI.Controllers {
             return View(habitaciones);
         }//Fin del método ListaHabitaciones.
 
+        public async Task<ActionResult> disponibilidadDiaHoy()
+        {
+            DateTime fechaActual = DateTime.Now;
+            List<TSH_Tipo_Habitacion> listaTiposHabitacion = new List<TSH_Tipo_Habitacion>();
+            List<TSH_Habitacion> listaHabitaciones = new List<TSH_Habitacion>();
+            List<TSH_Habitacion> listaHabitacionesReservadas = new List<TSH_Habitacion>();
+            Respuesta<List<TSH_Tipo_Habitacion>> respuestaTipoHabitacion = new Respuesta<List<TSH_Tipo_Habitacion>>();
+            Respuesta<List<TSH_Habitacion>> respuestaHabitaciones = new Respuesta<List<TSH_Habitacion>>();
+
+            //agregado de reservas
+
+            List<TSH_Reserva> listaReservas = new List<TSH_Reserva>();
+            Respuesta<List<TSH_Reserva>> respuesta = new Respuesta<List<TSH_Reserva>>();
+
+            try
+            {
+                HttpResponseMessage responseTipoHabitacionWAPI = await webAPI.GetAsync("api/TSH_Tipo_Habitacion");
+                if (responseTipoHabitacionWAPI.IsSuccessStatusCode)
+                {
+                    respuestaTipoHabitacion = JsonConvert.DeserializeObject<Respuesta<List<TSH_Tipo_Habitacion>>>(responseTipoHabitacionWAPI.Content.ReadAsStringAsync().Result);
+                    listaTiposHabitacion = respuestaTipoHabitacion.valorRetorno;
+                }//Fin del if.
+
+                HttpResponseMessage responseHabitacionWAPI = await webAPI.GetAsync("api/TSH_Habitacion");
+                if (responseHabitacionWAPI.IsSuccessStatusCode)
+                {
+                    respuestaHabitaciones = JsonConvert.DeserializeObject<Respuesta<List<TSH_Habitacion>>>(responseHabitacionWAPI.Content.ReadAsStringAsync().Result);
+                    listaHabitaciones = respuestaHabitaciones.valorRetorno;
+                }//Fin del if.
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Reserva/");
+                if (responseWAPI.IsSuccessStatusCode)
+                {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Reserva>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaReservas = respuesta.valorRetorno;
+                }//Fin del if.
+                
+            }
+            catch (Exception ex)
+            {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+            foreach (TSH_Reserva reserva in listaReservas)
+            {
+                if (reserva.TD_Fecha_Ingreso_TSH_Reserva == fechaActual)
+                {
+                    listaHabitacionesReservadas.Add(reserva.TSH_Habitacion);
+                }//Fin del if.
+            }//Fin del foreach.
+
+            Habitacion habitaciones = new Habitacion(listaTiposHabitacion, listaHabitaciones,listaHabitacionesReservadas);
+
+            return View(habitaciones);
+        }//Fin del método ListaHabitaciones.
+
         public async Task<ActionResult> ModificarHabitacion(int idTipoHabitacion) {
             List<TSH_Tipo_Habitacion> listaTiposHabitacion = new List<TSH_Tipo_Habitacion>();
             Respuesta<List<TSH_Tipo_Habitacion>> respuestaTipoHabitacion = new Respuesta<List<TSH_Tipo_Habitacion>>();
@@ -111,11 +165,6 @@ namespace SunsetHotelSystem.UI.Controllers {
                 return View("../Administrador/Home");
             }//Try-catch.
         }//Fin del método actualizarPaginaHabitacion.
-
-        public ActionResult disponibilidadDiaHoy(){
-            return View();
-        }//Fin de la función ResultadoReserva.
-
 
         public void generarPDF(){
             Document doc = new Document(PageSize.LETTER);

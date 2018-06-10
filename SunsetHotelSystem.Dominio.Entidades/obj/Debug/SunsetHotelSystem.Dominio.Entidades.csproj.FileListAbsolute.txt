@@ -18,3 +18,8 @@ C:\Users\Dylan\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entid
 C:\Users\Dylan\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\bin\Debug\SunsetHotelSystem.Dominio.Entidades.pdb
 C:\Users\Dylan\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.dll
 C:\Users\Dylan\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.pdb
+C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI2\SunsetHotelSystem.Dominio.Entidades\bin\Debug\SunsetHotelSystem.Dominio.Entidades.dll
+C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI2\SunsetHotelSystem.Dominio.Entidades\bin\Debug\SunsetHotelSystem.Dominio.Entidades.pdb
+C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI2\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.csprojResolveAssemblyReference.cache
+C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI2\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.dll
+C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI2\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.pdb
