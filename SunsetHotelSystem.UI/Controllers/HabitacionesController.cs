@@ -17,6 +17,8 @@ using System.Security.Permissions;
 
 namespace SunsetHotelSystem.UI.Controllers {
     public class HabitacionesController : ConfigController {
+
+        private Habitacion habitaciones;
         public async Task<ActionResult> ListaHabitaciones() {
             List<TSH_Tipo_Habitacion> listaTiposHabitacion = new List<TSH_Tipo_Habitacion>();
             List<TSH_Habitacion> listaHabitaciones = new List<TSH_Habitacion>();
@@ -93,9 +95,9 @@ namespace SunsetHotelSystem.UI.Controllers {
                 }//Fin del if.
             }//Fin del foreach.
 
-            Habitacion habitaciones = new Habitacion(listaTiposHabitacion, listaHabitaciones,listaHabitacionesReservadas);
+            this.habitaciones = new Habitacion(listaTiposHabitacion, listaHabitaciones,listaHabitacionesReservadas);
             generarPDF();
-            return View(habitaciones);
+            return View(this.habitaciones);
         }//Fin del método ListaHabitaciones.
 
         public async Task<ActionResult> ModificarHabitacion(int idTipoHabitacion) {
@@ -167,45 +169,38 @@ namespace SunsetHotelSystem.UI.Controllers {
             }//Try-catch.
         }//Fin del método actualizarPaginaHabitacion.
 
-        public void generarPDF(){
+        public void generarPDF()
+        {
             DateTime fechaActual = DateTime.Now;
-            FileIOPermission f = new FileIOPermission(FileIOPermissionAccess.AllAccess, "E:\\Documentos\\Universidad de Costa Rica");
+            FileIOPermission f = new FileIOPermission(FileIOPermissionAccess.AllAccess, "C:\\Users\\santi\\Desktop");
             f.AllLocalFiles = FileIOPermissionAccess.Write;
             f.Demand();
             Document doc = new Document(PageSize.LETTER);
             // Indicamos donde vamos a guardar el documento
             PdfWriter writer = PdfWriter.GetInstance(doc,
-                                        new FileStream(@"E:\Documentos\Universidad de Costa Rica\EstadoHabitaciones"+ fechaActual.ToString()+".pdf", FileMode.Create));
+                                        new FileStream(@"C:\Users\santi\Desktop\EstadoHabitacionSunSetHotel(" + fechaActual.Day+"-"+ fechaActual.Month+"-"+fechaActual.Year+").pdf", FileMode.Create));
 
             // Se le coloca el título y el autor
-            // **Nota: Esto no será visible en el documento
             doc.AddTitle("Estado de las habitaciones");
-            doc.AddCreator("Suntet Hotel");
+            doc.AddCreator("Suntet Hotel System");
 
             // Abrimos el archivo
             doc.Open();
             // Se crea el tipo de Font que vamos utilizar
             iTextSharp.text.Font _standardFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.COURIER, 8, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
-            iTextSharp.text.Font _standardFont2 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.NORMAL, BaseColor.DARK_GRAY);
-            iTextSharp.text.Font _standardFont3 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.SYMBOL, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+    
+            iTextSharp.text.Font _standardFont2 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.BOLDITALIC, BaseColor.DARK_GRAY);
+            iTextSharp.text.Font _standardFont6 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.DARK_GRAY);
+
+            iTextSharp.text.Font _standardFont3 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 7, iTextSharp.text.Font.NORMAL, BaseColor.LIGHT_GRAY);
             iTextSharp.text.Font _standardFont4 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
-            iTextSharp.text.Font _standardFont5 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.ZAPFDINGBATS, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
-
-            /*string imageURL = Server.MapPath("/images/") + "logo.png";
-
-            Image imagen = Image.GetInstance(imageURL);
-            Paragraph p = new Paragraph();
-            p.Add(new Chunk(imagen, 0, 0));
-            p.Add(new Phrase("Esto es un logo"));
-            doc.Add(p);
-
-             */
-
-
+            iTextSharp.text.Font _standardFont5 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.COURIER, 10, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
             // Se escribe el encabezamiento en el documento
             doc.Add(new Paragraph("SunSet Hotel", _standardFont2));
             doc.Add(Chunk.NEWLINE);
-            doc.Add(new Paragraph("Estado de las habitaciones de Suntet Hotel", _standardFont2));
+            doc.Add(new Paragraph("Reporte de habitaciones", _standardFont6));
+            doc.Add(Chunk.NEWLINE);
+            doc.Add(new Paragraph("A continuación, se muestra el desglose del estado de las habitaciones en la presente fecha: "+ fechaActual.ToShortDateString() +" y a la hora: " + fechaActual.ToShortTimeString(), _standardFont6));
             doc.Add(Chunk.NEWLINE);
 
             // Se crean las tablas (en este caso 3)
@@ -230,25 +225,54 @@ namespace SunsetHotelSystem.UI.Controllers {
             tblPrueba.AddCell(clNombreSegunda);
             tblPrueba.AddCell(clNombreTercera);
 
-            // se llena la tabla con información
-            clNombrePrimera = new PdfPCell(new Phrase("Info_Tabla1", _standardFont4));
-            clNombrePrimera.BorderWidth = 0;
 
-            clNombreSegunda = new PdfPCell(new Phrase("Info_Tabla2", _standardFont4));
-            clNombreSegunda.BorderWidth = 0;
+            foreach (var habitacion in this.habitaciones.Habitaciones)
+            {
 
-            clNombreTercera = new PdfPCell(new Phrase("Info_Tabla3", _standardFont4));
-            clNombreTercera.BorderWidth = 0;
+                clNombrePrimera = new PdfPCell(new Phrase(habitacion.TN_Numero_Habitacion_TSH_Habitacion.ToString(), _standardFont4));
+                clNombrePrimera.BorderWidth = 0;
 
-            // Añadimos las celdas a la tabla
-            tblPrueba.AddCell(clNombrePrimera);
-            tblPrueba.AddCell(clNombreSegunda);
-            tblPrueba.AddCell(clNombreTercera);
+                if (habitacion.TN_Id_TipoH_TSH_Habitacion == 2)
+                {
+                    clNombreSegunda = new PdfPCell(new Phrase("Estándar", _standardFont4));
+                    clNombreSegunda.BorderWidth = 0;
+                }
+                else
+                {
+                    clNombreSegunda = new PdfPCell(new Phrase("Suite", _standardFont4));
+                    clNombreSegunda.BorderWidth = 0;
+                }
+                if (this.habitaciones.Reservadas.Count > 0)
+                {
+                    foreach (var reservas in this.habitaciones.Reservadas)
+                    {
+                        if (reservas.TN_Numero_Habitacion_TSH_Habitacion != habitacion.TN_Numero_Habitacion_TSH_Habitacion)
+                        {
+                            clNombreTercera = new PdfPCell(new Phrase("Disponible", _standardFont4));
+                            clNombreTercera.BorderWidth = 0;
+                        }
+                        else
+                        {
+                            clNombreTercera = new PdfPCell(new Phrase("Ocupada", _standardFont4));
+                            clNombreTercera.BorderWidth = 0;
+                        }
+                    }
+                }
+                else
+                {
+                    clNombreTercera = new PdfPCell(new Phrase("Disponible", _standardFont4));
+                    clNombreTercera.BorderWidth = 0;
+                }
+                tblPrueba.AddCell(clNombrePrimera);
+                tblPrueba.AddCell(clNombreSegunda);
+                tblPrueba.AddCell(clNombreTercera);
 
+            }
+          
             // Finalmente, se añade la tabla al documento PDF y se cierra el documento
             doc.Add(tblPrueba);
             
-            doc.Add(new Paragraph("-Fin del reporte SunSet Hotel System. Emitido el " + fechaActual.ToString(), _standardFont));
+            doc.Add(new Paragraph("-Fin del reporte SunSet Hotel System. Emitido el " + fechaActual.ToString(), _standardFont3));
             doc.Add(Chunk.NEWLINE);
    
 
