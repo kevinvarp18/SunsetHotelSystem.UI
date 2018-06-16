@@ -46,17 +46,17 @@ namespace SunsetHotelSystem.UI.Controllers {
                 }//Fin del try-catch.
 
                 if (habitacionesDisponibles.Count > 0)
-                    return RedirectToAction("Reserva", "Reserva", new { idHabitacion = habitacionesDisponibles.First().TN_Identificador_TSH_Habitacion, fechaLlegada = fechaLlegada, fechaSalida = fechaSalida});
+                    return RedirectToAction("Reserva", "Reserva", new { numeroHabitacion = habitacionesDisponibles.First().TN_Numero_Habitacion_TSH_Habitacion, fechaLlegada = fechaLlegada, fechaSalida = fechaSalida});
                 else
                     return RedirectToAction("ResultadoReserva", "Reserva", new { nombreCliente = "", correoElectronico = "", numeroReserva = "", resultadoReserva = "2" });
             }//Verifica que las fechas tengan coherencia.
         }//Fin de la función HabitacionDisponible.
 
-        public async Task<ActionResult> Reserva(int idHabitacion, DateTime fechaLlegada, DateTime fechaSalida) {
+        public async Task<ActionResult> Reserva(int numeroHabitacion, DateTime fechaLlegada, DateTime fechaSalida) {
             TSH_Habitacion habitacion = new TSH_Habitacion();
             Respuesta<TSH_Habitacion> respuesta = new Respuesta<TSH_Habitacion>();
             try {
-                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Habitacion/", idHabitacion));
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Habitacion/", numeroHabitacion));
                 if (responseWAPI.IsSuccessStatusCode) {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Habitacion>>(responseWAPI.Content.ReadAsStringAsync().Result);
                     habitacion = respuesta.valorRetorno;
@@ -72,7 +72,7 @@ namespace SunsetHotelSystem.UI.Controllers {
         }//Fin de la función Reserva.
 
         [HttpPost]
-        public async Task<ActionResult> Reserva(string nombreReserva, string apellidoReserva, string correoReserva, string tarjetaReserva, int numeroHabitacion, DateTime fechaLlegada, DateTime fechaSalida) {
+        public async Task<ActionResult> Reserva(string cedulaReserva, string nombreReserva, string apellidoReserva, string correoReserva, string tarjetaReserva, int numeroHabitacion, DateTime fechaLlegada, DateTime fechaSalida) {
             fechaLlegada = fechaLlegada.Date + (new TimeSpan(15, 0, 0));
             fechaSalida = fechaSalida.Date + (new TimeSpan(11, 0, 0));
             Respuesta<TSH_Reserva> respuesta = new Respuesta<TSH_Reserva>();
@@ -96,6 +96,8 @@ namespace SunsetHotelSystem.UI.Controllers {
                 reserva.TD_Fecha_Ingreso_TSH_Reserva = fechaLlegada;
                 reserva.TD_Fecha_Salida_TSH_Reserva = fechaSalida;
                 reserva.TN_Num_Habitacion_TSH_Reserva = numeroHabitacion;
+                reserva.TC_Id_Cliente_TSH_Reserva = cedulaReserva;
+                reserva.TSH_Cliente.TC_Cedula_TSH_Cliente = cedulaReserva;
                 reserva.TSH_Cliente.TC_Nombre_TSH_Cliente = nombreReserva;
                 reserva.TSH_Cliente.TC_Apellidos_TSH_Cliente = apellidoReserva;
                 reserva.TSH_Cliente.TC_Tarjeta_TSH_Cliente = tarjetaReserva;

@@ -17,8 +17,7 @@ using System.Security.Permissions;
 
 namespace SunsetHotelSystem.UI.Controllers {
     public class HabitacionesController : ConfigController {
-
-        private Habitacion habitaciones;
+        
         public async Task<ActionResult> ListaHabitaciones() {
             List<TSH_Tipo_Habitacion> listaTiposHabitacion = new List<TSH_Tipo_Habitacion>();
             List<TSH_Habitacion> listaHabitaciones = new List<TSH_Habitacion>();
@@ -46,58 +45,46 @@ namespace SunsetHotelSystem.UI.Controllers {
             return View(habitaciones);
         }//Fin del método ListaHabitaciones.
 
-        public async Task<ActionResult> disponibilidadDiaHoy()
-        {
+        public async Task<ActionResult> DisponibilidadDiaHoy() {
             DateTime fechaActual = DateTime.Now;
             List<TSH_Tipo_Habitacion> listaTiposHabitacion = new List<TSH_Tipo_Habitacion>();
             List<TSH_Habitacion> listaHabitaciones = new List<TSH_Habitacion>();
             List<TSH_Habitacion> listaHabitacionesReservadas = new List<TSH_Habitacion>();
+            List<TSH_Reserva> listaReservas = new List<TSH_Reserva>();
             Respuesta<List<TSH_Tipo_Habitacion>> respuestaTipoHabitacion = new Respuesta<List<TSH_Tipo_Habitacion>>();
             Respuesta<List<TSH_Habitacion>> respuestaHabitaciones = new Respuesta<List<TSH_Habitacion>>();
-
-            //agregado de reservas
-
-            List<TSH_Reserva> listaReservas = new List<TSH_Reserva>();
             Respuesta<List<TSH_Reserva>> respuesta = new Respuesta<List<TSH_Reserva>>();
 
-            try
-            {
+            try {
                 HttpResponseMessage responseTipoHabitacionWAPI = await webAPI.GetAsync("api/TSH_Tipo_Habitacion");
-                if (responseTipoHabitacionWAPI.IsSuccessStatusCode)
-                {
+                if (responseTipoHabitacionWAPI.IsSuccessStatusCode) {
                     respuestaTipoHabitacion = JsonConvert.DeserializeObject<Respuesta<List<TSH_Tipo_Habitacion>>>(responseTipoHabitacionWAPI.Content.ReadAsStringAsync().Result);
                     listaTiposHabitacion = respuestaTipoHabitacion.valorRetorno;
                 }//Fin del if.
 
                 HttpResponseMessage responseHabitacionWAPI = await webAPI.GetAsync("api/TSH_Habitacion");
-                if (responseHabitacionWAPI.IsSuccessStatusCode)
-                {
+                if (responseHabitacionWAPI.IsSuccessStatusCode) {
                     respuestaHabitaciones = JsonConvert.DeserializeObject<Respuesta<List<TSH_Habitacion>>>(responseHabitacionWAPI.Content.ReadAsStringAsync().Result);
                     listaHabitaciones = respuestaHabitaciones.valorRetorno;
                 }//Fin del if.
                 HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Reserva/");
-                if (responseWAPI.IsSuccessStatusCode)
-                {
+                if (responseWAPI.IsSuccessStatusCode) {
                     respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Reserva>>>(responseWAPI.Content.ReadAsStringAsync().Result);
                     listaReservas = respuesta.valorRetorno;
                 }//Fin del if.
                 
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
-            foreach (TSH_Reserva reserva in listaReservas)
-            {
-                if (reserva.TD_Fecha_Ingreso_TSH_Reserva == fechaActual)
-                {
+            foreach (TSH_Reserva reserva in listaReservas) {
+                if (reserva.TD_Fecha_Ingreso_TSH_Reserva == fechaActual) {
                     listaHabitacionesReservadas.Add(reserva.TSH_Habitacion);
                 }//Fin del if.
             }//Fin del foreach.
 
-            this.habitaciones = new Habitacion(listaTiposHabitacion, listaHabitaciones,listaHabitacionesReservadas);
-            generarPDF();
-            return View(this.habitaciones);
+            Habitacion habitaciones = new Habitacion(listaTiposHabitacion, listaHabitaciones,listaHabitacionesReservadas);
+
+            return View(habitaciones);
         }//Fin del método ListaHabitaciones.
 
         public async Task<ActionResult> ModificarHabitacion(int idTipoHabitacion) {
@@ -169,16 +156,76 @@ namespace SunsetHotelSystem.UI.Controllers {
             }//Try-catch.
         }//Fin del método actualizarPaginaHabitacion.
 
-        public void generarPDF()
-        {
+        public async Task<ActionResult> CambiarEstadoHabitacion(int numeroHabitacion, int estadoHabitacion) {
+            TSH_Habitacion habitacion = new TSH_Habitacion();
+            Respuesta<TSH_Habitacion> respuesta = new Respuesta<TSH_Habitacion>();
+            habitacion.TN_Numero_Habitacion_TSH_Habitacion = numeroHabitacion;
+
+            if (estadoHabitacion == 1)
+                habitacion.TN_Borrado_TSH_Habitacion = 0;
+            else
+                habitacion.TN_Borrado_TSH_Habitacion = 1;
+
+            try {
+                String jsonContent = JsonConvert.SerializeObject(habitacion);
+                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
+                ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
+                byteArrayContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                HttpResponseMessage responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Habitacion"), byteArrayContent);
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<TSH_Habitacion>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                }//Fin del if.
+            } catch (Exception ex) {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+            return RedirectToAction("ListaHabitaciones");
+        }//Fin del método CambiarEstadoHabitacion.
+
+        public async Task<ActionResult> generarPDF() {
             DateTime fechaActual = DateTime.Now;
-            FileIOPermission f = new FileIOPermission(FileIOPermissionAccess.AllAccess, "C:\\Users\\santi\\Desktop");
+            List<TSH_Tipo_Habitacion> listaTiposHabitacion = new List<TSH_Tipo_Habitacion>();
+            List<TSH_Habitacion> listaHabitaciones = new List<TSH_Habitacion>();
+            List<TSH_Habitacion> listaHabitacionesReservadas = new List<TSH_Habitacion>();
+            List<TSH_Reserva> listaReservas = new List<TSH_Reserva>();
+            Respuesta<List<TSH_Tipo_Habitacion>> respuestaTipoHabitacion = new Respuesta<List<TSH_Tipo_Habitacion>>();
+            Respuesta<List<TSH_Habitacion>> respuestaHabitaciones = new Respuesta<List<TSH_Habitacion>>();
+            Respuesta<List<TSH_Reserva>> respuesta = new Respuesta<List<TSH_Reserva>>();
+
+            try {
+                HttpResponseMessage responseTipoHabitacionWAPI = await webAPI.GetAsync("api/TSH_Tipo_Habitacion");
+                if (responseTipoHabitacionWAPI.IsSuccessStatusCode) {
+                    respuestaTipoHabitacion = JsonConvert.DeserializeObject<Respuesta<List<TSH_Tipo_Habitacion>>>(responseTipoHabitacionWAPI.Content.ReadAsStringAsync().Result);
+                    listaTiposHabitacion = respuestaTipoHabitacion.valorRetorno;
+                }//Fin del if.
+
+                HttpResponseMessage responseHabitacionWAPI = await webAPI.GetAsync("api/TSH_Habitacion");
+                if (responseHabitacionWAPI.IsSuccessStatusCode) {
+                    respuestaHabitaciones = JsonConvert.DeserializeObject<Respuesta<List<TSH_Habitacion>>>(responseHabitacionWAPI.Content.ReadAsStringAsync().Result);
+                    listaHabitaciones = respuestaHabitaciones.valorRetorno;
+                }//Fin del if.
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Reserva/");
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Reserva>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaReservas = respuesta.valorRetorno;
+                }//Fin del if.
+
+            } catch (Exception ex) {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+            foreach (TSH_Reserva reserva in listaReservas) {
+                if (reserva.TD_Fecha_Ingreso_TSH_Reserva == fechaActual) {
+                    listaHabitacionesReservadas.Add(reserva.TSH_Habitacion);
+                }//Fin del if.
+            }//Fin del foreach.
+
+            Habitacion habitaciones = new Habitacion(listaTiposHabitacion, listaHabitaciones, listaHabitacionesReservadas);
+
+            FileIOPermission f = new FileIOPermission(FileIOPermissionAccess.AllAccess, "C:\\Users\\Kevin Vargas\\Desktop");
             f.AllLocalFiles = FileIOPermissionAccess.Write;
             f.Demand();
             Document doc = new Document(PageSize.LETTER);
             // Indicamos donde vamos a guardar el documento
-            PdfWriter writer = PdfWriter.GetInstance(doc,
-                                        new FileStream(@"C:\Users\santi\Desktop\EstadoHabitacionSunSetHotel(" + fechaActual.Day+"-"+ fechaActual.Month+"-"+fechaActual.Year+").pdf", FileMode.Create));
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(@"C:\Users\Kevin Vargas\Desktop\EstadoHabitacionSunSetHotel(" + fechaActual.Day+"-"+ fechaActual.Month+"-"+fechaActual.Year+").pdf", FileMode.Create));
 
             // Se le coloca el título y el autor
             doc.AddTitle("Estado de las habitaciones");
@@ -226,59 +273,46 @@ namespace SunsetHotelSystem.UI.Controllers {
             tblPrueba.AddCell(clNombreTercera);
 
 
-            foreach (var habitacion in this.habitaciones.Habitaciones)
-            {
-
+            foreach (var habitacion in habitaciones.Habitaciones) {
                 clNombrePrimera = new PdfPCell(new Phrase(habitacion.TN_Numero_Habitacion_TSH_Habitacion.ToString(), _standardFont4));
                 clNombrePrimera.BorderWidth = 0;
 
-                if (habitacion.TN_Id_TipoH_TSH_Habitacion == 2)
-                {
+                if (habitacion.TN_Id_TipoH_TSH_Habitacion == 2) {
                     clNombreSegunda = new PdfPCell(new Phrase("Estándar", _standardFont4));
                     clNombreSegunda.BorderWidth = 0;
-                }
-                else
-                {
+                } else {
                     clNombreSegunda = new PdfPCell(new Phrase("Suite", _standardFont4));
                     clNombreSegunda.BorderWidth = 0;
                 }
-                if (this.habitaciones.Reservadas.Count > 0)
-                {
-                    foreach (var reservas in this.habitaciones.Reservadas)
-                    {
-                        if (reservas.TN_Numero_Habitacion_TSH_Habitacion != habitacion.TN_Numero_Habitacion_TSH_Habitacion)
-                        {
+
+                if (habitaciones.Reservadas.Count > 0) {
+                    foreach (var reservas in habitaciones.Reservadas) {
+                        if (reservas.TN_Numero_Habitacion_TSH_Habitacion != habitacion.TN_Numero_Habitacion_TSH_Habitacion) {
                             clNombreTercera = new PdfPCell(new Phrase("Disponible", _standardFont4));
                             clNombreTercera.BorderWidth = 0;
-                        }
-                        else
-                        {
+                        } else {
                             clNombreTercera = new PdfPCell(new Phrase("Ocupada", _standardFont4));
                             clNombreTercera.BorderWidth = 0;
                         }
                     }
-                }
-                else
-                {
+                } else {
                     clNombreTercera = new PdfPCell(new Phrase("Disponible", _standardFont4));
                     clNombreTercera.BorderWidth = 0;
                 }
                 tblPrueba.AddCell(clNombrePrimera);
                 tblPrueba.AddCell(clNombreSegunda);
                 tblPrueba.AddCell(clNombreTercera);
-
             }
           
             // Finalmente, se añade la tabla al documento PDF y se cierra el documento
             doc.Add(tblPrueba);
-            
             doc.Add(new Paragraph("-Fin del reporte SunSet Hotel System. Emitido el " + fechaActual.ToString(), _standardFont3));
             doc.Add(Chunk.NEWLINE);
-   
-
             doc.Close();
             writer.Close();
-        }//End generarPDF
+
+            return RedirectToAction("DisponibilidadDiaHoy");
+        }//Fin del método generarPDF.
 
     }//Fin de la clase HabitacionesController.
 }//Fin de la namespace.

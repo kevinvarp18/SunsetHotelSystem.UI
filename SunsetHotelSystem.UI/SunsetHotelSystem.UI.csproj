@@ -280,7 +280,7 @@
     <Content Include="Views\ModificarPaginas\PaginaHome.cshtml" />
     <Content Include="Views\ModificarPaginas\PaginaSobreNosotros.cshtml" />
     <Content Include="Views\Administrador\Login.cshtml" />
-    <Content Include="Views\Habitaciones\disponibilidadDiaHoy.cshtml" />
+    <Content Include="Views\Habitaciones\DisponibilidadDiaHoy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SunsetHotelSystem.Dominio.Entidades\SunsetHotelSystem.Dominio.Entidades.csproj">

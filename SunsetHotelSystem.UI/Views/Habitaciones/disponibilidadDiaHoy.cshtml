@@ -1,12 +1,10 @@
 ﻿@model SunsetHotelSystem.UI.Models.Habitacion
-@{
-    ViewBag.Title = "disponibiblidadDiaHoy";
-}
+
 <article class="col-xs-12 col-sm-8 col-md-9">
     <div class="about">
         <div class=".col-sm-4">
             <H1 class="text-center">Estado del Hotel Hoy</H1><br />
-            <h4 class="text-center">Fecha:</h4><br /><br />
+            <h4 class="text-center">Fecha: @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</h4><br /><br />
             <center>
                 <div class="col-4 .col-sm-6">
                     <div class="container table-responsive">
@@ -20,51 +18,35 @@
                             </thead>
                             <tbody>
                                 @{
-                                    foreach (var habitacion in Model.Habitaciones)
-                                    {
+                                    foreach (var habitacion in Model.Habitaciones) {
                                         <tr class="table-danger">
-
                                             <td>@habitacion.TN_Numero_Habitacion_TSH_Habitacion</td>
 
-                                            @if (habitacion.TN_Id_TipoH_TSH_Habitacion == 2)
-                                            {
+                                            @if (habitacion.TN_Id_TipoH_TSH_Habitacion == 2) {
                                                 <td>Estandar</td>
-                                            }
-                                            else
-                                            {
+                                            } else {
                                                 <td>Suite</td>
                                             }
-                                            @if (Model.Reservadas.Count > 0)
-                                            {
-                                                foreach (var reservas in Model.Reservadas)
-                                                {
-                                                    if (reservas.TN_Numero_Habitacion_TSH_Habitacion != habitacion.TN_Numero_Habitacion_TSH_Habitacion)
-                                                    {
+                                            @if (Model.Reservadas.Count > 0) {
+                                                foreach (var reservas in Model.Reservadas) {
+                                                    if (reservas.TN_Numero_Habitacion_TSH_Habitacion != habitacion.TN_Numero_Habitacion_TSH_Habitacion) {
                                                         <td>Disponible</td>
-                                                    }
-                                                    else
-                                                    {
+                                                    } else {
                                                         <td>Ocupada</td>
                                                     }
                                                 }
-                                            }
-                                            else
-                                            {
+                                            } else {
                                                 <td>Disponible</td>
                                             }
-
-
-
                                         </tr>
                                     }
                                 }
-
                             </tbody>
                         </table>                       
                     </div>
 
                 </div>
-                @Html.ActionLink("Generar  Reporte", "disponibilidadDiaHoy", "Habitaciones", routeValues: null, htmlAttributes: new { @class = "btn btn-danger" })
+                @Html.ActionLink("Generar Reporte", "generarPDF", "Habitaciones", routeValues: null, htmlAttributes: new { @class = "btn btn-danger" })
             </center>
             <div class="clearfix"> </div>
         </div>

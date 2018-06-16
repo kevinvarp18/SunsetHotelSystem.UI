@@ -11,7 +11,7 @@
                     <div class="col-md-12 w3-about-left">
                         @{
                             foreach (var tipoHabitacion in Model.TipoHabitaciones) {
-                                    <h5>@tipoHabitacion.TC_Titulo_TSH_Tipo_Habitacion</h5><a href="@Url.Action("ModificarHabitacion", "Habitaciones", new {idTipoHabitacion = tipoHabitacion.TN_Identificador_TSH_Tipo_Habitacion})">Cambiar descripcion</a>
+                                <h5>@tipoHabitacion.TC_Titulo_TSH_Tipo_Habitacion</h5><a href="@Url.Action("ModificarHabitacion", "Habitaciones", new {idTipoHabitacion = tipoHabitacion.TN_Identificador_TSH_Tipo_Habitacion})">Cambiar descripcion</a>
                                     <br /><br />
                                     <table class="table table-bordered">
                                         <thead>
@@ -21,18 +21,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                @foreach (var habitacion in Model.Habitaciones) {
-                                                    <tr class="table-danger">
-                                                        @if (habitacion.TN_Id_TipoH_TSH_Habitacion == tipoHabitacion.TN_Identificador_TSH_Tipo_Habitacion) {
-                                                            <td>@habitacion.TN_Numero_Habitacion_TSH_Habitacion</td>
-                                                            if (habitacion.TN_Borrado_TSH_Habitacion == 1) {
-                                                                <td>Activa</td>
-                                                            } else {
-                                                                <td>Inactiva</td>
-                                                            }//Fin del if que verifica si la habitación está activa o no.
-                                                        }
-                                                    </tr>
-                                                }
+                                            @foreach (var habitacion in Model.Habitaciones) {
+                                                <tr class="table-danger">
+                                                    @if (habitacion.TN_Id_TipoH_TSH_Habitacion == tipoHabitacion.TN_Identificador_TSH_Tipo_Habitacion) {
+                                                        <td>@habitacion.TN_Numero_Habitacion_TSH_Habitacion</td>
+                                                        if (habitacion.TN_Borrado_TSH_Habitacion == 1) {
+                                                            <td><a href="@Url.Action("CambiarEstadoHabitacion", "Habitaciones", new {numeroHabitacion = @habitacion.TN_Numero_Habitacion_TSH_Habitacion, estadoHabitacion = @habitacion.TN_Borrado_TSH_Habitacion})">Activa</a></td>
+                                                        } else {
+                                                            <td><a href="@Url.Action("CambiarEstadoHabitacion", "Habitaciones", new {numeroHabitacion = @habitacion.TN_Numero_Habitacion_TSH_Habitacion, estadoHabitacion = @habitacion.TN_Borrado_TSH_Habitacion})">Inactiva</a></td>
+                                                        }//Fin del if que verifica si la habitación está activa o no.
+                                                    }
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
                                     <br /><br />

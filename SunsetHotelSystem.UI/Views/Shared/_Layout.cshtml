@@ -66,8 +66,9 @@
                                                 <li><a href="@Url.Action("", "")"><span>Lista de reservaciones</span></a></li>
                                                 <li><a href="@Url.Action("ListaHabitaciones", "Habitaciones")"><span>Administrar habitaciones</span></a></li>
                                                 <li><a href="@Url.Action("disponibilidadDiaHoy", "Habitaciones")"><span>Estado del hotel hoy</span></a></li>
-                                                <li><a href="@Url.Action("", "")"><span>Disponibilidad de habitaciones</span></a></li>
                                                 <li><a href="@Url.Action("", "")"><span>Publicidad</span></a></li>
+                                                <li><a href="@Url.Action("", "")"><span>Disponibilidad de habitaciones</span></a></li>
+                                                <li><a href="@Url.Action("Logout", "Administrador")"><span>Cerrar sesi&oacute;n</span></a></li>
                                             }
                                         }
                                     </ul>
@@ -78,26 +79,18 @@
                     <div class="clearfix"> </div>
                     @{
                         DateTime fechaHoy = DateTime.Now;
-                        //DateTime fechaHoy  = new DateTime(2018, 5, 25);
-                        //DateTime fechaHoy  = new DateTime(2018, 12, 25);
-                        //DateTime fechaHoy = new DateTime(2018, 9, 25);
                         int mesFh = fechaHoy.Month; 
-                        if (mesFh >= 2 && mesFh <= 6)
-                        {
+                        if (mesFh >= 2 && mesFh <= 6) {
                             //promo1
                             <div class="alert alert-success fade in">
                                 <a href="@Url.Action("HabitacionDisponible", "Reserva")" class="alert-link">Aproveche, las habitaciones estandar tienen un 10% de descuento y las suite tienen un 20%</a>
                             </div>
-                        }
-                        else if (mesFh >= 9 && mesFh <= 11)
-                        {
+                        } else if (mesFh >= 9 && mesFh <= 11) {
                             //promo2
                             <div class="alert alert-success fade in">
                                 <a href="@Url.Action("HabitacionDisponible", "Reserva")" class="alert-link">Aproveche, a partir de 3 noches de estadia paga 2 y de 5 paga 3 venga y disfrute</a>
                             </div>
-                        }
-                        else
-                        {
+                        } else {
                             //no hay promo
                         }
                     }

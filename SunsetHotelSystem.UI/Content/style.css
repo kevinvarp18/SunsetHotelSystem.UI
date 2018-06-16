@@ -934,7 +934,7 @@ form {
     width: 45%;
 }
 
-.news-letter input[type="text"], .news-letter input[type="email"], .news-letter input[type="date"], select, .news-letter textarea {
+.news-letter input[type="text"], .news-letter input[type="email"], .news-letter input[type="date"], .news-letter input[type="password"], select, .news-letter textarea {
     padding: 0.5em;
     color: #848484;
     font-size: 1em;
