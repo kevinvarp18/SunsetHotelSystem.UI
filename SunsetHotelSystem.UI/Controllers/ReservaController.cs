@@ -180,5 +180,47 @@ namespace SunsetHotelSystem.UI.Controllers {
             }//Fin del foreach.
             return Json(resultado);
         }//CargarDatosCliente
+
+        [HttpPost]
+        public async Task<ActionResult> ObtenerReservas()
+        {
+            List<TSH_Reserva> listaReservas = new List<TSH_Reserva>();
+            Respuesta<List<TSH_Reserva>> respuesta = new Respuesta<List<TSH_Reserva>>();
+            try
+            {
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Reserva/");
+                if (responseWAPI.IsSuccessStatusCode)
+                {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Reserva>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaReservas = respuesta.valorRetorno;
+                }//Fin del if.
+            }
+            catch (Exception ex)
+            {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+            return View("ListadoReservas", listaReservas);
+        }//CargarDatosCliente
+
+        public async Task<ActionResult> ObtenerReservas()
+        {
+            List<TSH_Reserva> listaReservas = new List<TSH_Reserva>();
+            Respuesta<List<TSH_Reserva>> respuesta = new Respuesta<List<TSH_Reserva>>();
+            try
+            {
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Reserva/");
+                if (responseWAPI.IsSuccessStatusCode)
+                {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Reserva>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaReservas = respuesta.valorRetorno;
+                }//Fin del if.
+            }
+            catch (Exception ex)
+            {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+            return View("ListadoReservas", listaReservas);
+        }//CargarDatosCliente
+
     }//Fin de la clase ReservaController.
 }//Fin del namespace.

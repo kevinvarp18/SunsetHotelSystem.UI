@@ -1,0 +1,94 @@
+﻿@model List<SunsetHotelSystem.Dominio.Entidades.TSH_Reserva>
+<article class="col-xs-12 col-sm-8 col-md-9">
+        <div class=".col-sm-12">
+                    <div class="container table-responsive">
+                        @using (Html.BeginForm("ModifyUser", "Reserva", FormMethod.Post))
+                        {
+                            <table class="table table-bordered">
+                            <thead>
+                                <tr class="table-info">
+                                    <th>Fecha</th>
+                                    <th>Id Reserva</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Email</th>
+                                    <th>Tarjeta</th>
+                                    <th>Fecha llegada</th>
+                                    <th>Fecha Salida</th>
+                                    <th>Tipo</th>
+                                    <th>Ver</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{foreach (var item in Model)
+                                    {
+                                        <tr class="table-danger">
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" id="fecha" value="@item.TD_Fecha_Ingreso_TSH_Reserva" name="fecha" readonly="readonly" class="form-control" />
+                                                </div>                                                
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" id="idReserva" value="@item.TN_Identificador_TSH_Reserva" name="idReserva" readonly="readonly" class="form-control" />
+                                                </div>                                                
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" id="nomCliente" value="@item.TSH_Cliente.TC_Nombre_TSH_Cliente" name="nomCliente" readonly="readonly" class="form-control" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" id="apeCliente" value="@item.TSH_Cliente.TC_Apellidos_TSH_Cliente" name="apeCliente" readonly="readonly" class="form-control" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" id="correoCliente" value="@item.TSH_Cliente.TC_Correo_TSH_Cliente" name="correoCliente" readonly="readonly" class="form-control" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" id="tarCliente" value="@item.TSH_Cliente.TC_Tarjeta_TSH_Cliente" name="tarCliente" readonly="readonly" class="form-control" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" id="fechaingreso" value="@item.TD_Fecha_Ingreso_TSH_Reserva" name="fechaingreso" readonly="readonly" class="form-control" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" id="fechaSalida" value="@item.TD_Fecha_Salida_TSH_Reserva" name="fechaSalida" readonly="readonly" class="form-control" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    @if (item.TSH_Habitacion.TN_Id_TipoH_TSH_Habitacion == 2)
+                                                    {
+                                                        <input type="text" id="tipoHabitacion" value="Estandar" name="tipoHabitacion" readonly="readonly" class="form-control" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="text" id="tipoHabitacion" value="Suite" name="tipoHabitacion" readonly="readonly" class="form-control" />
+                                                    }                                                    
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button type="submit" id="ver" name="ver" class="btn btn-success">Ver</button>
+                                            </td>
+                                            <td>
+                                                <button type="submit" id="eliminar" name="eliminar" class="btn btn-danger">Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                                    }
+                    </div>
+            <div class="clearfix"> </div>
+        </div>
+</article>
