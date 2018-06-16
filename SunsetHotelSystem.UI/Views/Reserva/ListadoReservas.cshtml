@@ -14,6 +14,7 @@
                                     <th>Apellido</th>
                                     <th>Email</th>
                                     <th>Tarjeta</th>
+                                    <th>Transaccion</th>
                                     <th>Fecha llegada</th>
                                     <th>Fecha Salida</th>
                                     <th>Tipo</th>
@@ -27,7 +28,7 @@
                                         <tr class="table-danger">
                                             <td>
                                                 <div class="form-group">
-                                                    <input type="text" id="fecha" value="@item.TD_Fecha_Ingreso_TSH_Reserva" name="fecha" readonly="readonly" class="form-control" />
+                                                    <input type="text" id="fecha" value="@DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year" name="fecha" readonly="readonly" class="form-control" />
                                                 </div>                                                
                                             </td>
                                             <td>
@@ -53,6 +54,11 @@
                                             <td>
                                                 <div class="form-group">
                                                     <input type="text" id="tarCliente" value="@item.TSH_Cliente.TC_Tarjeta_TSH_Cliente" name="tarCliente" readonly="readonly" class="form-control" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input type="text" id="transs" value="@item.TN_Numero_Reserva_TSH_Reserva" name="transs" readonly="readonly" class="form-control" />
                                                 </div>
                                             </td>
                                             <td>

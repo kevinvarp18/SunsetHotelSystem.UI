@@ -202,14 +202,15 @@ namespace SunsetHotelSystem.UI.Controllers {
         }//End ObtenerReservas
 
         [HttpPost]
-        public ActionResult mostarReservas(string fecha, string idReserva, string nomCliente, string apeCliente, string correoCliente, string tarCliente, string fechaingreso, string fechaSalida, string tipoHabitacion, string boton){
+        public ActionResult mostarReservas(string fecha, string idReserva, string nomCliente, string apeCliente, string correoCliente, string tarCliente,string transs, string fechaingreso, string fechaSalida, string tipoHabitacion, string boton){
             List<string> respuesta = new List<String>();
             respuesta.Add(fecha);
             respuesta.Add(idReserva);
             respuesta.Add(nomCliente);
             respuesta.Add(apeCliente);
-            respuesta.Add(correoCliente);
+            respuesta.Add(correoCliente);            
             respuesta.Add(tarCliente);
+            respuesta.Add(transs);
             respuesta.Add(fechaingreso);
             respuesta.Add(fechaSalida);
             respuesta.Add(tipoHabitacion);
