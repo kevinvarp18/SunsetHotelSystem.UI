@@ -181,7 +181,6 @@ namespace SunsetHotelSystem.UI.Controllers {
             return Json(resultado);
         }//CargarDatosCliente
 
-        [HttpPost]
         public async Task<ActionResult> ObtenerReservas()
         {
             List<TSH_Reserva> listaReservas = new List<TSH_Reserva>();
@@ -200,27 +199,27 @@ namespace SunsetHotelSystem.UI.Controllers {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
             return View("ListadoReservas", listaReservas);
-        }//CargarDatosCliente
+        }//End ObtenerReservas
 
-        public async Task<ActionResult> ObtenerReservas()
-        {
-            List<TSH_Reserva> listaReservas = new List<TSH_Reserva>();
-            Respuesta<List<TSH_Reserva>> respuesta = new Respuesta<List<TSH_Reserva>>();
-            try
-            {
-                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Reserva/");
-                if (responseWAPI.IsSuccessStatusCode)
-                {
-                    respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Reserva>>>(responseWAPI.Content.ReadAsStringAsync().Result);
-                    listaReservas = respuesta.valorRetorno;
-                }//Fin del if.
-            }
-            catch (Exception ex)
-            {
-                System.Console.Write(ex.ToString());
-            }//Fin del try-catch.
-            return View("ListadoReservas", listaReservas);
-        }//CargarDatosCliente
+        [HttpPost]
+        public ActionResult mostarReservas(string fecha, string idReserva, string nomCliente, string apeCliente, string correoCliente, string tarCliente, string fechaingreso, string fechaSalida, string tipoHabitacion, string boton){
+            List<string> respuesta = new List<String>();
+            respuesta.Add(fecha);
+            respuesta.Add(idReserva);
+            respuesta.Add(nomCliente);
+            respuesta.Add(apeCliente);
+            respuesta.Add(correoCliente);
+            respuesta.Add(tarCliente);
+            respuesta.Add(fechaingreso);
+            respuesta.Add(fechaSalida);
+            respuesta.Add(tipoHabitacion);
+            if (boton.Equals("Ver")) {
+                return View("VerReserva", respuesta);
+            } else {
+                //Santi agregue aqui lo de eliminar si presiona el boton de la tabla
+                return View("LisadoReservas", respuesta);
+            }//End if-else (boton.Equals("Ver"))
+        }//End mostarReservas
 
     }//Fin de la clase ReservaController.
 }//Fin del namespace.

@@ -282,6 +282,7 @@
     <Content Include="Views\Administrador\Login.cshtml" />
     <Content Include="Views\Habitaciones\DisponibilidadDiaHoy.cshtml" />
     <Content Include="Views\Reserva\ListadoReservas.cshtml" />
+    <Content Include="Views\Reserva\VerReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SunsetHotelSystem.Dominio.Entidades\SunsetHotelSystem.Dominio.Entidades.csproj">

@@ -2,7 +2,8 @@
 <article class="col-xs-12 col-sm-8 col-md-9">
         <div class=".col-sm-12">
                     <div class="container table-responsive">
-                        @using (Html.BeginForm("ModifyUser", "Reserva", FormMethod.Post))
+                        <h2>Listado de Reservaciones</h2>
+                        @using (Html.BeginForm("mostarReservas", "Reserva", FormMethod.Post))
                         {
                             <table class="table table-bordered">
                             <thead>
@@ -77,10 +78,10 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <button type="submit" id="ver" name="ver" class="btn btn-success">Ver</button>
+                                                <button type="submit" id="boton" name="boton" value="Ver" class="btn btn-success">Ver</button>
                                             </td>
                                             <td>
-                                                <button type="submit" id="eliminar" name="eliminar" class="btn btn-danger">Eliminar</button>
+                                                <button type="submit" id="boton" name="boton" value="Eliminar" class="btn btn-danger">Eliminar</button>
                                             </td>
                                         </tr>
                                     }

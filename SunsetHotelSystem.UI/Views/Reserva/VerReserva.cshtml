@@ -1,0 +1,32 @@
+﻿@model List<string> 
+<article class="col-xs-12 col-sm-8 col-md-9">
+    <div class=".col-sm-12">
+        <div class="container">
+            <h2>Listado de Reservaciones - Ver Reserva</h2>
+            @using (Html.BeginForm("ModifyUser", "Reserva", FormMethod.Post))
+            {
+                    <label>Fecha:</label>
+                    <span>@Model[0]</span><br/>
+                    <label>ID Reserva:</label>
+                    <span>@Model[1]</span><br />
+                    <label>Nombre:</label>
+                    <span>@Model[2]</span><br />
+                    <label>Apellido:</label>
+                    <span>@Model[3]</span><br />
+                    <label>Correo:</label>
+                    <span>@Model[4]</span><br />
+                    <label>Tarjeta:</label>
+                    <span>@Model[5]</span><br />
+                    <label>Fecha llegada:</label>
+                    <span>@Model[6]</span><br />
+                    <label>Fecha Salida:</label>
+                    <span>@Model[7]</span><br />
+                    <label>Tipo</label>
+                    <span>@Model[8]</span><br /><br/>
+                    <button type="submit" id="boton" name="boton" value="Eliminar" class="btn btn-danger">Eliminar</button>
+                    <button type="submit" id="boton" name="boton" value="Reporte" class="btn btn-primary">Reporte</button><br/>
+            }
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</article>
