@@ -1,53 +1,50 @@
-﻿@model List<SunsetHotelSystem.Dominio.Entidades.TSH_Pag_Facilidades>
+﻿@model List<SunsetHotelSystem.Dominio.Entidades.TSH_Publicidad>
 
 <article class="col-xs-12 col-sm-8 col-md-9">
     <div class="news-letter">
         <div class="row">
             <div class="w3ls-heading">
-                <h3>Modificar P&aacute;ginas</h3>
+                <h3>Publicidad</h3>
             </div>
             <div class="agileinfo-subscribe">
-                <h5>Facilidades</h5>
-                <form action="ActualizarFacilidades" method="post" enctype="multipart/form-data" id="formularioFacilidades">
-                    <input type="number" name="facilidadesTotal" id="facilidadesTotal" value="@Model.Count" style="display: none;" />
-                    <input type="number" name="nuevasFacilidades" id="nuevasFacilidades" value="0" style="display: none;" />
-                    <textarea id="descripcionPagina" name="descripcionPagina">@Model.First().TSH_Pagina.TC_Descripcion_TSH_Pagina</textarea>
+                <form action="ActualizarPublicidad" method="post" enctype="multipart/form-data" id="formularioPublicidad">
+                    <input type="number" name="publicidadTotal" id="publicidadTotal" value="@Model.Count" style="display: none;" />
+                    <input type="number" name="nuevaPublicidad" id="nuevaPublicidad" value="0" style="display: none;" />
                     @{
                         int contador = 1;
                         foreach (var item in Model) {
                             string style = "";
-                            if (item.TN_Borrado_TSH_Pag_Facilidades == 0) {
+                            if (item.TN_Borrado_TSH_Publicidad == 0) {
                                 style = "style=filter: alpha(opacity = 50); opacity: 0.5;";
                             }//Fin del if que verifica si esa facilidad está temporalmente eliminada para poder establecer el css del div.
-                            var base64ImagenFacilidad = Convert.ToBase64String(@item.TI_Imagen_TSH_Pag_Facilidades);
-                            string imgSrcImagenFacilidad = String.Format("data:image/gif;base64,{0}", base64ImagenFacilidad);
+                            var base64ImagenPublicidad = Convert.ToBase64String(@item.TI_Imagen_TSH_Publicidad);
+                            string imgSrcImagenPublicidad = String.Format("data:image/gif;base64,{0}", base64ImagenPublicidad);
                             <div id="row@(contador)" class="row" style="@style">
                                 <h5></h5><br />
-                                <input type="number" name="id@(contador)" id="id@(contador)" value="@item.TN_IdentificadorNumFac_TSH_Pag_Facilidades" style="display: none;" />
-                                <input type="number" name="borrado@(contador)" id="borrado@(contador)" value="@item.TN_Borrado_TSH_Pag_Facilidades" style="display: none;" />
+                                <input type="number" name="id@(contador)" id="id@(contador)" value="@item.TN_Identificador_TSH_Publicidad" style="display: none;" />
+                                <input type="number" name="borrado@(contador)" id="borrado@(contador)" value="@item.TN_Borrado_TSH_Publicidad" style="display: none;" />
                                 <div class="formCenter2">
-                                    <input type="text" name="tituloFacilidad@(contador)" id="tituloFacilidad@(contador)" value="@item.TC_TituloFacilidad_TSH_Pag_Facilidades" />
+                                    <input type="text" name="rutaPublicidad@(contador)" id="rutaPublicidad@(contador)" value="@item.TC_Direccion_Pagina_TSH_Publicidad" />
                                 </div>
-                                <textarea id="descripcion@(contador)" name="descripcion@(contador)">@item.TC_Descripcion_TSH_Pag_Facilidades</textarea>
                                 <div class="formCenter">
                                     <div class="col-md-5 about-img" style="margin-left: -2%;">
                                         <span>Imagen Actual</span><br />
-                                        <img src="@imgSrcImagenFacilidad" alt="Sunset Hotel" />
+                                        <img src="@imgSrcImagenPublicidad" alt="Sunset Hotel" />
                                     </div>
                                     <div class="col-md-6">
                                         <br /><br /><br />
                                         <span>Subir imagen nueva</span><br />
-                                        <input type="file" name="imagen@(contador)" id="imagen@(contador)" value="@imgSrcImagenFacilidad" accept="image/x-png,image/jpeg,image/jpg">
+                                        <input type="file" name="imagen@(contador)" id="imagen@(contador)" value="@imgSrcImagenPublicidad" accept="image/x-png,image/jpeg,image/jpg">
                                         <br /><br /><br /><br /><br />
                                     </div>
-                                    @if (item.TN_Borrado_TSH_Pag_Facilidades == 0) {
-                                        <input type="button" id="recuperar@(contador)" value="Restaurar facilidad" onclick="recuperarFacilidad(@contador);">
+                                    @if (item.TN_Borrado_TSH_Publicidad == 0) {
+                                        <input type="button" id="recuperar@(contador)" value="Restaurar publicidad" onclick="recuperarPublicidad(@contador);">
                                     } else {
-                                        <input type="button" id="eliminar@(contador)" value="Eliminar facilidad" onclick="eliminarFacilidad(@contador);">
+                                        <input type="button" id="eliminar@(contador)" value="Eliminar publicidad" onclick="eliminarPublicidad(@contador);">
                                     }
                                 </div>
-                            </div><br /><br />
-                            //}//Fin del if.
+                            </div>
+                            <br /><br /><br /><br />
                             contador = contador + 1;
                         }//Fin del foreach.
                     }
@@ -57,7 +54,7 @@
                     </center>
                     <div class="clearfix"> </div>
                 </form>
-                <input type="submit" value="Agregar facilidad" onclick="nuevaFacilidad();">
+                <input type="submit" value="Agregar publicidad" onclick="nuevaPublicidad();">
             </div>
         </div>
     </div>
@@ -71,7 +68,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">¿Desea salir sin guardar cambios?</div>
-            <form action="Home" method="post">
+            <form action="Publicidad" method="post">
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Si</button>
                     <button type="submit" class="btn btn-danger" data-dismiss="modal">No</button>

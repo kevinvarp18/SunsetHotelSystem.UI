@@ -174,11 +174,13 @@
     <Compile Include="Controllers\HabitacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModificarPaginasController.cs" />
+    <Compile Include="Controllers\PublicidadController.cs" />
     <Compile Include="Controllers\ReservaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Habitacion.cs" />
+    <Compile Include="Models\Reserva.cs" />
     <Compile Include="Models\Tarifa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -196,32 +198,10 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="images\anuncio1.png" />
-    <Content Include="images\anuncio10.png" />
-    <Content Include="images\anuncio2.png" />
     <Content Include="images\anuncio3.png" />
-    <Content Include="images\anuncio4.png" />
-    <Content Include="images\anuncio5.png" />
     <Content Include="images\anuncio6.png" />
-    <Content Include="images\anuncio7.png" />
-    <Content Include="images\anuncio8.png" />
     <Content Include="images\anuncio9.png" />
     <Content Include="images\banner.jpg" />
-    <Content Include="images\foto1.jpg" />
-    <Content Include="images\foto10.jpg" />
-    <Content Include="images\foto11.jpg" />
-    <Content Include="images\foto12.jpg" />
-    <Content Include="images\foto2.jpg" />
-    <Content Include="images\foto3.jpg" />
-    <Content Include="images\foto4.jpg" />
-    <Content Include="images\foto5.jpg" />
-    <Content Include="images\foto6.jpg" />
-    <Content Include="images\foto7.jpg" />
-    <Content Include="images\foto8.jpg" />
-    <Content Include="images\foto9.jpg" />
-    <Content Include="images\habitacion1.jpg" />
-    <Content Include="images\habitacion2.jpg" />
-    <Content Include="images\hotel.jpg" />
     <Content Include="images\icono.png" />
     <Content Include="images\logo.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -236,6 +216,7 @@
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\move-top.js" />
     <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\viewsScript\Publicidad.js" />
     <Content Include="Scripts\viewsScript\ComoLlegar.js" />
     <Content Include="Scripts\viewsScript\PaginaFacilidades.js" />
     <Content Include="Web.config" />
@@ -283,6 +264,7 @@
     <Content Include="Views\Habitaciones\DisponibilidadDiaHoy.cshtml" />
     <Content Include="Views\Reserva\ListadoReservas.cshtml" />
     <Content Include="Views\Reserva\VerReserva.cshtml" />
+    <Content Include="Views\Publicidad\Publicidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SunsetHotelSystem.Dominio.Entidades\SunsetHotelSystem.Dominio.Entidades.csproj">

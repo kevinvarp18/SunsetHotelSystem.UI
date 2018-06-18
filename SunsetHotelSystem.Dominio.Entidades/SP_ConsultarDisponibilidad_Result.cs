@@ -14,6 +14,7 @@ namespace SunsetHotelSystem.Dominio.Entidades
     public partial class SP_ConsultarDisponibilidad_Result
     {
         public int TN_Numero_Habitacion_TSH_Habitacion { get; set; }
+        public string TC_Titulo_TSH_Tipo_Habitacion { get; set; }
         public string TC_Descripcion_TSH_Tipo_Habitacion { get; set; }
         public double TN_Tarifa_TSH_Tipo_Habitacion { get; set; }
     }

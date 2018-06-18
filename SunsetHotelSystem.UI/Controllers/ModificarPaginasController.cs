@@ -189,20 +189,16 @@ namespace SunsetHotelSystem.UI.Controllers {
             pagina.TC_Descripcion_TSH_Pagina = collection.GetValue("descripcionPagina").AttemptedValue.ToString();
             Respuesta<TSH_Pagina> respuestaPagina = new Respuesta<TSH_Pagina>();
 
-            try
-            {
+            try {
                 String jsonContent = JsonConvert.SerializeObject(pagina);
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
                 ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
                 byteArrayContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
                 HttpResponseMessage responseWAPI = await webAPI.PutAsync(String.Concat("api/TSH_Pagina"), byteArrayContent);
-                if (responseWAPI.IsSuccessStatusCode)
-                {
+                if (responseWAPI.IsSuccessStatusCode) {
                     respuestaPagina = JsonConvert.DeserializeObject<Respuesta<TSH_Pagina>>(responseWAPI.Content.ReadAsStringAsync().Result);
                 }//Fin del if.
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
 
@@ -214,24 +210,19 @@ namespace SunsetHotelSystem.UI.Controllers {
             int totalFacilidades = int.Parse(collection.GetValue("facilidadesTotal").AttemptedValue.ToString());
             int nuevasFacilidades = int.Parse(collection.GetValue("nuevasFacilidades").AttemptedValue.ToString());
 
-            for (int i = 1; i <= (totalFacilidades + nuevasFacilidades); i++)
-            {
+            for (int i = 1; i <= (totalFacilidades + nuevasFacilidades); i++) {
                 HttpPostedFileBase imagen = Request.Files["imagen" + i];
                 TSH_Pag_Facilidades facilidad = new TSH_Pag_Facilidades();
 
-                try
-                {
-                    if (imagen.ContentLength > 0)
-                    {
+                try {
+                    if (imagen.ContentLength > 0) {
                         byte[] imageData = null;
-                        using (var binaryReader = new BinaryReader(imagen.InputStream))
-                        {
+                        using (var binaryReader = new BinaryReader(imagen.InputStream)) {
                             imageData = binaryReader.ReadBytes(imagen.ContentLength);
                         }
                         facilidad.TI_Imagen_TSH_Pag_Facilidades = imageData;
                     }//Fin del if.
-                }
-                catch {
+                } catch {
                 }//Fin del try-catch.
 
                 Guid g = Guid.NewGuid();
@@ -245,10 +236,8 @@ namespace SunsetHotelSystem.UI.Controllers {
                 listaFacilidades.Add(facilidad);
             }//Fin del for.
 
-            try
-            {
-                foreach (TSH_Pag_Facilidades facilidad in listaFacilidades)
-                {
+            try {
+                foreach (TSH_Pag_Facilidades facilidad in listaFacilidades) {
                     String jsonContent = JsonConvert.SerializeObject(facilidad);
                     byte[] buffer = System.Text.Encoding.UTF8.GetBytes(jsonContent);
                     ByteArrayContent byteArrayContent = new ByteArrayContent(buffer);
@@ -260,20 +249,16 @@ namespace SunsetHotelSystem.UI.Controllers {
                     else
                         responseWAPI = await webAPI.PostAsync(String.Concat("api/TSH_Pag_Facilidades"), byteArrayContent);
 
-                    if (responseWAPI.IsSuccessStatusCode)
-                    {
+                    if (responseWAPI.IsSuccessStatusCode) {
                         respuestas.Add(JsonConvert.DeserializeObject<Respuesta<TSH_Pag_Facilidades>>(responseWAPI.Content.ReadAsStringAsync().Result));
                     }//Fin del if.
                     contador++;
                 }//Fin del foreach.
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
 
-            foreach (Respuesta<TSH_Pag_Facilidades> respuesta in respuestas)
-            {
+            foreach (Respuesta<TSH_Pag_Facilidades> respuesta in respuestas) {
                 if (respuesta.resultado == 0)
                     bandera = 0;
             }//Fin del foreach.

@@ -1,34 +1,35 @@
-﻿@model List<string> 
+﻿@model SunsetHotelSystem.UI.Models.Reserva
+
 <article class="col-xs-12 col-sm-8 col-md-9">
-    <div class=".col-sm-6">
-        <div class="container">
-            <h2>Listado de Reservaciones - Ver Reserva</h2>
-            @using (Html.BeginForm("ModifyUser", "Reserva", FormMethod.Post))
-            {
-                    <label>Fecha:</label>
-                    <span>@Model[0]</span><br/>
-                    <label>ID Reserva:</label>
-                    <span>@Model[1]</span><br />
-                    <label>Nombre:</label>
-                    <span>@Model[2]</span><br />
-                    <label>Apellido:</label>
-                    <span>@Model[3]</span><br />
-                    <label>Correo:</label>
-                    <span>@Model[4]</span><br />
-                    <label>Tarjeta:</label>
-                    <span>@Model[5]</span><br />
-                    <label>Transaccion:</label>
-                    <span>@Model[6]</span><br />
-                    <label>Fecha llegada:</label>
-                    <span>@Model[7]</span><br />
-                    <label>Fecha Salida:</label>
-                    <span>@Model[8]</span><br />
-                    <label>Tipo</label>
-                    <span>@Model[9]</span><br /><br/>
-                    <button type="submit" id="boton" name="boton" value="Eliminar" class="btn btn-danger">Eliminar</button>
-                    <button type="submit" id="boton" name="boton" value="Reporte" class="btn btn-primary">Reporte</button><br/>
-            }
+    <div class="news-letter">
+        <div class="row">
+            <div class="w3ls-heading">
+                <h3>Listado de Reservaciones - Ver Reserva</h3>
+            </div>
+            <div class="agileinfo-subscribe">
+                <div class="formCenter">
+                    <span>ID Reserva:</span>
+                    <span>@Model.Reserva_.TN_Identificador_TSH_Reserva</span><br />
+                    <span>Nombre:</span>
+                    <span>@Model.Reserva_.TSH_Cliente.TC_Nombre_TSH_Cliente</span><br />
+                    <span>Apellido:</span>
+                    <span>@Model.Reserva_.TSH_Cliente.TC_Apellidos_TSH_Cliente</span><br />
+                    <span>Correo:</span>
+                    <span>@Model.Reserva_.TSH_Cliente.TC_Correo_TSH_Cliente</span><br />
+                    <span>Tarjeta:</span>
+                    <span>@Model.Reserva_.TSH_Cliente.TC_Tarjeta_TSH_Cliente</span><br />
+                    <span>Transaccion:</span>
+                    <span>@Model.Reserva_.TN_Numero_Reserva_TSH_Reserva</span><br />
+                    <span>Fecha Llegada:</span>
+                    <span>@Model.Reserva_.TD_Fecha_Ingreso_TSH_Reserva</span><br />
+                    <span>Fecha Salida:</span>
+                    <span>@Model.Reserva_.TD_Fecha_Salida_TSH_Reserva</span><br />
+                    <span>Tipo</span>
+                    <span>@Model.TipoHabitacionReserva.TC_Titulo_TSH_Tipo_Habitacion</span><br /><br />
+                    @Html.ActionLink("Eliminar", "EliminarReserva", "Reserva", routeValues: new { idReserva = Model.Reserva_.TN_Identificador_TSH_Reserva }, htmlAttributes: new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Reporte", "GuardarPDF", "Reserva", routeValues: new { idReserva = Model.Reserva_.TN_Identificador_TSH_Reserva }, htmlAttributes: new { @class = "btn btn-primary" })
+                </div>
+            </div>
         </div>
-        <div class="clearfix"> </div>
     </div>
 </article>

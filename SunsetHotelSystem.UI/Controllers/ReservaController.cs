@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using SunsetHotelSystem.UI.Models;
 
 namespace SunsetHotelSystem.UI.Controllers {
     public class ReservaController : ConfigController {
@@ -181,46 +182,61 @@ namespace SunsetHotelSystem.UI.Controllers {
             return Json(resultado);
         }//CargarDatosCliente
 
-        public async Task<ActionResult> ObtenerReservas()
-        {
+        public async Task<ActionResult> ObtenerReservas() {
             List<TSH_Reserva> listaReservas = new List<TSH_Reserva>();
-            Respuesta<List<TSH_Reserva>> respuesta = new Respuesta<List<TSH_Reserva>>();
-            try
-            {
+            List<TSH_Tipo_Habitacion> listaTiposHabitacion = new List<TSH_Tipo_Habitacion>();
+            Respuesta<List<TSH_Reserva>> respuestaReservas = new Respuesta<List<TSH_Reserva>>();
+            Respuesta <List<TSH_Tipo_Habitacion>> respuestaTipoHabitacion = new Respuesta<List<TSH_Tipo_Habitacion>>();
+            try {
                 HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Reserva/");
-                if (responseWAPI.IsSuccessStatusCode)
-                {
-                    respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Reserva>>>(responseWAPI.Content.ReadAsStringAsync().Result);
-                    listaReservas = respuesta.valorRetorno;
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuestaReservas = JsonConvert.DeserializeObject<Respuesta<List<TSH_Reserva>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaReservas = respuestaReservas.valorRetorno;
                 }//Fin del if.
-            }
-            catch (Exception ex)
-            {
+
+                responseWAPI = await webAPI.GetAsync("api/TSH_Tipo_Habitacion/");
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuestaTipoHabitacion = JsonConvert.DeserializeObject<Respuesta<List<TSH_Tipo_Habitacion>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaTiposHabitacion = respuestaTipoHabitacion.valorRetorno;
+                }//Fin del if.
+            } catch (Exception ex) {
                 System.Console.Write(ex.ToString());
             }//Fin del try-catch.
-            return View("ListadoReservas", listaReservas);
-        }//End ObtenerReservas
 
-        [HttpPost]
-        public ActionResult mostarReservas(string fecha, string idReserva, string nomCliente, string apeCliente, string correoCliente, string tarCliente,string transs, string fechaingreso, string fechaSalida, string tipoHabitacion, string boton){
-            List<string> respuesta = new List<String>();
-            respuesta.Add(fecha);
-            respuesta.Add(idReserva);
-            respuesta.Add(nomCliente);
-            respuesta.Add(apeCliente);
-            respuesta.Add(correoCliente);            
-            respuesta.Add(tarCliente);
-            respuesta.Add(transs);
-            respuesta.Add(fechaingreso);
-            respuesta.Add(fechaSalida);
-            respuesta.Add(tipoHabitacion);
-            if (boton.Equals("Ver")) {
-                return View("VerReserva", respuesta);
-            } else {
-                //Santi agregue aqui lo de eliminar si presiona el boton de la tabla
-                return View("LisadoReservas", respuesta);
-            }//End if-else (boton.Equals("Ver"))
-        }//End mostarReservas
+            Reserva reservas = new Reserva(listaReservas, listaTiposHabitacion);
+
+            return View("ListadoReservas", reservas);
+        }//Fin del método ObtenerReservas.
+        
+        public async Task<ActionResult> MostrarReserva(int idReserva, int idTipoHabitacion) {
+            Respuesta<TSH_Reserva> respuestaReserva = new Respuesta<TSH_Reserva>();
+            Respuesta<List<SP_ConsultarDisponibilidad_Result>> respuestaTipoHabitacion = new Respuesta<List<SP_ConsultarDisponibilidad_Result>>();
+            TSH_Reserva reserva = new TSH_Reserva();
+            List<SP_ConsultarDisponibilidad_Result> listaHabitaciones = new List<SP_ConsultarDisponibilidad_Result>();
+            TSH_Tipo_Habitacion tipoHabitacion = new TSH_Tipo_Habitacion();
+
+            try {
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Reserva/", idReserva));
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuestaReserva = JsonConvert.DeserializeObject<Respuesta<TSH_Reserva>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    reserva = respuestaReserva.valorRetorno;
+                }//Fin del if.
+
+                responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Tipo_Habitacion/", idTipoHabitacion));
+                if (responseWAPI.IsSuccessStatusCode) {
+                    respuestaTipoHabitacion = JsonConvert.DeserializeObject<Respuesta<List<SP_ConsultarDisponibilidad_Result>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaHabitaciones = respuestaTipoHabitacion.valorRetorno;
+                }//Fin del if.
+            } catch (Exception ex) {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+
+            tipoHabitacion.TC_Titulo_TSH_Tipo_Habitacion = listaHabitaciones.First().TC_Titulo_TSH_Tipo_Habitacion;
+
+            Reserva reservaVista = new Reserva(reserva, tipoHabitacion);
+
+            return View("VerReserva", reservaVista);
+        }//Fin del método MostrarReserva
 
     }//Fin de la clase ReservaController.
 }//Fin del namespace.

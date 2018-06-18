@@ -10,8 +10,8 @@
         <br /><br /><br />
         @{
             foreach (var tipoHabitacion in Model.TipoHabitaciones) {
-                var base64ImagenHotel = Convert.ToBase64String(@tipoHabitacion.TI_Imagen_TSH_Tipo_Habitacion);
-                string imgSrcImagenHabitacion = String.Format("data:image/gif;base64,{0}", base64ImagenHotel);
+                var base64ImagenHabitacion = Convert.ToBase64String(@tipoHabitacion.TI_Imagen_TSH_Tipo_Habitacion);
+                string imgSrcImagenHabitacion = String.Format("data:image/gif;base64,{0}", base64ImagenHabitacion);
                 <div class="row">
                     <div class="col-4 col-sm-6 col-md-6 w3-about-left">
                         <div class="about-img-grids">

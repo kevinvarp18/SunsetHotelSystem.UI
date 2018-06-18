@@ -22,7 +22,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach (var habitacion in Model.Habitaciones) {
-                                                <tr class="table-danger">
+                                                <tr>
                                                     @if (habitacion.TN_Id_TipoH_TSH_Habitacion == tipoHabitacion.TN_Identificador_TSH_Tipo_Habitacion) {
                                                         <td>@habitacion.TN_Numero_Habitacion_TSH_Habitacion</td>
                                                         if (habitacion.TN_Borrado_TSH_Habitacion == 1) {

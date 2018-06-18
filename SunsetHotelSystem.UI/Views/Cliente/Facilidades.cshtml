@@ -19,8 +19,8 @@
         @{
             foreach (var item in Model) {
                 if (item.TN_Borrado_TSH_Pag_Facilidades == 1) {
-                    var base64ImagenHotel = Convert.ToBase64String(@item.TI_Imagen_TSH_Pag_Facilidades);
-                    string imgSrcImagenFacilidad = String.Format("data:image/gif;base64,{0}", base64ImagenHotel);
+                    var base64ImagenFacilidad = Convert.ToBase64String(@item.TI_Imagen_TSH_Pag_Facilidades);
+                    string imgSrcImagenFacilidad = String.Format("data:image/gif;base64,{0}", base64ImagenFacilidad);
                     <div class="row">
                         <div class="col-4 col-sm-6 col-md-6 w3-about-left">
                             <div class="about-img-grids">

@@ -18,5 +18,6 @@ namespace SunsetHotelSystem.Dominio.Entidades
         public System.Guid TN_Id_Imagen_TSH_Publicidad { get; set; }
         public byte[] TI_Imagen_TSH_Publicidad { get; set; }
         public string TC_Direccion_Pagina_TSH_Publicidad { get; set; }
+        public int TN_Borrado_TSH_Publicidad { get; set; }
     }
 }

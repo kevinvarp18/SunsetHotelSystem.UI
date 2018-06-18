@@ -1,14 +1,17 @@
-﻿@model List<SunsetHotelSystem.Dominio.Entidades.TSH_Reserva>
+﻿@model SunsetHotelSystem.UI.Models.Reserva
+
 <article class="col-xs-12 col-sm-8 col-md-9">
-        <div class=".col-sm-12">
-                    <div class="container table-responsive">
-                        <h2>Listado de Reservaciones</h2>
-                        @using (Html.BeginForm("mostarReservas", "Reserva", FormMethod.Post))
-                        {
-                            <table class="table table-bordered">
+    <div class="about">
+        <div class="row">
+            <div class="w3ls-heading">
+                <h2>Listado de Reservaciones</h2>
+            </div>
+            <div class="w3-about-grids">
+                <div class="w3-about-grids">
+                    <div class="col-md-12 w3-about-left">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr class="table-info">
-                                    <th>Fecha</th>
                                     <th>Id Reserva</th>
                                     <th>Nombre</th>
                                     <th>Apellido</th>
@@ -23,79 +26,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @{foreach (var item in Model)
-                                    {
-                                        <tr class="table-danger">
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" id="fecha" value="@DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year" name="fecha" readonly="readonly" class="form-control" />
-                                                </div>                                                
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" id="idReserva" value="@item.TN_Identificador_TSH_Reserva" name="idReserva" readonly="readonly" class="form-control" />
-                                                </div>                                                
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" id="nomCliente" value="@item.TSH_Cliente.TC_Nombre_TSH_Cliente" name="nomCliente" readonly="readonly" class="form-control" />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" id="apeCliente" value="@item.TSH_Cliente.TC_Apellidos_TSH_Cliente" name="apeCliente" readonly="readonly" class="form-control" />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" id="correoCliente" value="@item.TSH_Cliente.TC_Correo_TSH_Cliente" name="correoCliente" readonly="readonly" class="form-control" />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" id="tarCliente" value="@item.TSH_Cliente.TC_Tarjeta_TSH_Cliente" name="tarCliente" readonly="readonly" class="form-control" />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" id="transs" value="@item.TN_Numero_Reserva_TSH_Reserva" name="transs" readonly="readonly" class="form-control" />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" id="fechaingreso" value="@item.TD_Fecha_Ingreso_TSH_Reserva" name="fechaingreso" readonly="readonly" class="form-control" />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input type="text" id="fechaSalida" value="@item.TD_Fecha_Salida_TSH_Reserva" name="fechaSalida" readonly="readonly" class="form-control" />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    @if (item.TSH_Habitacion.TN_Id_TipoH_TSH_Habitacion == 2)
-                                                    {
-                                                        <input type="text" id="tipoHabitacion" value="Estandar" name="tipoHabitacion" readonly="readonly" class="form-control" />
+                                @{
+                                    foreach (var item in Model.Reservas) {
+                                        if (item.TN_Borrado_TSH_Reserva == 1) {
+                                            <tr>
+                                                <td>@item.TN_Identificador_TSH_Reserva</td>
+                                                <td>@item.TSH_Cliente.TC_Nombre_TSH_Cliente</td>
+                                                <td>@item.TSH_Cliente.TC_Apellidos_TSH_Cliente</td>
+                                                <td>@item.TSH_Cliente.TC_Correo_TSH_Cliente</td>
+                                                <td>@item.TSH_Cliente.TC_Tarjeta_TSH_Cliente</td>
+                                                <td>@item.TN_Numero_Reserva_TSH_Reserva</td>
+                                                <td>@item.TD_Fecha_Ingreso_TSH_Reserva</td>
+                                                <td>@item.TD_Fecha_Salida_TSH_Reserva</td>
+                                                @foreach (var tipoHabitacion in Model.TipoHabitaciones) {
+                                                    if (item.TSH_Habitacion.TN_Id_TipoH_TSH_Habitacion == tipoHabitacion.TN_Identificador_TSH_Tipo_Habitacion) {
+                                                        <td>@tipoHabitacion.TC_Titulo_TSH_Tipo_Habitacion</td>
                                                     }
-                                                    else
-                                                    {
-                                                        <input type="text" id="tipoHabitacion" value="Suite" name="tipoHabitacion" readonly="readonly" class="form-control" />
-                                                    }                                                    
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <button type="submit" id="boton" name="boton" value="Ver" class="btn btn-success">Ver</button>
-                                            </td>
-                                            <td>
-                                                <button type="submit" id="boton" name="boton" value="Eliminar" class="btn btn-danger">Eliminar</button>
-                                            </td>
-                                        </tr>
+                                                }
+                                                <td>@Html.ActionLink("Ver", "MostrarReserva", "Reserva", routeValues: new { idReserva = item.TN_Identificador_TSH_Reserva, idTipoHabitacion = item.TSH_Habitacion.TN_Id_TipoH_TSH_Habitacion }, htmlAttributes: new { @class = "btn btn-success" })</td>
+                                                <td>@Html.ActionLink("Eliminar", "EliminarReserva", "Reserva", routeValues: new { idReserva = item.TN_Identificador_TSH_Reserva }, htmlAttributes: new { @class = "btn btn-danger" })</td>
+                                            </tr>
+                                        }
                                     }
                                 }
                             </tbody>
                         </table>
-                                    }
                     </div>
-            <div class="clearfix"> </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
         </div>
+    </div>
 </article>
