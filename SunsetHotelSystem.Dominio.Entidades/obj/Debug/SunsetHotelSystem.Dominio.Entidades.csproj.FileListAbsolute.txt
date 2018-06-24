@@ -26,3 +26,4 @@ C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI2\SunsetHotelSystem.Dominio.E
 C:\Users\santi\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.csprojResolveAssemblyReference.cache
 C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.csprojResolveAssemblyReference.cache
 C:\Users\Dylan\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.csprojResolveAssemblyReference.cache
+C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.Dominio.Entidades\obj\Debug\SunsetHotelSystem.Dominio.Entidades.csprojResolveAssemblyReference.cache

@@ -45,6 +45,91 @@ namespace SunsetHotelSystem.UI.Controllers {
             return View(habitaciones);
         }//Fin del método ListaHabitaciones.
 
+        public async Task<ActionResult> RangoFechas()
+        {
+            List<TSH_Tipo_Habitacion> listaTipoHabitaciones = new List<TSH_Tipo_Habitacion>();
+            Respuesta<List<TSH_Tipo_Habitacion>> respuesta = new Respuesta<List<TSH_Tipo_Habitacion>>();
+            try
+            {
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Tipo_Habitacion");
+                if (responseWAPI.IsSuccessStatusCode)
+                {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Tipo_Habitacion>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaTipoHabitaciones = respuesta.valorRetorno;
+                }//Fin del if.
+            }
+            catch (Exception ex)
+            {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+
+            return View("RangoFechas", listaTipoHabitaciones);
+        }//Fin de la funcion RangoFechas
+
+
+        [HttpPost]
+        public async Task<ActionResult> RangoFechas(DateTime fechaLlegada, DateTime fechaSalida, int tipoHabitacion)
+        {
+            
+            List<TSH_Tipo_Habitacion> listaTiposHabitacion = new List<TSH_Tipo_Habitacion>();
+            List<TSH_Habitacion> listaHabitaciones = new List<TSH_Habitacion>();
+            List<TSH_Habitacion> listaHabitacionesMostradas = new List<TSH_Habitacion>();
+            List<TSH_Habitacion> listaHabitacionesReservadas = new List<TSH_Habitacion>();
+            List<TSH_Reserva> listaReservas = new List<TSH_Reserva>();
+            Respuesta<List<TSH_Tipo_Habitacion>> respuestaTipoHabitacion = new Respuesta<List<TSH_Tipo_Habitacion>>();
+            Respuesta<List<TSH_Habitacion>> respuestaHabitaciones = new Respuesta<List<TSH_Habitacion>>();
+            Respuesta<List<TSH_Reserva>> respuesta = new Respuesta<List<TSH_Reserva>>();
+
+            try
+            {
+                HttpResponseMessage responseTipoHabitacionWAPI = await webAPI.GetAsync("api/TSH_Tipo_Habitacion");
+                if (responseTipoHabitacionWAPI.IsSuccessStatusCode)
+                {
+                    respuestaTipoHabitacion = JsonConvert.DeserializeObject<Respuesta<List<TSH_Tipo_Habitacion>>>(responseTipoHabitacionWAPI.Content.ReadAsStringAsync().Result);
+                    listaTiposHabitacion = respuestaTipoHabitacion.valorRetorno;
+                }//Fin del if.
+
+                HttpResponseMessage responseHabitacionWAPI = await webAPI.GetAsync("api/TSH_Habitacion");
+                if (responseHabitacionWAPI.IsSuccessStatusCode)
+                {
+                    respuestaHabitaciones = JsonConvert.DeserializeObject<Respuesta<List<TSH_Habitacion>>>(responseHabitacionWAPI.Content.ReadAsStringAsync().Result);
+                    listaHabitaciones = respuestaHabitaciones.valorRetorno;
+                }//Fin del if.
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync("api/TSH_Reserva/");
+                if (responseWAPI.IsSuccessStatusCode)
+                {
+                    respuesta = JsonConvert.DeserializeObject<Respuesta<List<TSH_Reserva>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaReservas = respuesta.valorRetorno;
+                }//Fin del if.
+
+            }
+            catch (Exception ex)
+            {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+            foreach (TSH_Reserva reserva in listaReservas)
+            {
+                //Fecha ingreso <= reserva fecha ingreso < = fecha salida
+                if (fechaLlegada <= reserva.TD_Fecha_Ingreso_TSH_Reserva  && reserva.TD_Fecha_Ingreso_TSH_Reserva <= fechaSalida )
+                {
+                    listaHabitacionesReservadas.Add(reserva.TSH_Habitacion);
+                }//Fin del if.
+            }//Fin del foreach.
+
+            foreach (TSH_Habitacion hab in listaHabitaciones)
+            {
+                //Fecha ingreso <= reserva fecha ingreso < = fecha salida
+                if (hab.TN_Id_TipoH_TSH_Habitacion == tipoHabitacion)
+                {
+                    listaHabitacionesMostradas.Add(hab);
+                }//Fin del if.
+            }//Fin del foreach.
+
+            Habitacion habitaciones = new Habitacion(listaTiposHabitacion, listaHabitacionesMostradas, listaHabitacionesReservadas);
+            
+            return View("DisponibilidadFechas", habitaciones);
+        }//Fin de la función HabitacionDisponible.
+
         public async Task<ActionResult> DisponibilidadDiaHoy() {
             DateTime fechaActual = DateTime.Now;
             List<TSH_Tipo_Habitacion> listaTiposHabitacion = new List<TSH_Tipo_Habitacion>();

@@ -392,3 +392,4 @@ C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI2\SunsetHotelSystem.UI\obj\De
 C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI2\SunsetHotelSystem.UI\obj\Debug\SunsetHotelSystem.UI.pdb
 C:\Users\santi\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.UI\bin\itextsharp.dll
 C:\Users\Kevin Vargas\Source\Repos\SunsetHotelSystem\SunsetHotelSystem.UI\SunsetHotelSystem.UI\bin\itextsharp.dll
+C:\Users\mcalvo96\Source\Repos\SunsetHotelSystem.UI\SunsetHotelSystem.UI\bin\itextsharp.dll

@@ -1,0 +1,53 @@
+﻿@model SunsetHotelSystem.UI.Models.Habitacion
+
+<article class="col-xs-12 col-sm-8 col-md-9">
+    <div class="about">
+        <div class=".col-sm-4">
+            <H1 class="text-center">Estado del Hotel por rango de fechas</H1><br />
+            @*<h4 class="text-center">Fecha: @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</h4><br /><br />*@
+            <center>
+                <div class="col-4 .col-sm-6">
+                    <div class="container table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="table-info">
+                                    <th>Numero de Habitacion</th>
+                                    <th>Tipo</th>
+                                    <th>Costo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var habitacion in Model.Habitaciones) {
+                                        <tr class="table-danger">
+                                            <td>@habitacion.TN_Numero_Habitacion_TSH_Habitacion</td>
+                                            
+                                            @if (habitacion.TN_Id_TipoH_TSH_Habitacion == 2) {
+                                                <td>Estandar</td>
+                                            } else {
+                                                <td>Suite</td>
+                                            }
+                                            @if (Model.Reservadas.Count > 0) {
+                                                foreach (var reservas in Model.Reservadas) {
+                                                    if (reservas.TN_Numero_Habitacion_TSH_Habitacion != habitacion.TN_Numero_Habitacion_TSH_Habitacion) {
+                                                        <td>$@habitacion.TSH_Tipo_Habitacion.TN_Tarifa_TSH_Tipo_Habitacion</td>
+                                                    } else {
+                                                        <td></td>
+                                                    }
+                                                }
+                                            } else {
+                                                <td>$@habitacion.TSH_Tipo_Habitacion.TN_Tarifa_TSH_Tipo_Habitacion</td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>                       
+                    </div>
+
+                </div>                
+            </center>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</article>
