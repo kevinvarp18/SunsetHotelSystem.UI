@@ -8,6 +8,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using SunsetHotelSystem.UI.Models;
+using System.Security.Permissions;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace SunsetHotelSystem.UI.Controllers {
     public class ReservaController : ConfigController {
@@ -235,8 +239,177 @@ namespace SunsetHotelSystem.UI.Controllers {
 
             Reserva reservaVista = new Reserva(reserva, tipoHabitacion);
 
+        
             return View("VerReserva", reservaVista);
         }//Fin del método MostrarReserva
+
+
+        public async Task<ActionResult> GuardarPDF(int idReserva, int idTipoHabitacion)
+        {
+            DateTime fechaActual = DateTime.Now;
+
+            Respuesta<TSH_Reserva> respuestaReserva = new Respuesta<TSH_Reserva>();
+            Respuesta<List<SP_ConsultarDisponibilidad_Result>> respuestaTipoHabitacion = new Respuesta<List<SP_ConsultarDisponibilidad_Result>>();
+            TSH_Reserva reserva = new TSH_Reserva();
+            List<SP_ConsultarDisponibilidad_Result> listaHabitaciones = new List<SP_ConsultarDisponibilidad_Result>();
+            TSH_Tipo_Habitacion tipoHabitacion = new TSH_Tipo_Habitacion();
+
+            try
+            {
+                HttpResponseMessage responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Reserva/", idReserva));
+                if (responseWAPI.IsSuccessStatusCode)
+                {
+                    respuestaReserva = JsonConvert.DeserializeObject<Respuesta<TSH_Reserva>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    reserva = respuestaReserva.valorRetorno;
+                }//Fin del if.
+
+                responseWAPI = await webAPI.GetAsync(String.Concat("api/TSH_Tipo_Habitacion/", idTipoHabitacion));
+                if (responseWAPI.IsSuccessStatusCode)
+                {
+                    respuestaTipoHabitacion = JsonConvert.DeserializeObject<Respuesta<List<SP_ConsultarDisponibilidad_Result>>>(responseWAPI.Content.ReadAsStringAsync().Result);
+                    listaHabitaciones = respuestaTipoHabitacion.valorRetorno;
+                }//Fin del if.
+            }
+            catch (Exception ex)
+            {
+                System.Console.Write(ex.ToString());
+            }//Fin del try-catch.
+
+            tipoHabitacion.TC_Titulo_TSH_Tipo_Habitacion = listaHabitaciones.First().TC_Titulo_TSH_Tipo_Habitacion;
+
+            Reserva reservaVista = new Reserva(reserva, tipoHabitacion);
+
+            FileIOPermission f = new FileIOPermission(FileIOPermissionAccess.AllAccess, "C:\\Users\\Kevin Vargas\\Desktop");
+            f.AllLocalFiles = FileIOPermissionAccess.Write;
+            f.Demand();
+            Document doc = new Document(PageSize.LETTER);
+            // Indicamos donde vamos a guardar el documento
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(@"C:\Users\Kevin Vargas\Desktop\ReservaSunSetHotel(" + fechaActual.Day + "-" + fechaActual.Month + "-" + fechaActual.Year + ").pdf", FileMode.Create));
+
+            // Se le coloca el título y el autor
+            doc.AddTitle("Estado de Reserva");
+            doc.AddCreator("Suntet Hotel System");
+
+            // Abrimos el archivo
+            doc.Open();
+            // Se crea el tipo de Font que vamos utilizar
+            iTextSharp.text.Font _standardFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.COURIER, 8, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+
+            iTextSharp.text.Font _standardFont2 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.BOLDITALIC, BaseColor.DARK_GRAY);
+            iTextSharp.text.Font _standardFont6 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.DARK_GRAY);
+
+            iTextSharp.text.Font _standardFont3 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 7, iTextSharp.text.Font.NORMAL, BaseColor.LIGHT_GRAY);
+            iTextSharp.text.Font _standardFont4 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+            iTextSharp.text.Font _standardFont5 = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.COURIER, 10, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+            // Se escribe el encabezamiento en el documento
+            doc.Add(new Paragraph("SunSet Hotel", _standardFont2));
+            doc.Add(Chunk.NEWLINE);
+            doc.Add(new Paragraph("Reporte de Reserva", _standardFont6));
+            doc.Add(Chunk.NEWLINE);
+            doc.Add(new Paragraph("A continuación, se muestra el desglose del estado de la reserva generado en la presente fecha: " + fechaActual.ToShortDateString() + " y a la hora: " + fechaActual.ToShortTimeString(), _standardFont6));
+            doc.Add(Chunk.NEWLINE);
+
+            // Se crean las tablas (en este caso 3)
+            PdfPTable tblPrueba = new PdfPTable(3);
+            tblPrueba.WidthPercentage = 100;
+
+            // Se configura el título de las columnas de la tabla
+            PdfPCell clNombrePrimera = new PdfPCell(new Phrase("ID", _standardFont));
+            clNombrePrimera.BorderWidth = 0;
+            clNombrePrimera.BorderWidthBottom = 0.75f;
+
+            PdfPCell clNombreSegunda = new PdfPCell(new Phrase("Nombre", _standardFont));
+            clNombreSegunda.BorderWidth = 0;
+            clNombreSegunda.BorderWidthBottom = 0.75f;
+
+            PdfPCell clNombreTercera = new PdfPCell(new Phrase("Apellido", _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            PdfPCell clNombreCuarta = new PdfPCell(new Phrase("Correo", _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            PdfPCell clNombreQuinta = new PdfPCell(new Phrase("Tarjeta", _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            PdfPCell clNombreSexta = new PdfPCell(new Phrase("Llegada", _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            PdfPCell clNombreSetima = new PdfPCell(new Phrase("Salida", _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            PdfPCell clNombreOctava = new PdfPCell(new Phrase("Tipo", _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            // se añade las celdas a la tabla
+            tblPrueba.AddCell(clNombrePrimera);
+            tblPrueba.AddCell(clNombreSegunda);
+            tblPrueba.AddCell(clNombreTercera);
+            tblPrueba.AddCell(clNombreCuarta);
+            tblPrueba.AddCell(clNombreQuinta);
+            tblPrueba.AddCell(clNombreSexta);
+            tblPrueba.AddCell(clNombreSetima);
+            tblPrueba.AddCell(clNombreOctava);
+
+
+            //***********************************
+
+
+            clNombrePrimera = new PdfPCell(new Phrase(reservaVista.Reserva_.TC_Id_Cliente_TSH_Reserva, _standardFont));
+            clNombrePrimera.BorderWidth = 0;
+            clNombrePrimera.BorderWidthBottom = 0.75f;
+
+            clNombreSegunda = new PdfPCell(new Phrase(reservaVista.Reserva_.TSH_Cliente.TC_Nombre_TSH_Cliente, _standardFont));
+            clNombreSegunda.BorderWidth = 0;
+            clNombreSegunda.BorderWidthBottom = 0.75f;
+
+            clNombreTercera = new PdfPCell(new Phrase(reservaVista.Reserva_.TSH_Cliente.TC_Apellidos_TSH_Cliente, _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            clNombreCuarta = new PdfPCell(new Phrase(reservaVista.Reserva_.TSH_Cliente.TC_Correo_TSH_Cliente, _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            clNombreQuinta = new PdfPCell(new Phrase(reservaVista.Reserva_.TSH_Cliente.TC_Tarjeta_TSH_Cliente, _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            clNombreSexta = new PdfPCell(new Phrase(reservaVista.Reserva_.TD_Fecha_Ingreso_TSH_Reserva.ToString(), _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            clNombreSetima = new PdfPCell(new Phrase(reservaVista.Reserva_.TD_Fecha_Salida_TSH_Reserva.ToString(), _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            clNombreOctava = new PdfPCell(new Phrase(reservaVista.Reserva_.TSH_Habitacion.TSH_Tipo_Habitacion.ToString(), _standardFont));
+            clNombreTercera.BorderWidth = 0;
+            clNombreTercera.BorderWidthBottom = 0.75f;
+
+            tblPrueba.AddCell(clNombrePrimera);
+            tblPrueba.AddCell(clNombreSegunda);
+            tblPrueba.AddCell(clNombreTercera);
+            tblPrueba.AddCell(clNombreCuarta);
+            tblPrueba.AddCell(clNombreQuinta);
+            tblPrueba.AddCell(clNombreSexta);
+            tblPrueba.AddCell(clNombreSetima);
+            tblPrueba.AddCell(clNombreOctava);
+
+            // Finalmente, se añade la tabla al documento PDF y se cierra el documento
+            doc.Add(tblPrueba);
+            doc.Add(new Paragraph("-Fin del reporte SunSet Hotel System. Emitido el " + fechaActual.ToString(), _standardFont3));
+            doc.Add(Chunk.NEWLINE);
+            doc.Close();
+            writer.Close();
+
+            return RedirectToAction("VerReserva");
+        }//Fin del método generarPDF.
 
     }//Fin de la clase ReservaController.
 }//Fin del namespace.
